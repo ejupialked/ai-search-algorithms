@@ -3,8 +3,6 @@ package Game;
 
 import Utils.Utils;
 
-import static Utils.Utils.buildStringFromArray1D;
-
 /**
  * Represents a board containing NxN cells.
  * It keeps track of tiles a, b, c and the agent.
@@ -29,6 +27,7 @@ public class Board {
     public Board(int N, String[][] grid) {
         this.N = N;
         this.cells = generateCells(grid, N);
+        this.configuration = Utils.buildStringFromArray1D(getArray1D());
 
     }
 

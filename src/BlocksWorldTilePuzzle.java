@@ -1,24 +1,31 @@
+import Game.Actions;
 import Game.Board;
 import Game.State;
 
 public class BlocksWorldTilePuzzle {
 
     private static int N = 4;
-    private static State START_STATE = startState();
-    private static State GOAL_STATE =  goalState();
+    public static State START_STATE = startState();
+    public static State GOAL_STATE =  goalState();
 
+    public Actions actions;
+
+    BlocksWorldTilePuzzle(){
+        this.actions = new Actions();
+    }
 
     private static State startState(){
 
         String[][] grid = new String[][]
                 {{"x", "x", "x", "x"},
-                        {"O", "x", "C", "x"},
+                        {"a", "x", "C", "x"},
                         {"x", "B", "x", "x"},
                         {"x", "A", "x", "x"}};
 
 
         Board board = new Board(N, grid);
 
+        board.getN();
         return new State(board, grid);
     }
 
@@ -27,7 +34,7 @@ public class BlocksWorldTilePuzzle {
                 {{"x", "x", "x", "x"},
                         {"x", "x", "C", "x"},
                         {"x", "B", "x", "x"},
-                        {"x", "A", "x", "O"}};
+                        {"x", "A", "x", "a"}};
 
 
         Board board = new Board(N, grid);
@@ -35,4 +42,7 @@ public class BlocksWorldTilePuzzle {
         return new State(board, grid);
     }
 
+    public Actions getActions() {
+        return actions;
+    }
 }
