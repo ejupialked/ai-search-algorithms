@@ -136,9 +136,6 @@ public class Board {
         return array1d;
     }
 
-    public void update(){
-        this.configuration = buildStringFromArray1D(getArray1D());
-    }
 
     @Override
     public String toString() {

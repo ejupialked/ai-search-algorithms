@@ -7,6 +7,7 @@ import static Utils.Utils.print;
 
 public class Main {
 
+
     public static void main(String[] args) {
         BlocksWorldTilePuzzle blocksWorldTilePuzzle = new BlocksWorldTilePuzzle();
 
