@@ -1,6 +1,5 @@
 import Exceptions.IllegalMoveException;
 import Game.Actions;
-import Game.BlocksWorldTilePuzzle;
 
 import static Game.BlocksWorldTilePuzzle.START_STATE;
 import static Utils.Utils.print;
