@@ -1,21 +1,34 @@
+import Exceptions.IllegalMoveException;
+import Game.Actions;
+import Game.BlocksWorldTilePuzzle;
 
-import static Utils.Utils.drawGrid;
+import static Game.BlocksWorldTilePuzzle.START_STATE;
 import static Utils.Utils.print;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        int n = 4;
-
-        String[][] grid = {{" ", " ", " ", " "},
-                {" ", " ", "C", " "},
-                {" ", "B", " ", " "},
-                {" ", "A", " ", "a"}
-        };
+        BlocksWorldTilePuzzle blocksWorldTilePuzzle = new BlocksWorldTilePuzzle();
 
 
-        print(drawGrid(grid, n));
+        print(START_STATE.toString());
+
+        Actions actions = blocksWorldTilePuzzle.getActions();
+
+        try {
+            actions.moveAgent(Actions.AgentMoves.UP, START_STATE.getBoard());
+            print(START_STATE.toString());
+            actions.moveAgent(Actions.AgentMoves.RIGHT, START_STATE.getBoard());
+            print(START_STATE.toString());
+            actions.moveAgent(Actions.AgentMoves.RIGHT, START_STATE.getBoard());
+            print(START_STATE.toString());
+            actions.moveAgent(Actions.AgentMoves.DOWN, START_STATE.getBoard());
+            print(START_STATE.toString());
+
+        } catch (IllegalMoveException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

@@ -1,5 +1,7 @@
 package Utils;
 
+import Game.Cell;
+
 /**
  * Utility class
  *
@@ -11,26 +13,21 @@ public final class Utils {
 
     public final static boolean DEBUG = true;
 
-    public final static int DEPTH_FIRST = 1;
-    public final static int BREADTH_FIRST  = 2;
-    public final static int ITERATIVE_DEEPENING = 3;
-    public final static int A_STAR_HEURISTIC = 4;
-
-
     /**
      * Draws the blocks of the puzzle in a nice way in the Console.
      *
-     * @param puzzle the puzzle in 2D array form
+     * @param array1D the puzzle in 2d array form
      * @param n  the size of grid (nxn)
      * @return the String containing the puzzle with blocks
      */
-    public static String drawGrid(String[][] puzzle, int n) {
-        String[] array1D = array2dToArray1d(puzzle);
+    public static String drawGrid(String[] array1D, int n) {
+        for (int i = 0; i < array1D.length; i++) {
+            if(array1D[i].equals("x"))
+                array1D[i] = " ";
 
+        }
         String pattern = buildPattern(n);
-
         String[] R ={"╔═╤╦╗","║ │║║o","╟─┼╫╢","╠═╪╬╣","╚═╧╩╝"};
-
         StringBuilder r = new StringBuilder();
 
         for (int X: pattern.getBytes()) {
@@ -63,7 +60,7 @@ public final class Utils {
      * @param array2D the array 2D to convert
      * @return the 1D array
      */
-    private static String[] array2dToArray1d(String[][] array2D){
+    public static String[] array2dToArray1d(String[][] array2D){
         String[] array1D = new String[array2D.length*array2D[0].length];
 
         for(int i = 0; i < array2D.length; i++) {
@@ -74,6 +71,32 @@ public final class Utils {
         return  array1D;
     }
 
+    /**
+     * Convert an array 2D to an array 1D
+     * @param array2D the array 2D to convert
+     * @return the 1D array
+     */
+    public static Cell[] array2dToArray1dCell(Cell[][] array2D){
+        Cell[] array1D = new Cell[array2D.length*array2D[0].length];
+
+        for(int i = 0; i < array2D.length; i++) {
+            Cell[] row = array2D[i];
+            System.arraycopy(array2D[i], 0, array1D, i * row.length, row.length);
+        }
+
+        return  array1D;
+    }
+
+    /**
+     * Build a string from array1D
+     * @param array1D
+     * @return the string
+     */
+    public static String buildStringFromArray1D(String[] array1D) {
+        StringBuilder s = new StringBuilder();
+        for (String s1: array1D) s.append(s1);
+        return s.toString();
+    }
 
     /**
      * Print a string in the console
