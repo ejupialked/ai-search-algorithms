@@ -1,9 +1,5 @@
-import Game.Actions;
 import Game.Board;
-import Game.IllegalMoveException;
 import Game.State;
-
-import static Utils.Utils.*;
 
 public class BlocksWorldTilePuzzle {
 
