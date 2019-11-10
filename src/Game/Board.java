@@ -3,6 +3,8 @@ package Game;
 
 import Utils.Utils;
 
+import java.awt.*;
+
 /**
  * Represents a board containing NxN cells.
  * It keeps track of tiles a, b, c and the agent.
@@ -11,6 +13,7 @@ public class Board {
 
     private final int N;
     private Cell[][] cells;
+    private String[][] grid;
     private String configuration;
 
     private Cell a;
@@ -26,6 +29,7 @@ public class Board {
      */
     public Board(int N, String[][] grid) {
         this.N = N;
+        this.grid = grid;
         this.cells = generateCells(grid, N);
         this.configuration = Utils.buildStringFromArray1D(getArray1D());
 
@@ -80,6 +84,51 @@ public class Board {
     }
 
 
+    public String updateBoard(){
+        this.configuration = Utils.buildStringFromArray1D(getArray1D());
+
+        return configuration;
+    }
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public String[] getArray1D(){
+        Cell[] cells = Utils.array2dToArray1dCell(getCells());
+        String[] array1d = new String[N * N];
+        for (int i = 0; i < cells.length; i++) {
+            array1d[i] = cells[i].getCellType().getText();
+        }
+        return array1d;
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return configuration;
+    }
+
+    @Override
+    public int hashCode() {
+        return configuration.hashCode();
+    }
+
+    public void setBLocation(Point location) {
+        this.b.setLocation(location);
+    }
+
+    public void setALocation(Point agent) {
+        this.b.setLocation(agent);
+    }
+
+    public void setCLocation(Point agent) {
+        this.b.setLocation(agent);
+    }
+
+
+
     public Cell[][] getCells() {
         return cells;
     }
@@ -97,12 +146,16 @@ public class Board {
         this.a = a;
     }
 
+    public void setB(Cell b) {
+        this.b = b;
+    }
+
     public Cell getB() {
         return b;
     }
 
-    public void setB(Cell b) {
-        this.b = b;
+    public String[][] getGrid() {
+        return grid;
     }
 
     public Cell getC() {
@@ -126,18 +179,15 @@ public class Board {
     }
 
 
-    public String[] getArray1D(){
-        Cell[] cells = Utils.array2dToArray1dCell(getCells());
-        String[] array1d = new String[N * N];
-        for (int i = 0; i < cells.length; i++) {
-            array1d[i] = cells[i].getCellType().getText();
+    public void updateGrid() {
+
+        String[][] grid = new String[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N ; j++) {
+                grid[i][j] = cells[i][j].getCellType().getText();
+            }
         }
-        return array1d;
-    }
 
-
-    @Override
-    public String toString() {
-        return configuration;
+        this.grid = grid;
     }
 }

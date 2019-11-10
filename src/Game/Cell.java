@@ -2,8 +2,6 @@ package Game;
 
 import java.awt.*;
 
-
-
 /**
  * Basic representation of a single cell
  * defining its positions (X, y) and its {@code CellType}

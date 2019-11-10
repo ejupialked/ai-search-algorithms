@@ -2,6 +2,8 @@ package Utils;
 
 import Game.Cell;
 
+import java.io.IOException;
+
 /**
  * Utility class
  *
@@ -103,6 +105,15 @@ public final class Utils {
      * @param str the string to print
      */
     public static void print(String str){
+
+        System.out.println(str);
+    }
+    /**
+     * Print a string in the console
+     * @param str the string to print
+     */
+    public static void print(String str, String str2){
+        System.out.println(str2);
         System.out.println(str);
     }
 

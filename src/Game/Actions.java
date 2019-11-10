@@ -1,6 +1,7 @@
 package Game;
 
 import Exceptions.IllegalMoveException;
+
 import java.awt.Point;
 
 
@@ -11,8 +12,7 @@ import java.awt.Point;
 public class Actions {
 
     /* Enum class for agent moves */
-    public enum AgentMoves {UP, DOWN, LEFT, RIGHT}
-
+    public enum AgentMove {UP, DOWN, LEFT, RIGHT}
 
     /**
      *
@@ -20,7 +20,7 @@ public class Actions {
      * @param b the {@link Board}
      * @throws  IllegalMoveException if move cannot be done
      */
-    public void moveAgent(AgentMoves move, Board b) throws IllegalMoveException {
+    public void moveAgent(AgentMove move, Board b) throws IllegalMoveException {
         Cell agent = b.getAgent();
 
         switch (move){
@@ -29,8 +29,10 @@ public class Actions {
             case LEFT:  left(b, agent);  break;
             case RIGHT: right(b, agent); break;
         }
-    }
 
+        b.updateBoard();
+        b.updateGrid();
+    }
 
     /**
      * Agent moves up
@@ -44,7 +46,7 @@ public class Actions {
         Point up = new Point(newX, agent.y);
 
         if(up.x < 0) {
-            throw new IllegalMoveException(AgentMoves.UP, up);
+            throw new IllegalMoveException(AgentMove.UP, up);
         }else{
             moveAgent(board, up);
         }
@@ -62,7 +64,7 @@ public class Actions {
         Point down = new Point(newX, agent.y);
 
         if(down.x >= board.getN()) {
-            throw new IllegalMoveException(AgentMoves.DOWN, down);
+            throw new IllegalMoveException(AgentMove.DOWN, down);
         }else{
             moveAgent(board, down);
         }
@@ -80,7 +82,7 @@ public class Actions {
         Point left = new Point(agent.x, newY);
 
         if(left.y < 0) {
-            throw new IllegalMoveException(AgentMoves.LEFT, left);
+            throw new IllegalMoveException(AgentMove.LEFT, left);
         }else{
             moveAgent(board, left);
         }
@@ -99,54 +101,55 @@ public class Actions {
         Point right = new Point(agent.x, newY);
 
         if(right.y >= board.getN()) {
-            throw new IllegalMoveException(AgentMoves.RIGHT, right);
+            throw new IllegalMoveException(AgentMove.RIGHT, right);
         }else{
             moveAgent(board, right);
         }
     }
 
-
     /**
      * Move the agent in a specific point
-     * @param b the board
+     * @param board the board
      * @param p future cell of the agent
      */
-    private void moveAgent(Board b, Point p){
-        Cell cellToSwap = b.getCells()[p.x][p.y];
-        Point agent = b.getAgent().getPoint();
+    private void moveAgent(Board board, Point p){
+        Cell cellToSwap = board.getCells()[p.x][p.y];
+        Point agent = board.getAgent().getPoint();
+
         switch (cellToSwap.getCellType()){
             case A:
-                swapCell(b, agent, cellToSwap);
-                b.setA(b.getAgent());
+                swapCell(board, agent, cellToSwap.getPoint());
+                board.setALocation(board.getAgent());
                 break;
             case B:
-                swapCell(b, agent, cellToSwap);
-                b.setB(b.getAgent());
+                swapCell(board, agent, cellToSwap.getPoint());
+                board.setBLocation(agent);
                 break;
             case C:
-                swapCell(b, agent, cellToSwap);
-                b.setC(b.getAgent());
+                swapCell(board, agent, cellToSwap.getPoint());
+                board.setCLocation(agent);
                 break;
             case EMPTY:
-                swapCell(b, agent, cellToSwap);
+                swapCell(board, agent, cellToSwap.getPoint());
                 break;
         }
-
-        b.setAgent(cellToSwap);
     }
 
     /**
      * Swap two given point in the board
      * @param board the board
-     * @param a point a
-     * @param b point b
+     * @param curr point curr
+     * @param next point next
      */
-    private void swapCell(Board board, Point a, Point b){
+    private void swapCell(Board board, Point curr, Point next){
         Cell[][] cells = board.getCells();
-        Cell temp = cells[b.x][b.y];
-        cells[b.x][b.y] =  cells[a.x][a.y];
-        board.setAgent(cells[b.x][b.y]);
-        cells[a.x][a.y] = temp;
 
+        Cell c1  = cells[next.x][next.y];
+        Cell c2 = cells[curr.x][curr.y];
+
+        cells[next.x][next.y] = c2;
+        cells[curr.x][curr.y] = c1;
+        c2.setLocation(next);
+        c1.setLocation(curr);
     }
 }

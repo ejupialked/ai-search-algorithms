@@ -6,14 +6,14 @@ import java.awt.*;
 
 public class IllegalMoveException extends Exception {
 
-    private Actions.AgentMoves a;
+    private Actions.AgentMove a;
     private Point p;
 
     private String detailMessage;
 
 
 
-    public IllegalMoveException(Actions.AgentMoves a, Point p){
+    public IllegalMoveException(Actions.AgentMove a, Point p){
         super();
         this.a = a;
         this.p = p;
