@@ -1,7 +1,8 @@
 import Exceptions.IllegalMoveException;
-import Problem.BlocksWorldTilePuzzle;
-import Problem.Puzzle;
+import Problem.BlocksWorldTileProblem;
+import Problem.Problem;
 import SearchAlgorithm.BFS;
+import SearchAlgorithm.SearchAlgorithm;
 
 
 import static Utils.Utils.print;
@@ -11,11 +12,19 @@ public class Main {
 
     public static void main(String[] args) throws IllegalMoveException {
 
-        BFS bfs = new BFS();
+        Problem problem = new BlocksWorldTileProblem();
 
-        Puzzle puzzle = new BlocksWorldTilePuzzle();
 
-       String BFSDetails = bfs.searchDebug(puzzle);
+        SearchAlgorithm bfs = new BFS();
+        //SearchAlgorithm dfs = new DFS();
+        //SearchAlgorithm bfs = new BFS();
+        //SearchAlgorithm bfs = new BFS();
+
+
+        String BFSDetails = bfs.searchDebug(problem);
+        //String BFSDetails = bfs.searchDebug(problem);
+        //String BFSDetails = bfs.searchDebug(problem);
+        //String BFSDetails = bfs.searchDebug(problem);
 
        print(BFSDetails);
 

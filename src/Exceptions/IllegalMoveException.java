@@ -1,17 +1,15 @@
 package Exceptions;
 
-import Game.Actions;
-
+import Puzzle.Actions;
 import java.awt.*;
 
+/**
+ * Exception for an illegal move of the agent.
+ */
 public class IllegalMoveException extends Exception {
 
     private Actions.AgentMove a;
     private Point p;
-
-    private String detailMessage;
-
-
 
     public IllegalMoveException(Actions.AgentMove a, Point p){
         super();
@@ -20,11 +18,8 @@ public class IllegalMoveException extends Exception {
     }
 
 
-
     @Override
     public String getMessage() {
-        return super.getMessage();
+        return "["+a+"]"+" is an illegal move. Point ("+ p.x +", "+ p.y + ");";
     }
-
-
 }

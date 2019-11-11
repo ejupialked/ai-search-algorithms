@@ -1,8 +1,10 @@
 package SearchAlgorithm;
 
-import Game.Actions;
-import Problem.Puzzle;
+import Problem.BlocksWorldTileProblem;
+import Puzzle.Actions;
+import Problem.Problem;
 import Utils.Utils;
+
 import java.util.*;
 
 public class BFS extends SearchAlgorithm {
@@ -18,14 +20,14 @@ public class BFS extends SearchAlgorithm {
 
 
     /**
-     * Solves {@link Problem.BlocksWorldTilePuzzle} with BFS
+     * Solves {@link BlocksWorldTileProblem} with BFS
      *
      * @param problem the problem to solve
      * @return a {@code LinkedList<Node>} containing the solution
      *          if successful, returns {@code null} if case of failure.
      */
     @Override
-    protected LinkedList<Node> search(Puzzle problem) {
+    protected LinkedList<Node> search(Problem problem) {
 
         Node root = new Node(problem.startState(), null);
         nodes++;
@@ -44,21 +46,18 @@ public class BFS extends SearchAlgorithm {
 
             for (Actions.AgentMove action: Actions.AgentMove.values()) {
 
-                Node successor = new Node(nodeToExpand.getState(), nodeToExpand);
+                Node child = new Node(nodeToExpand.state, nodeToExpand);
                 nodes++;
 
-                if(!successor.getState().action(action)) continue;
+                /* if action cannot be performed goes to the next action */
+                if(!child.state.performAction(action)) continue;
 
-                Utils.print("Action: " + action);
-                Utils.print(successor.state.Ascii());
-
-
-                if (!explored.contains(successor) || !frontier.contains(successor)) {
-                    if (problem.checkGoal(successor.state)) {
-                        return solution(successor);
+                if (!explored.contains(child) || !frontier.contains(child)) {
+                    if (problem.checkGoal(child.state)) {
+                        return solution(child);
                     }
 
-                    frontier.add(successor);
+                    frontier.add(child);
                 }
             }
         }
@@ -72,7 +71,6 @@ public class BFS extends SearchAlgorithm {
 
         LinkedList<Node> path = new LinkedList<>();
 
-        path.add(solution);
         while (solution.parent != null) {
             path.add(solution.parent);
             solution = solution.parent;

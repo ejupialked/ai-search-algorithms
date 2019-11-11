@@ -1,11 +1,14 @@
 package Problem;
 
-import Game.State;
+import Puzzle.State;
 
 /**
- * Interface for defining a puzzle problem
+ * Interface for defining the puzzle problem
+ *
+ * @author Alked Ejupi. Copyright (2019). All rights reserved.
+ *
  */
-public interface Puzzle {
+public interface Problem {
 
     State startState();
     State goalState();

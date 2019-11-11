@@ -1,24 +1,27 @@
 package Problem;
 
-import Game.Actions;
-import Game.Board;
-import Game.Cell;
-import Game.State;
+import Puzzle.Actions;
+import Puzzle.Board;
+import Puzzle.State;
 
-public class BlocksWorldTilePuzzle implements Puzzle {
+
+/**
+ *  @author Alked Ejupi Copyright (2019). All rights reserved.
+ */
+
+public class BlocksWorldTileProblem implements Problem {
 
     private static int N = 4;
-
 
     public Actions actions;
 
     private static String A = "A";
     private static String B = "B";
     private static String C = "C";
-    private static String AG = "a";
+    private static String AG = "@";
     private static String X = "x";
 
-    public BlocksWorldTilePuzzle(){
+    public BlocksWorldTileProblem(){
         this.actions = new Actions();
     }
 
@@ -38,8 +41,8 @@ public class BlocksWorldTilePuzzle implements Puzzle {
     public State goalState() {
         String[][] grid = new String[][]
                         {{X, X, X, X},
-                        {X, A, X, X},
-                        {X, B, X, X},
+                        {B, A, X, X},
+                        {X, X, X, X},
                         {X, C, X, AG}};
 
 
@@ -50,12 +53,15 @@ public class BlocksWorldTilePuzzle implements Puzzle {
     }
 
 
-
+    /**
+     * Checks by just comparing
+     * the String configuration (of the Board)
+     * @param state the state to check
+     * @return
+     */
     @Override
     public boolean checkGoal(State state) {
-        return goalState().toString()
-                .replace("a", "x")
-                .equals(state.toString().replace("a", "x"));
+        return goalState().toString().replace(AG, X).equals(state.toString().replace(AG, X));
     }
 
 

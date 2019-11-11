@@ -1,20 +1,23 @@
-package Game;
+package Puzzle;
 
 import Exceptions.IllegalMoveException;
-
 import java.awt.Point;
-
 
 /**
  * Represents all possible actions
  * that can be taken in puzzle game
+ *
+ *  @author Alked Ejupi Copyright (2019). All rights reserved.
  */
+
 public class Actions {
 
     /* Enum class for agent moves */
     public enum AgentMove {UP, DOWN, LEFT, RIGHT}
 
     /**
+     * Moves the agent based on {@link AgentMove}
+     * on the {@link Board}.
      *
      * @param move the type of move of the agent
      * @param b the {@link Board}
@@ -116,40 +119,31 @@ public class Actions {
         Cell cellToSwap = board.getCells()[p.x][p.y];
         Point agent = board.getAgent().getPoint();
 
+        swapCell(board, agent, cellToSwap.getPoint());
+
+        // reset the location of tiles
         switch (cellToSwap.getCellType()){
-            case A:
-                swapCell(board, agent, cellToSwap.getPoint());
-                board.setALocation(board.getAgent());
-                break;
-            case B:
-                swapCell(board, agent, cellToSwap.getPoint());
-                board.setBLocation(agent);
-                break;
-            case C:
-                swapCell(board, agent, cellToSwap.getPoint());
-                board.setCLocation(agent);
-                break;
-            case EMPTY:
-                swapCell(board, agent, cellToSwap.getPoint());
-                break;
+            case A: board.setALocation(agent); break;
+            case B: board.setBLocation(agent); break;
+            case C: board.setCLocation(agent); break;
         }
     }
 
     /**
      * Swap two given point in the board
      * @param board the board
-     * @param curr point curr
-     * @param next point next
+     * @param a point a
+     * @param b point b
      */
-    private void swapCell(Board board, Point curr, Point next){
+    private void swapCell(Board board, Point a, Point b){
         Cell[][] cells = board.getCells();
 
-        Cell c1  = cells[next.x][next.y];
-        Cell c2 = cells[curr.x][curr.y];
+        Cell c1  = cells[b.x][b.y];
+        Cell c2 = cells[a.x][a.y];
 
-        cells[next.x][next.y] = c2;
-        cells[curr.x][curr.y] = c1;
-        c2.setLocation(next);
-        c1.setLocation(curr);
+        cells[b.x][b.y] = c2;
+        cells[a.x][a.y] = c1;
+        c2.setLocation(b);
+        c1.setLocation(a);
     }
 }

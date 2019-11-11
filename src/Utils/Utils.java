@@ -1,13 +1,11 @@
 package Utils;
 
-import Game.Cell;
-
-import java.io.IOException;
+import Puzzle.Cell;
 
 /**
  * Utility class
  *
- * @author Alked Ejupi
+ * @author Alked Ejupi Copyright (2019). All rights reserved.
  */
 
 public final class Utils {

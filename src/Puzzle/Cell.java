@@ -1,12 +1,19 @@
-package Game;
+package Puzzle;
 
 import java.awt.*;
 
 /**
  * Basic representation of a single cell
  * defining its positions (X, y) and its {@code CellType}
+ *
+ *  @author Alked Ejupi Copyright (2019). All rights reserved.
+ *
  */
 public class Cell extends Point{
+
+
+    private String symbol;
+    private CellType cellType;
 
 
     /**
@@ -17,7 +24,7 @@ public class Cell extends Point{
         A("A"),
         B("B"),
         C("C"),
-        AGENT("a"),
+        AGENT("@"),
         EMPTY("x");
 
         private  String text;
@@ -30,11 +37,10 @@ public class Cell extends Point{
         }
     }
 
-    private CellType cellType;
 
-    public Cell(int x, int y){
+    public Cell(int x, int y, CellType cellType){
         super(x, y);
-
+        this.cellType = cellType;
     }
 
     public CellType getCellType() {

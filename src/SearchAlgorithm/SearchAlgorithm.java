@@ -1,11 +1,19 @@
 package SearchAlgorithm;
 
-import Game.Board;
-import Game.State;
-import Problem.Puzzle;
+import Puzzle.Board;
+import Puzzle.State;
+import Problem.Problem;
 
 import java.util.LinkedList;
 
+
+/**
+ * Abstract class for a search algorithm,
+ * Contains all methods and attributes that
+ * every search methods should have.
+ *
+ * @author Alked Ejupi Copyright (2019). All rights reserved.
+ */
 public abstract class SearchAlgorithm {
 
     protected int nodes;
@@ -18,7 +26,7 @@ public abstract class SearchAlgorithm {
     StringBuilder solutionASCII;
 
 
-    public String searchDebug(Puzzle problem){
+    public String searchDebug(Problem problem){
         start();
         LinkedList<Node> solution = search(problem);
 
@@ -30,7 +38,7 @@ public abstract class SearchAlgorithm {
                     .append(": ")
                     .append(node.state.getActionTaken())
                     .append("\n")
-                    .append(node.state.Ascii())
+                    .append(node.state.ascii())
                     .append("\n");
         }
 
@@ -39,7 +47,7 @@ public abstract class SearchAlgorithm {
         return toString();
     }
 
-    protected abstract LinkedList<Node> search(Puzzle problem);
+    protected abstract LinkedList<Node> search(Problem problem);
 
     protected abstract LinkedList<Node> solution(Node node);
 
@@ -59,7 +67,6 @@ public abstract class SearchAlgorithm {
         this.end = System.currentTimeMillis();
     }
 
-
     public long time(){
         return end - start;
     }
@@ -67,10 +74,6 @@ public abstract class SearchAlgorithm {
 
     @Override
     public String toString() {
-
-
-
-
         return solutionASCII + "\nTime elapsed: " + time() + "ms\n" +
                 "Number nodes: " + nodes + "\n" +
                 "Depth : " + depth + "\n";
@@ -95,7 +98,6 @@ public abstract class SearchAlgorithm {
         public String toString() {
             return Integer.toString(hashCode());
         }
-
 
         public State getState() {
             return state;

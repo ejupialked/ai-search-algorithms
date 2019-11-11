@@ -1,8 +1,17 @@
-package Game;
+package Puzzle;
 
 import Exceptions.IllegalMoveException;
 import Utils.Utils;
 
+
+/**
+ * Class that represent a single state of the puzzle,
+ * in other words the arrangements of the pieces.
+ * It also provides the possible action that can be performed.
+ *
+ * @author Alked Ejupi Copyright (2019). All rights reserved.
+ *
+ */
 public class State {
 
     private final Board board;
@@ -20,10 +29,16 @@ public class State {
     }
 
 
-    public boolean action(Actions.AgentMove action)  {
+    /**
+     * Perform a on the {@link Board}
+     * @param a the action to perform
+     * @return return {@code true} if action performs
+     *         successfully, {@code false} otherwise.
+     */
+    public boolean performAction(Actions.AgentMove a)  {
         try {
-            actions.moveAgent(action, board);
-            setActionTaken(action);
+            actions.moveAgent(a, board);
+            setActionTaken(a);
             return true;
         } catch (IllegalMoveException e) {
             return false;
@@ -46,7 +61,7 @@ public class State {
         return board.hashCode();
     }
 
-    public String Ascii(){
+    public String ascii(){
         return Utils.drawGrid(Utils.array2dToArray1d(board.getGrid()), board.getN());
     }
 

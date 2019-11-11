@@ -1,26 +1,31 @@
-package Game;
-
+package Puzzle;
 
 import java.awt.*;
-
 import static Utils.Utils.array2dToArray1d;
 import static Utils.Utils.buildStringFromArray1D;
 
 /**
  * Represents a board containing NxN cells.
- * It keeps track of tiles a, b, c and the agent.
+ * It remembers the position of tiles a, b, c and the agent.
+ *
+ * the {@code configuration} attribute represents the
+ * arrangements of tiles and agent as a single {@code String}
+ *
+ *
+ *
+ * @author Alked Ejupi Copyright (2019). All rights reserved.
+ *
+ *
  */
 public class Board {
 
     private final int N;
     private Cell[][] cells;
     private String[][] grid;
+
     private String configuration;
 
-    private Cell a;
-    private Cell b;
-    private Cell c;
-    private Cell agent;
+    private Cell a, b, c, agent;
 
     /**
      * Creates a board NxN with cells
@@ -37,7 +42,7 @@ public class Board {
     }
 
     /**
-     * Generated 2d array of cells.
+     * Generates 2d array of cells.
      *
      * @param grid the grid with {@code String} values.
      * @param N the size of the board NxN
@@ -63,25 +68,22 @@ public class Board {
      * @return the single cell generated.
      */
     private Cell generateSingleCell(String s, int x, int y){
-        Cell cell = new Cell(x, y);
-
-        if(s.equals(Cell.CellType.EMPTY.getText())){
-            cell.setCellType(Cell.CellType.EMPTY);
-        }else if(s.equals(Cell.CellType.A.getText())){
-            cell.setCellType(Cell.CellType.A);
-            setA(cell);
-        }else if(s.equals(Cell.CellType.B.getText())){
-            cell.setCellType(Cell.CellType.B);
-            setB(cell);
-        }else if(s.equals(Cell.CellType.C.getText())){
-            cell.setCellType(Cell.CellType.C);
-            setC(cell);
-        }else if(s.equals(Cell.CellType.AGENT.getText())){
-            cell.setCellType(Cell.CellType.AGENT);
-            setAgent(cell);
+        Cell.CellType c1 = null;
+        for (Cell.CellType c: Cell.CellType.values()) {
+            if(s.equalsIgnoreCase(c.getText())){
+                c1 = c;
+            }
         }
 
-        return cell;
+        Cell cell = new Cell(x, y, c1);
+
+        switch (cell.getCellType()) {
+            case A: this.a = cell; break;
+            case B: this.b = cell; break;
+            case C: this.c = cell; break;
+            case AGENT: this.agent = cell; break;
+        }
+            return cell;
     }
 
 
@@ -117,14 +119,24 @@ public class Board {
     }
 
 
+    public int getN() {
+        return N;
+    }
 
     public Cell[][] getCells() {
         return cells;
     }
 
-
     public void setCells(Cell[][] cells) {
         this.cells = cells;
+    }
+
+    public String[][] getGrid() {
+        return grid;
+    }
+
+    public void setGrid(String[][] grid) {
+        this.grid = grid;
     }
 
     public Cell getA() {
@@ -135,16 +147,12 @@ public class Board {
         this.a = a;
     }
 
-    public void setB(Cell b) {
-        this.b = b;
-    }
-
     public Cell getB() {
         return b;
     }
 
-    public String[][] getGrid() {
-        return grid;
+    public void setB(Cell b) {
+        this.b = b;
     }
 
     public Cell getC() {
@@ -163,11 +171,6 @@ public class Board {
         this.agent = agent;
     }
 
-    public int getN() {
-        return N;
-    }
-
-
     public void updateGrid() {
         String[][] grid = new String[N][N];
         for (int i = 0; i < N; i++) {
@@ -178,4 +181,5 @@ public class Board {
 
         this.grid = grid;
     }
+
 }
