@@ -1,16 +1,21 @@
-import Exceptions.IllegalMoveException;
 import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
 import SearchAlgorithm.BFS;
 import SearchAlgorithm.SearchAlgorithm;
 
-
 import static Utils.Utils.print;
+
+/**
+ *
+ * Run the algorithms here.
+ *
+ * @author Alked Ejupi Copyright (2019). All rights reserved.
+ */
 
 public class Main {
 
 
-    public static void main(String[] args) throws IllegalMoveException {
+    public static void main(String[] args){
 
         Problem problem = new BlocksWorldTileProblem();
 
@@ -29,6 +34,4 @@ public class Main {
        print(BFSDetails);
 
     }
-
-
 }

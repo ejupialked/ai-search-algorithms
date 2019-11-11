@@ -103,13 +103,4 @@ public final class Utils {
 
         System.out.println(str);
     }
-    /**
-     * Print a string in the console
-     * @param str the string to print
-     */
-    public static void print(String str, String str2){
-        System.out.println(str2);
-        System.out.println(str);
-    }
-
 }

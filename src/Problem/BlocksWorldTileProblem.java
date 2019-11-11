@@ -6,6 +6,8 @@ import Puzzle.State;
 
 
 /**
+ *  This class defines the problem to solve.
+ *
  *  @author Alked Ejupi Copyright (2019). All rights reserved.
  */
 
