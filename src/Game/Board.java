@@ -1,9 +1,10 @@
 package Game;
 
 
-import Utils.Utils;
-
 import java.awt.*;
+
+import static Utils.Utils.array2dToArray1d;
+import static Utils.Utils.buildStringFromArray1D;
 
 /**
  * Represents a board containing NxN cells.
@@ -31,7 +32,7 @@ public class Board {
         this.N = N;
         this.grid = grid;
         this.cells = generateCells(grid, N);
-        this.configuration = Utils.buildStringFromArray1D(getArray1D());
+        this.configuration = buildStringFromArray1D(array2dToArray1d(grid));
 
     }
 
@@ -84,25 +85,13 @@ public class Board {
     }
 
 
-    public String updateBoard(){
-        this.configuration = Utils.buildStringFromArray1D(getArray1D());
-
-        return configuration;
+    public void updateBoard(){
+        this.configuration = buildStringFromArray1D(array2dToArray1d(getGrid()));
     }
+
     public String getConfiguration() {
         return configuration;
     }
-
-    public String[] getArray1D(){
-        Cell[] cells = Utils.array2dToArray1dCell(getCells());
-        String[] array1d = new String[N * N];
-        for (int i = 0; i < cells.length; i++) {
-            array1d[i] = cells[i].getCellType().getText();
-        }
-        return array1d;
-    }
-
-
 
 
     @Override
@@ -180,7 +169,6 @@ public class Board {
 
 
     public void updateGrid() {
-
         String[][] grid = new String[N][N];
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N ; j++) {

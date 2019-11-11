@@ -7,13 +7,10 @@ import java.io.IOException;
 /**
  * Utility class
  *
- *
  * @author Alked Ejupi
  */
 
 public final class Utils {
-
-    public final static boolean DEBUG = true;
 
     /**
      * Draws the blocks of the puzzle in a nice way in the Console.

@@ -1,7 +1,7 @@
 package SearchAlgorithm;
 
 import Game.Actions;
-import PuzzleProbem.Puzzle;
+import Problem.Puzzle;
 import Utils.Utils;
 import java.util.*;
 
@@ -17,10 +17,17 @@ public class BFS extends SearchAlgorithm {
     }
 
 
+    /**
+     * Solves {@link Problem.BlocksWorldTilePuzzle} with BFS
+     *
+     * @param problem the problem to solve
+     * @return a {@code LinkedList<Node>} containing the solution
+     *          if successful, returns {@code null} if case of failure.
+     */
     @Override
-    public LinkedList<Node> search(Puzzle problem) {
+    protected LinkedList<Node> search(Puzzle problem) {
 
-        Node root = new Node(problem.startState());
+        Node root = new Node(problem.startState(), null);
         nodes++;
 
         if(problem.checkGoal(root.state)){
@@ -31,25 +38,27 @@ public class BFS extends SearchAlgorithm {
 
         while (!frontier.isEmpty()){
 
-            Node node = frontier.remove();
+            Node nodeToExpand = frontier.remove();
 
-            explored.add(node);
+            explored.add(nodeToExpand);
 
             for (Actions.AgentMove action: Actions.AgentMove.values()) {
-                Node child = new Node(node.getState(), node);
+
+                Node successor = new Node(nodeToExpand.getState(), nodeToExpand);
                 nodes++;
 
-                if(!child.getState().action(action)) continue;
+                if(!successor.getState().action(action)) continue;
 
                 Utils.print("Action: " + action);
-                Utils.print(child.state.Ascii());
+                Utils.print(successor.state.Ascii());
 
 
-                if (!explored.contains(child) || !frontier.contains(child)) {
-                    if (problem.checkGoal(child.state)) {
-                        return solution(child);
+                if (!explored.contains(successor) || !frontier.contains(successor)) {
+                    if (problem.checkGoal(successor.state)) {
+                        return solution(successor);
                     }
-                    frontier.add(child);
+
+                    frontier.add(successor);
                 }
             }
         }

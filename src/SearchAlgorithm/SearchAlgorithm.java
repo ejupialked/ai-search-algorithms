@@ -2,11 +2,9 @@ package SearchAlgorithm;
 
 import Game.Board;
 import Game.State;
-import PuzzleProbem.Puzzle;
+import Problem.Puzzle;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public abstract class SearchAlgorithm {
 
@@ -16,11 +14,41 @@ public abstract class SearchAlgorithm {
     protected long start;
     protected long end;
 
+    StringBuilder solutionMoves;
+    StringBuilder solutionASCII;
+
+
+    public String searchDebug(Puzzle problem){
+        start();
+        LinkedList<Node> solution = search(problem);
+
+        int i = 0;
+        for (Node node: solution) {
+            solutionASCII
+                    .append("Step ")
+                    .append(i++)
+                    .append(": ")
+                    .append(node.state.getActionTaken())
+                    .append("\n")
+                    .append(node.state.Ascii())
+                    .append("\n");
+        }
+
+        end();
+
+        return toString();
+    }
+
+    protected abstract LinkedList<Node> search(Puzzle problem);
+
+    protected abstract LinkedList<Node> solution(Node node);
 
     SearchAlgorithm(){
         this.nodes = 0;
         this.depth = 0;
+        this.solutionASCII = new StringBuilder();
     }
+
 
 
     public void start(){
@@ -40,36 +68,23 @@ public abstract class SearchAlgorithm {
     @Override
     public String toString() {
 
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("Time elapsed: ").append(time()).append("ms\n");
-        stringBuilder.append("Number nodes: ").append(nodes).append("\n");
-        stringBuilder.append("Depth : ").append(depth).append("\n");
 
 
 
-
-        return stringBuilder.toString();
+        return solutionASCII + "\nTime elapsed: " + time() + "ms\n" +
+                "Number nodes: " + nodes + "\n" +
+                "Depth : " + depth + "\n";
     }
 
     public static class Node {
         State state;
         Node parent;
 
-
-        public Node(State startState){
-
-            Board board = new Board(startState.getBoard().getN(),startState.getBoard().getGrid());
-            this.state = new State(board);
-            this.parent = null;
-        }
-
         Node(State startState, Node parent){
             Board board = new Board(startState.getBoard().getN(),startState.getBoard().getGrid());
             this.state = new State(board);
             this.parent = parent;
         }
-
 
         /**
          * Returns the state of the board
@@ -80,7 +95,6 @@ public abstract class SearchAlgorithm {
         public String toString() {
             return Integer.toString(hashCode());
         }
-
 
 
         public State getState() {
@@ -102,11 +116,4 @@ public abstract class SearchAlgorithm {
             return this.state.getBoard().getConfiguration().hashCode();
         }
     }
-
-
-    public abstract LinkedList<Node> search(Puzzle problem);
-
-    public abstract LinkedList<Node> solution(Node node);
-
-
 }

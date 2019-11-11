@@ -7,6 +7,7 @@ public class State {
 
     private final Board board;
     private Actions actions;
+    private Actions.AgentMove actionTaken;
 
 
     public State(Board board) {
@@ -22,6 +23,7 @@ public class State {
     public boolean action(Actions.AgentMove action)  {
         try {
             actions.moveAgent(action, board);
+            setActionTaken(action);
             return true;
         } catch (IllegalMoveException e) {
             return false;
@@ -45,11 +47,17 @@ public class State {
     }
 
     public String Ascii(){
-        return Utils.drawGrid(board.getArray1D(), board.getN());
+        return Utils.drawGrid(Utils.array2dToArray1d(board.getGrid()), board.getN());
     }
 
 
+    public Actions.AgentMove getActionTaken() {
+        return actionTaken;
+    }
 
+    public void setActionTaken(Actions.AgentMove actionTaken) {
+        this.actionTaken = actionTaken;
+    }
 
     @Override
     public String toString() {

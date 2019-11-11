@@ -1,6 +1,5 @@
-package PuzzleProbem;
+package Problem;
 
-import Game.Actions;
 import Game.State;
 
 /**
@@ -8,17 +7,8 @@ import Game.State;
  */
 public interface Puzzle {
 
-
     State startState();
-
     State goalState();
-
-    Actions actions();
-
-
-    /* size of the grid */
-    int sizeProblem();
-
 
     /**
      * Check if the given state

@@ -1,14 +1,14 @@
-package PuzzleProbem;
+package Problem;
 
 import Game.Actions;
 import Game.Board;
+import Game.Cell;
 import Game.State;
 
 public class BlocksWorldTilePuzzle implements Puzzle {
 
     private static int N = 4;
-    public State START_STATE = startState();
-    public State GOAL_STATE =  goalState();
+
 
     public Actions actions;
 
@@ -41,21 +41,15 @@ public class BlocksWorldTilePuzzle implements Puzzle {
                         {X, A, X, X},
                         {X, B, X, X},
                         {X, C, X, AG}};
+
+
+
         Board board = new Board(N, grid);
 
         return new State(board);
     }
 
 
-    @Override
-    public Actions actions() {
-        return actions;
-    }
-
-    @Override
-    public int sizeProblem() {
-        return N;
-    }
 
     @Override
     public boolean checkGoal(State state) {
