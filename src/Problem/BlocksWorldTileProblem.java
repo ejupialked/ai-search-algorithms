@@ -1,8 +1,11 @@
 package Problem;
 
-import Puzzle.Actions;
+import Puzzle.TransitionModel;
+import Puzzle.TransitionModel.*;
 import Puzzle.Board;
 import Puzzle.State;
+
+import java.util.Random;
 
 
 /**
@@ -15,7 +18,7 @@ public class BlocksWorldTileProblem implements Problem {
 
     private static int N = 4;
 
-    public Actions actions;
+    public TransitionModel transitionModel;
 
     private static String A = "A";
     private static String B = "B";
@@ -24,9 +27,36 @@ public class BlocksWorldTileProblem implements Problem {
     private static String X = "x";
 
     public BlocksWorldTileProblem(){
-        this.actions = new Actions();
+        this.transitionModel = new TransitionModel();
     }
 
+    @Override
+    public TransitionModel transitionModel() {
+        return transitionModel;
+    }
+
+    @Override
+    public Action[] actions() {
+        return Action.values();
+    }
+    @Override
+    public Action[] shuffleActions() {
+
+        Random rand = new Random();
+
+        Action[] actions = actions();
+
+        for (int i = 0; i < actions.length; i++) {
+            int randomIndexToSwap = rand.nextInt(actions.length);
+            Action temp = actions[randomIndexToSwap];
+            actions[randomIndexToSwap] = actions[i];
+            actions[i] = temp;
+        }
+
+
+
+        return actions;
+    }
     @Override
     public State startState(){
         String[][] grid = new String[][]
@@ -42,11 +72,10 @@ public class BlocksWorldTileProblem implements Problem {
     @Override
     public State goalState() {
         String[][] grid = new String[][]
-                        {{X, X, X, X},
-                        {B, A, X, X},
+                {{X, X, X , X},
                         {X, X, X, X},
-                        {X, C, X, AG}};
-
+                        {X, B, X, X},
+                        {A,  C,X, AG}};
 
 
         Board board = new Board(N, grid);

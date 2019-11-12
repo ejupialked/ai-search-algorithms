@@ -10,20 +10,20 @@ import java.awt.Point;
  *  @author Alked Ejupi Copyright (2019). All rights reserved.
  */
 
-public class Actions {
+public class TransitionModel {
 
     /* Enum class for agent moves */
-    public enum AgentMove {UP, DOWN, LEFT, RIGHT}
+    public enum Action {UP, DOWN, LEFT, RIGHT}
 
     /**
-     * Moves the agent based on {@link AgentMove}
+     * Moves the agent based on {@link Action}
      * on the {@link Board}.
      *
      * @param move the type of move of the agent
      * @param b the {@link Board}
      * @throws  IllegalMoveException if move cannot be done
      */
-    public void moveAgent(AgentMove move, Board b) throws IllegalMoveException {
+    public void moveAgent(Action move, Board b) throws IllegalMoveException {
         Cell agent = b.getAgent();
 
         switch (move){
@@ -33,8 +33,9 @@ public class Actions {
             case RIGHT: right(b, agent); break;
         }
 
-        b.updateBoard();
         b.updateGrid();
+        b.updateBoard();
+
     }
 
     /**
@@ -49,11 +50,12 @@ public class Actions {
         Point up = new Point(newX, agent.y);
 
         if(up.x < 0) {
-            throw new IllegalMoveException(AgentMove.UP, up);
+            throw new IllegalMoveException(Action.UP, up);
         }else{
             moveAgent(board, up);
         }
     }
+
 
     /**
      * Agent moves down
@@ -67,7 +69,7 @@ public class Actions {
         Point down = new Point(newX, agent.y);
 
         if(down.x >= board.getN()) {
-            throw new IllegalMoveException(AgentMove.DOWN, down);
+            throw new IllegalMoveException(Action.DOWN, down);
         }else{
             moveAgent(board, down);
         }
@@ -85,7 +87,7 @@ public class Actions {
         Point left = new Point(agent.x, newY);
 
         if(left.y < 0) {
-            throw new IllegalMoveException(AgentMove.LEFT, left);
+            throw new IllegalMoveException(Action.LEFT, left);
         }else{
             moveAgent(board, left);
         }
@@ -104,7 +106,7 @@ public class Actions {
         Point right = new Point(agent.x, newY);
 
         if(right.y >= board.getN()) {
-            throw new IllegalMoveException(AgentMove.RIGHT, right);
+            throw new IllegalMoveException(Action.RIGHT, right);
         }else{
             moveAgent(board, right);
         }

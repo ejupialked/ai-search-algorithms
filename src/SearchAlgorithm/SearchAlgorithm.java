@@ -1,8 +1,7 @@
 package SearchAlgorithm;
 
-import Puzzle.Board;
-import Puzzle.State;
 import Problem.Problem;
+import Utils.Utils;
 
 import java.util.LinkedList;
 
@@ -26,9 +25,15 @@ public abstract class SearchAlgorithm {
     StringBuilder solutionASCII;
 
 
+
     public String searchDebug(Problem problem){
+
+        Utils.print("I'm searching your solution..");
         start();
-        LinkedList<Node> solution = search(problem);
+
+        LinkedList<Node> solution = treeSearch(problem);
+
+
 
         int i = 0;
         for (Node node: solution) {
@@ -47,7 +52,9 @@ public abstract class SearchAlgorithm {
         return toString();
     }
 
-    protected abstract LinkedList<Node> search(Problem problem);
+    protected abstract LinkedList<Node> treeSearch(Problem problem);
+
+    protected abstract LinkedList<Node> graphSearch(Problem problem);
 
     protected abstract LinkedList<Node> solution(Node node);
 
@@ -79,43 +86,5 @@ public abstract class SearchAlgorithm {
                 "Depth : " + depth + "\n";
     }
 
-    public static class Node {
-        State state;
-        Node parent;
 
-        Node(State startState, Node parent){
-            Board board = new Board(startState.getBoard().getN(),startState.getBoard().getGrid());
-            this.state = new State(board);
-            this.parent = parent;
-        }
-
-        /**
-         * Returns the state of the board
-         * as a String.
-         * @return the state of board
-         */
-        @Override
-        public String toString() {
-            return Integer.toString(hashCode());
-        }
-
-        public State getState() {
-            return state;
-        }
-
-
-        @Override
-        public boolean equals(Object obj) {
-            if(obj instanceof Node){
-                return getState().getBoard().getConfiguration().equals(
-                        ((Node) obj).getState().getBoard().getConfiguration());
-            }
-            return false;
-        }
-
-        @Override
-        public int hashCode() {
-            return this.state.getBoard().getConfiguration().hashCode();
-        }
-    }
 }

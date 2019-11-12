@@ -1,6 +1,7 @@
 package Puzzle;
 
 import Exceptions.IllegalMoveException;
+import Puzzle.TransitionModel.*;
 import Utils.Utils;
 
 
@@ -15,13 +16,13 @@ import Utils.Utils;
 public class State {
 
     private final Board board;
-    private Actions actions;
-    private Actions.AgentMove actionTaken;
+    private TransitionModel transitionModel;
+    private Action actionTaken;
 
 
     public State(Board board) {
         this.board = board;
-        this.actions = new Actions();
+        this.transitionModel = new TransitionModel();
     }
 
     public Board getBoard() {
@@ -35,9 +36,9 @@ public class State {
      * @return return {@code true} if action performs
      *         successfully, {@code false} otherwise.
      */
-    public boolean performAction(Actions.AgentMove a)  {
+    public boolean performAction(TransitionModel.Action a)  {
         try {
-            actions.moveAgent(a, board);
+            transitionModel.moveAgent(a, board);
             setActionTaken(a);
             return true;
         } catch (IllegalMoveException e) {
@@ -66,11 +67,11 @@ public class State {
     }
 
 
-    public Actions.AgentMove getActionTaken() {
+    public TransitionModel.Action getActionTaken() {
         return actionTaken;
     }
 
-    public void setActionTaken(Actions.AgentMove actionTaken) {
+    public void setActionTaken(TransitionModel.Action actionTaken) {
         this.actionTaken = actionTaken;
     }
 

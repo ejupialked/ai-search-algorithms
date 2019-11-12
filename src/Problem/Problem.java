@@ -1,6 +1,8 @@
 package Problem;
 
 import Puzzle.State;
+import Puzzle.TransitionModel;
+import Puzzle.TransitionModel.Action;
 
 /**
  * Interface for defining the puzzle problem
@@ -9,6 +11,13 @@ import Puzzle.State;
  *
  */
 public interface Problem {
+
+
+    TransitionModel transitionModel();
+    Action[] actions();
+
+    Action[] shuffleActions();
+
 
     State startState();
     State goalState();
