@@ -50,8 +50,7 @@ public class State {
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof State){
-            return getBoard().getConfiguration().equals(
-                    ((State) obj).getBoard().getConfiguration());
+            return board.equals(((State) obj).board);
         }
         return super.equals(obj);
     }

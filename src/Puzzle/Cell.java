@@ -11,10 +11,7 @@ import java.awt.*;
  */
 public class Cell extends Point{
 
-
-    private String symbol;
     private CellType cellType;
-
 
     /**
      * Enum class for representing

@@ -34,7 +34,7 @@ public class TransitionModel {
         }
 
         b.updateGrid();
-        b.updateBoard();
+        b.updateConfiguration();
 
     }
 
@@ -145,7 +145,10 @@ public class TransitionModel {
 
         cells[b.x][b.y] = c2;
         cells[a.x][a.y] = c1;
+
+
         c2.setLocation(b);
         c1.setLocation(a);
+
     }
 }

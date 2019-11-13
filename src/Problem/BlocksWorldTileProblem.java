@@ -4,9 +4,7 @@ import Puzzle.TransitionModel;
 import Puzzle.TransitionModel.*;
 import Puzzle.Board;
 import Puzzle.State;
-
 import java.util.Random;
-
 
 /**
  *  This class defines the problem to solve.
@@ -61,9 +59,9 @@ public class BlocksWorldTileProblem implements Problem {
     public State startState(){
         String[][] grid = new String[][]
                        {{X, X, X , X},
-                        {X, X, X, X},
-                        {X, X, X, X},
-                        {A, B, C, AG}};
+                        {X, A, X, X},
+                        {X, C, X, X},
+                        {X, B, X , AG}};
 
         Board board = new Board(N, grid);
 
@@ -73,9 +71,9 @@ public class BlocksWorldTileProblem implements Problem {
     public State goalState() {
         String[][] grid = new String[][]
                 {{X, X, X , X},
-                        {X, X, X, X},
+                        {X, A, X, X},
                         {X, B, X, X},
-                        {A,  C,X, AG}};
+                        {X,  C,X, AG}};
 
 
         Board board = new Board(N, grid);

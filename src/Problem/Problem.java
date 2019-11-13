@@ -14,8 +14,8 @@ public interface Problem {
 
 
     TransitionModel transitionModel();
-    Action[] actions();
 
+    Action[] actions();
     Action[] shuffleActions();
 
 

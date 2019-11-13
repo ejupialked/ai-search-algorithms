@@ -87,7 +87,10 @@ public class Board {
     }
 
 
-    public void updateBoard(){
+    /**
+     * Updates the String configuration of the board
+     */
+    public void updateConfiguration(){
         this.configuration = buildStringFromArray1D(array2dToArray1d(getGrid()));
     }
 
@@ -95,6 +98,14 @@ public class Board {
         return configuration;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Board){
+            return toString().equals(obj);
+        }
+        return super.equals(obj);
+    }
 
     @Override
     public String toString() {
@@ -127,49 +138,29 @@ public class Board {
         return cells;
     }
 
-    public void setCells(Cell[][] cells) {
-        this.cells = cells;
-    }
 
     public String[][] getGrid() {
         return grid;
     }
 
-    public void setGrid(String[][] grid) {
-        this.grid = grid;
-    }
 
     public Cell getA() {
         return a;
     }
 
-    public void setA(Cell a) {
-        this.a = a;
-    }
 
     public Cell getB() {
         return b;
-    }
-
-    public void setB(Cell b) {
-        this.b = b;
     }
 
     public Cell getC() {
         return c;
     }
 
-    public void setC(Cell c) {
-        this.c = c;
-    }
-
     public Cell getAgent() {
         return agent;
     }
 
-    public void setAgent(Cell agent) {
-        this.agent = agent;
-    }
 
     public void updateGrid() {
         String[][] grid = new String[N][N];

@@ -3,6 +3,7 @@ package SearchAlgorithm;
 import Problem.Problem;
 import Utils.Utils;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 
@@ -29,14 +30,15 @@ public abstract class SearchAlgorithm {
     public String searchDebug(Problem problem){
 
         Utils.print("I'm searching your solution..");
+
         start();
-
-        LinkedList<Node> solution = treeSearch(problem);
-
-
+        LinkedList<Node> solution = search(problem);
+        end();
 
         int i = 0;
         for (Node node: solution) {
+
+            solutionMoves.append(node.action).append(" ");
             solutionASCII
                     .append("Step ")
                     .append(i++)
@@ -47,23 +49,37 @@ public abstract class SearchAlgorithm {
                     .append("\n");
         }
 
-        end();
 
         return toString();
     }
 
-    protected abstract LinkedList<Node> treeSearch(Problem problem);
+    protected abstract LinkedList<Node> search(Problem problem);
 
-    protected abstract LinkedList<Node> graphSearch(Problem problem);
-
-    protected abstract LinkedList<Node> solution(Node node);
 
     SearchAlgorithm(){
-        this.nodes = 0;
+        this.nodes = 1;
         this.depth = 0;
         this.solutionASCII = new StringBuilder();
+        this.solutionMoves = new StringBuilder();
     }
 
+
+    protected LinkedList<Node> solution(Node solution) {
+
+        LinkedList<Node> path = new LinkedList<>();
+
+        path.add(solution);
+        while (solution.parent != null) {
+            path.add(solution.parent);
+            solution = solution.parent;
+        }
+
+        Collections.reverse(path);
+
+        depth = path.size();
+        return path;
+
+    }
 
 
     public void start(){
@@ -83,7 +99,7 @@ public abstract class SearchAlgorithm {
     public String toString() {
         return solutionASCII + "\nTime elapsed: " + time() + "ms\n" +
                 "Number nodes: " + nodes + "\n" +
-                "Depth : " + depth + "\n";
+                "Depth : " + depth + "\n" + "Moves: " + solutionMoves;
     }
 
 
