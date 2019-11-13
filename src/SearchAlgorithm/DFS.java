@@ -17,7 +17,7 @@ public class DFS extends SearchAlgorithm {
 
     @Override
     protected LinkedList<Node> search(Problem problem) {
-        Node root = new Node(problem.startState(), null);
+        Node root = new Node(problem.startState());
         nodes++;
 
         if(problem.checkGoal(root.state)){

@@ -9,7 +9,7 @@ public class IDS extends SearchAlgorithm {
     @Override
     protected LinkedList<Node> search(Problem problem) {
 
-        Node root = new Node(problem.startState(), null);
+        Node root = new Node(problem.startState());
         Node solution;
 
         for (int depth = 1; depth < Integer.MAX_VALUE ; depth++) {
