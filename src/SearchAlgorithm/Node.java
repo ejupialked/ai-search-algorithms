@@ -4,11 +4,17 @@ import Puzzle.TransitionModel.Action;
 import Puzzle.Board;
 import Puzzle.State;
 
-public class Node implements Comparable<Node>{
+public class Node implements Comparable<Node>, Heuristic {
 
     State state;
     Node parent;
     Action action;
+
+
+    int cost;
+    int h;
+    int g;
+    int f;
 
 
     /* Constructor for the root */
@@ -26,6 +32,17 @@ public class Node implements Comparable<Node>{
         this.parent = parent;
 
         state.performAction(action);
+    }
+
+
+    @Override
+    public int compareTo(Node o) {
+        if (this.f == o.f) {
+            return o.g - this.g;
+        }
+        else {
+            return o.f - this.f;
+        }
     }
 
     /**
@@ -55,8 +72,21 @@ public class Node implements Comparable<Node>{
         return this.state.getBoard().getConfiguration().hashCode();
     }
 
+
     @Override
-    public int compareTo(Node o) {
+    public int g(Node node) {
         return 0;
     }
+
+    @Override
+    public int h(Node node) {
+        return 0;
+    }
+
+    @Override
+    public int f(Node node) {
+        return 0;
+    }
+
+
 }

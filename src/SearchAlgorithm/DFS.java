@@ -35,9 +35,6 @@ public class DFS extends SearchAlgorithm {
                 Node child = new Node(nodeToExpand, action);
                 nodes++;
 
-                /* if action cannot be performed goes to the next action */
-                if(!child.state.performAction(action)) continue;
-
                 if (problem.checkGoal(child.state)) {
                     return solution(child);
                 }

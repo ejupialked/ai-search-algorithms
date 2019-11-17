@@ -39,9 +39,7 @@ public class BlocksWorldTileProblem implements Problem {
     }
     @Override
     public Action[] shuffleActions() {
-
         Random rand = new Random();
-
         Action[] actions = actions();
 
         for (int i = 0; i < actions.length; i++) {
@@ -50,18 +48,16 @@ public class BlocksWorldTileProblem implements Problem {
             actions[randomIndexToSwap] = actions[i];
             actions[i] = temp;
         }
-
-
-
         return actions;
     }
+
     @Override
     public State startState(){
         String[][] grid = new String[][]
                        {{X, X, X , X},
-                        {X, A, X, X},
-                        {X, C, X, X},
-                        {X, B, X , AG}};
+                        {X, X, X, X},
+                        {X, X, X, X},
+                        {A, B, C ,AG}};
 
         Board board = new Board(N, grid);
 
@@ -70,10 +66,10 @@ public class BlocksWorldTileProblem implements Problem {
     @Override
     public State goalState() {
         String[][] grid = new String[][]
-                {{X, X, X , X},
+                       {{X, X, X , X},
                         {X, A, X, X},
-                        {X, B, X, X},
-                        {X,  C,X, AG}};
+                        {X, B, AG, X},
+                        {X, C,X , X}};
 
 
         Board board = new Board(N, grid);
@@ -85,6 +81,11 @@ public class BlocksWorldTileProblem implements Problem {
     /**
      * Checks by just comparing
      * the String configuration (of the Board)
+     *
+     * Replaces the string of the agent with
+     * the string that represents an empty space
+     * since the position of the agent does not matter
+     * when checking the goal state
      * @param state the state to check
      * @return
      */

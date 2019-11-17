@@ -3,12 +3,10 @@ import Problem.Problem;
 import SearchAlgorithm.BFS;
 import SearchAlgorithm.DFS;
 import SearchAlgorithm.IDS;
-
+import SearchAlgorithm.ASHS;
 
 import SearchAlgorithm.SearchAlgorithm;
-import Utils.Utils;
 
-import java.awt.*;
 
 import static Utils.Utils.print;
 
@@ -26,29 +24,30 @@ public class Main {
 
         Problem problem = new BlocksWorldTileProblem();
 
+        String algorithm = args[0];
 
-        SearchAlgorithm bfs = new BFS();
-        SearchAlgorithm dfs = new DFS();
-        SearchAlgorithm ids = new IDS();
-        //SearchAlgorithm bfs = new BFS();
+        String output = null;
+
+        switch (algorithm){
+            case "BFS":
+                SearchAlgorithm bfs = new BFS();
+                output = bfs.searchDebug(problem);
+                break;
+            case "DFS":
+                SearchAlgorithm dfs = new DFS();
+                output = dfs.searchDebug(problem);
+                break;
+            case "IDS":
+                SearchAlgorithm ids = new IDS();
+                output = ids.searchDebug(problem);
+            case "ASHS":
+                SearchAlgorithm ashs = new ASHS();
+                output = ashs.searchDebug(problem);
+
+        }
 
 
-        //String BFSDetails = bfs.searchDebug(problem);
-       //String DFSDetails = dfs.searchDebug(problem);
-        //String IDSDetails = ids.searchDebug(problem);
-        //String BFSDetails = bfs.searchDebug(problem);
-
-       //print(BFSDetails);
-       //print(DFSDetails);
-       //print(IDSDetails);
-
-
-        Point a = new Point(0, 0);
-        Point b = new Point(0, 2);
-
-        System.out.print(a.distance(b));
-
-
+       print(output);
 
     }
 }

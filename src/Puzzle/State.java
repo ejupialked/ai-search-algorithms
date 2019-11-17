@@ -36,14 +36,11 @@ public class State {
      * @return return {@code true} if action performs
      *         successfully, {@code false} otherwise.
      */
-    public boolean performAction(TransitionModel.Action a)  {
+    public void performAction(Action a)  {
         try {
             transitionModel.moveAgent(a, board);
             setActionTaken(a);
-            return true;
-        } catch (IllegalMoveException e) {
-            return false;
-        }
+        } catch (IllegalMoveException ignored){}
     }
 
 

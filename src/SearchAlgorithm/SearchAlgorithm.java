@@ -2,7 +2,6 @@ package SearchAlgorithm;
 
 import Problem.Problem;
 import Utils.Utils;
-
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -22,8 +21,12 @@ public abstract class SearchAlgorithm {
     protected long start;
     protected long end;
 
+    protected long startMemory;
+    protected long endMemory;
+
     StringBuilder solutionMoves;
     StringBuilder solutionASCII;
+
 
 
 
@@ -32,8 +35,12 @@ public abstract class SearchAlgorithm {
         Utils.print("I'm searching your solution..");
 
         start();
+        startMemory = Runtime.getRuntime().totalMemory();
+
         LinkedList<Node> solution = search(problem);
         end();
+        endMemory = Runtime.getRuntime().totalMemory() - startMemory;
+
 
         int i = 0;
         for (Node node: solution) {
@@ -65,7 +72,6 @@ public abstract class SearchAlgorithm {
 
 
     protected LinkedList<Node> solution(Node solution) {
-
         LinkedList<Node> path = new LinkedList<>();
 
         path.add(solution);
@@ -97,9 +103,13 @@ public abstract class SearchAlgorithm {
 
     @Override
     public String toString() {
-        return solutionASCII + "\nTime elapsed: " + time() + "ms\n" +
-                "Number nodes: " + nodes + "\n" +
-                "Depth : " + depth + "\n" + "Moves: " + solutionMoves;
+        return solutionASCII +
+                "\nMemory used: " + Utils.humanReadableByteCount(endMemory, true) +
+                "\nTime elapsed: " + time() + "ms" +
+                "\nNumber nodes generated: " + nodes +
+                "\nDepth solution : " + depth +
+                "\nMoves: " + solutionMoves
+               ;
     }
 
 

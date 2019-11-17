@@ -36,8 +36,6 @@ public class IDS extends SearchAlgorithm {
                 Node child = new Node(current, action);
                 nodes++;
 
-                if(!child.state.performAction(action)) continue;
-
                 Node found = DLS(problem, child,depth - 1);
 
                 if (found != null) {
