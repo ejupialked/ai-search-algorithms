@@ -72,15 +72,41 @@ public class Node implements Comparable<Node>, Heuristic {
         Board boardGoal = goal.getBoard();
         Board boardCurr = state.getBoard();
 
-        sum += boardCurr.getA().manhattanDistance(boardGoal.getA());
-        sum += boardCurr.getB().manhattanDistance(boardGoal.getB());
-        sum += boardCurr.getC().manhattanDistance(boardGoal.getC());
 
-        int ag = (int) Math.floor(sum / 3);
 
-        sum += ag;
+        int a = boardCurr.getA().manhattanDistance(boardGoal.getA());
+        int b = boardCurr.getB().manhattanDistance(boardGoal.getB());
+        int c = boardCurr.getC().manhattanDistance(boardGoal.getC());
 
-        return sum;
+        int max = Math.max(a, Math.max(b, c));
+
+        if(!(boardCurr.getA().manhattanDistance(boardGoal.getA()) == 0)){
+            sum += boardCurr.getA().manhattanDistance(boardGoal.getA());
+
+            if((boardCurr.getAgent().manhattanDistance(boardCurr.getA()) > 3)){
+                sum += boardCurr.getAgent().manhattanDistance(boardCurr.getA());
+            }
+
+        }
+
+        if(!(boardCurr.getB().manhattanDistance(boardGoal.getB()) == 0)){
+            sum += boardCurr.getB().manhattanDistance(boardGoal.getB());
+            if((boardCurr.getAgent().manhattanDistance(boardCurr.getB()) > 3)){
+                sum += boardCurr.getAgent().manhattanDistance(boardCurr.getB());
+            }
+        }
+
+        if(!(boardCurr.getC().manhattanDistance(boardGoal.getC()) == 0)){
+            sum += boardCurr.getC().manhattanDistance(boardGoal.getC());
+            if((boardCurr.getAgent().manhattanDistance(boardCurr.getC()) > 3)){
+                sum += boardCurr.getAgent().manhattanDistance(boardCurr.getC());
+            }
+
+        }
+
+
+
+        return sum + max;
     }
 
     @Override
