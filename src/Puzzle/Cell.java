@@ -9,9 +9,11 @@ import java.awt.*;
  *  @author Alked Ejupi Copyright (2019). All rights reserved.
  *
  */
-public class Cell extends Point{
+public class Cell extends Point implements ManhattanDistance {
 
     private CellType cellType;
+
+
 
     /**
      * Enum class for representing
@@ -32,6 +34,16 @@ public class Cell extends Point{
         public String getText() {
             return this.text;
         }
+    }
+
+    /**
+     * Calculates Manhattan Distance between two cells
+     * @param c the cell to calculate the distance
+     * @return the manhattan distance
+     */
+    @Override
+    public int manhattanDistance(Cell c) {
+        return Math.abs(this.x - c.x) + Math.abs(this.y - c.y);
     }
 
 

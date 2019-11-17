@@ -4,46 +4,91 @@ import Puzzle.TransitionModel.Action;
 import Puzzle.Board;
 import Puzzle.State;
 
-public class Node implements Comparable<Node>, Heuristic {
+public class Node implements Comparable<Node>, Heuristic{
 
     State state;
     Node parent;
     Action action;
-
-
-    int cost;
-    int h;
-    int g;
     int f;
 
-
-    /* Constructor for the root */
+  ;
+    /*the root */
     Node(State start){
         this.state = start;
         this.parent =null;
     }
 
-    /* Constructor for child (successor) */
+    /* child (successor) */
     Node(Node parent, Action action){
         Board board = new Board(parent.state.getBoard().getN(),
-                                parent.state.getBoard().getGrid());
+                parent.state.getBoard().getGrid());
+        this.state = new State(board);
+        this.action = action;
+        this.parent = parent;
+    }
+
+
+    /* child (successor) heuristic */
+    Node(Node parent, State goal, Action action){
+        Board board = new Board(parent.state.getBoard().getN(),
+                parent.state.getBoard().getGrid());
         this.state = new State(board);
         this.action = action;
         this.parent = parent;
 
-        state.performAction(action);
+        this.f = f(g(),h(goal));
     }
 
+
+    /* Node for g() */
+    Node(Node parent){
+        this.parent = parent;
+    }
 
     @Override
     public int compareTo(Node o) {
-        if (this.f == o.f) {
-            return o.g - this.g;
-        }
-        else {
-            return o.f - this.f;
-        }
+        return Integer.compare(this.f, o.f);
     }
+
+    @Override
+    public int g() {
+        if(this.parent == null){
+            return 0;
+        }
+        Node curr = new Node(this.parent);
+
+        int cost = 0;
+        while (curr != null){
+            curr = curr.parent;
+            cost++;
+        }
+        return cost;
+    }
+
+    @Override
+    public int h(State goal) {
+        int sum = 0;
+
+        Board boardGoal = goal.getBoard();
+        Board boardCurr = state.getBoard();
+
+        sum += boardCurr.getA().manhattanDistance(boardGoal.getA());
+        sum += boardCurr.getB().manhattanDistance(boardGoal.getB());
+        sum += boardCurr.getC().manhattanDistance(boardGoal.getC());
+
+        int ag = (int) Math.floor(sum / 3);
+
+        sum += ag;
+
+        return sum;
+    }
+
+    @Override
+    public int f(int g, int h) {
+        return g + h;
+    }
+
+
 
     /**
      * Returns the state of the board
@@ -71,22 +116,5 @@ public class Node implements Comparable<Node>, Heuristic {
     public int hashCode() {
         return this.state.getBoard().getConfiguration().hashCode();
     }
-
-
-    @Override
-    public int g(Node node) {
-        return 0;
-    }
-
-    @Override
-    public int h(Node node) {
-        return 0;
-    }
-
-    @Override
-    public int f(Node node) {
-        return 0;
-    }
-
 
 }

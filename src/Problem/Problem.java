@@ -16,11 +16,13 @@ public interface Problem {
     TransitionModel transitionModel();
 
     Action[] actions();
-    Action[] shuffleActions();
+    Action[] randomiseActions();
 
 
     State startState();
     State goalState();
+
+    String goal();
 
     /**
      * Check if the given state

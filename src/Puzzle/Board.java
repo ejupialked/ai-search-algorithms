@@ -25,7 +25,7 @@ public class Board {
 
     private String configuration;
 
-    private Cell a, b, c, agent;
+    Cell a, b, c, agent;
 
     /**
      * Creates a board NxN with cells

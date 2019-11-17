@@ -30,10 +30,13 @@ public class DFS extends SearchAlgorithm {
 
             Node nodeToExpand = frontier.pop();
 
-            for (Action action: problem.shuffleActions()) {
+            for (Action action: problem.randomiseActions()) {
 
                 Node child = new Node(nodeToExpand, action);
                 nodes++;
+
+                if(child.state.performAction(action)) continue;
+
 
                 if (problem.checkGoal(child.state)) {
                     return solution(child);

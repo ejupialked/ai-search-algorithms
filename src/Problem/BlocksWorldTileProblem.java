@@ -5,6 +5,7 @@ import Puzzle.TransitionModel.*;
 import Puzzle.Board;
 import Puzzle.State;
 import java.util.Random;
+import static Puzzle.Cell.*;
 
 /**
  *  This class defines the problem to solve.
@@ -17,16 +18,43 @@ public class BlocksWorldTileProblem implements Problem {
     private static int N = 4;
 
     public TransitionModel transitionModel;
+    public State goalState;
+    public State startState;
 
-    private static String A = "A";
-    private static String B = "B";
-    private static String C = "C";
-    private static String AG = "@";
-    private static String X = "x";
+    private static String a = CellType.A.getText();
+    private static String b = CellType.B.getText();
+    private static String c = CellType.C.getText();
+    private static String ag = CellType.AGENT.getText();
+    private static String x = CellType.EMPTY.getText();
 
     public BlocksWorldTileProblem(){
         this.transitionModel = new TransitionModel();
+        this.goalState = intiGoalState();
+        this.startState = initStartState();
     }
+
+    public State initStartState(){
+        String[][] grid = new String[][]
+                       {{x, x, x , x},
+                        {x, x, x, x},
+                        {x, x, x, x},
+                        {a, b, c,ag}};
+
+        Board board = new Board(N, grid);
+        return new State(board);
+    }
+
+    public State intiGoalState() {
+        String[][] grid = new String[][]
+                       {{x, x, x, x},
+                        {x, a, x, x},
+                        {x, b, ag, x},
+                        {x, c,x , x}};
+
+        Board board = new Board(N, grid);
+        return new State(board);
+    }
+
 
     @Override
     public TransitionModel transitionModel() {
@@ -37,8 +65,9 @@ public class BlocksWorldTileProblem implements Problem {
     public Action[] actions() {
         return Action.values();
     }
+
     @Override
-    public Action[] shuffleActions() {
+    public Action[] randomiseActions() {
         Random rand = new Random();
         Action[] actions = actions();
 
@@ -52,31 +81,19 @@ public class BlocksWorldTileProblem implements Problem {
     }
 
     @Override
-    public State startState(){
-        String[][] grid = new String[][]
-                       {{X, X, X , X},
-                        {X, X, X, X},
-                        {X, X, X, X},
-                        {A, B, C ,AG}};
-
-        Board board = new Board(N, grid);
-
-        return new State(board);
+    public State startState() {
+        return startState;
     }
+
     @Override
     public State goalState() {
-        String[][] grid = new String[][]
-                       {{X, X, X , X},
-                        {X, A, X, X},
-                        {X, B, AG, X},
-                        {X, C,X , X}};
-
-
-        Board board = new Board(N, grid);
-
-        return new State(board);
+        return goalState;
     }
 
+    @Override
+    public String goal() {
+        return goalState.toString();
+    }
 
     /**
      * Checks by just comparing
@@ -91,8 +108,6 @@ public class BlocksWorldTileProblem implements Problem {
      */
     @Override
     public boolean checkGoal(State state) {
-        return goalState().toString().replace(AG, X).equals(state.toString().replace(AG, X));
+        return goal().replace(ag, x).equals(state.toString().replace(ag, x));
     }
-
-
 }

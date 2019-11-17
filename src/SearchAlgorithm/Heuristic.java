@@ -1,10 +1,22 @@
 package SearchAlgorithm;
 
+import Puzzle.State;
+
 public interface Heuristic {
 
-    public int g(Node node);
 
-    public int h(Node node);
+    /**
+     * Path cost from start node to {@code n}
+     */
+    int g();
 
-    public int f(Node node);
+    /**
+     * estimated cost of the cheapest path from {@code n} to goal
+     */
+    int h(State goal);
+
+    /**
+     *  estimated cost of the cheapest solution through {@code n}
+     */
+    int f(int g, int h);
 }

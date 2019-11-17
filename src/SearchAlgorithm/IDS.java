@@ -31,10 +31,12 @@ public class IDS extends SearchAlgorithm {
         }
 
         if (depth > 0) {
-            for (Action action : problem.shuffleActions()) {
+            for (Action action : problem.randomiseActions()) {
 
                 Node child = new Node(current, action);
                 nodes++;
+
+                if(child.state.performAction(action)) continue;
 
                 Node found = DLS(problem, child,depth - 1);
 

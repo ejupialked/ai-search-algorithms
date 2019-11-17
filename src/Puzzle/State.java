@@ -4,7 +4,6 @@ import Exceptions.IllegalMoveException;
 import Puzzle.TransitionModel.*;
 import Utils.Utils;
 
-
 /**
  * Class that represent a single state of the puzzle,
  * in other words the arrangements of the pieces.
@@ -15,7 +14,7 @@ import Utils.Utils;
  */
 public class State {
 
-    private final Board board;
+    private Board board;
     private TransitionModel transitionModel;
     private Action actionTaken;
 
@@ -29,18 +28,18 @@ public class State {
         return board;
     }
 
-
     /**
-     * Perform a on the {@link Board}
+     * Perform an action on the {@link Board}
      * @param a the action to perform
-     * @return return {@code true} if action performs
-     *         successfully, {@code false} otherwise.
      */
-    public void performAction(Action a)  {
+    public boolean performAction(Action a)  {
         try {
             transitionModel.moveAgent(a, board);
             setActionTaken(a);
-        } catch (IllegalMoveException ignored){}
+            return true;
+        } catch (IllegalMoveException e){
+            return false;
+        }
     }
 
 
@@ -52,22 +51,15 @@ public class State {
         return super.equals(obj);
     }
 
-
-    @Override
-    public int hashCode() {
-        return board.hashCode();
-    }
-
     public String ascii(){
         return Utils.drawGrid(Utils.array2dToArray1d(board.getGrid()), board.getN());
     }
 
-
-    public TransitionModel.Action getActionTaken() {
+    public Action getActionTaken() {
         return actionTaken;
     }
 
-    public void setActionTaken(TransitionModel.Action actionTaken) {
+    public void setActionTaken(Action actionTaken) {
         this.actionTaken = actionTaken;
     }
 
@@ -76,5 +68,9 @@ public class State {
         return board.getConfiguration();
     }
 
+    @Override
+    public int hashCode() {
+        return board.hashCode();
+    }
 
 }
