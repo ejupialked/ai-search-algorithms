@@ -4,7 +4,7 @@ import Puzzle.TransitionModel.Action;
 import Puzzle.Board;
 import Puzzle.State;
 
-public class Node implements Comparable<Node>, Heuristic{
+public class Node implements Comparable<Node>, Heuristic {
 
     State state;
     Node parent;

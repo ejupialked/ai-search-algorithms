@@ -46,10 +46,10 @@ public class BlocksWorldTileProblem implements Problem {
 
     public State intiGoalState() {
         String[][] grid = new String[][]
-                       {{x, x, x, x},
-                        {x, a, x, x},
-                        {x, b, ag, x},
-                        {x, c,x , x}};
+                       {{a, x, x, c},
+                        {x, x, x, x},
+                        {x, x, ag, x},
+                        {b, x,x , x}};
 
         Board board = new Board(N, grid);
         return new State(board);

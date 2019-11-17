@@ -37,7 +37,7 @@ public class BFS extends SearchAlgorithm {
                 Node child = new Node(nodeToExpand, action);
                 nodes++;
 
-                if(child.state.performAction(action)) continue;
+                if(!child.state.performAction(action)) continue;
 
                 if (problem.checkGoal(child.state)) {
                     return solution(child);
