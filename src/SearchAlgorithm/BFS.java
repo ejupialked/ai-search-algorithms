@@ -25,7 +25,7 @@ public class BFS extends SearchAlgorithm {
     @Override
     protected LinkedList<Node> search(Problem problem) {
         Node root = new Node(problem.startState());
-
+        nodes++;
         if(problem.checkGoal(root.state)){
             return solution(root);
         }
@@ -33,6 +33,7 @@ public class BFS extends SearchAlgorithm {
         frontier.add(root);
         while (!frontier.isEmpty()){
             Node nodeToExpand = frontier.remove();
+
             for (Action action: problem.actions()) {
                 Node child = new Node(nodeToExpand, action);
                 nodes++;

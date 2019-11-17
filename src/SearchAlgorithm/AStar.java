@@ -2,18 +2,16 @@ package SearchAlgorithm;
 
 import Problem.Problem;
 import Puzzle.TransitionModel.*;
-import Utils.Utils;
-
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class AStar extends SearchAlgorithm {
 
-    private PriorityQueue<Node> priorityQueue;
+    private PriorityQueue<Node> frontier;
 
     public AStar(){
         super();
-        this.priorityQueue = new PriorityQueue<Node>();
+        this.frontier = new PriorityQueue<Node>();
     }
 
     @Override
@@ -22,11 +20,10 @@ public class AStar extends SearchAlgorithm {
         nodes++;
 
 
-
         //Utils.print("START STATE: \n" + problem.startState().ascii());
        // Utils.print("GOAL STATE: \n" + problem.goalState().ascii());
 
-        priorityQueue.add(root);
+        frontier.add(root);
 
         if(problem.checkGoal(root.state)){
             return solution(root);
@@ -34,9 +31,9 @@ public class AStar extends SearchAlgorithm {
 
 
 
-        while(!priorityQueue.isEmpty()){
+        while(!frontier.isEmpty()){
 
-            Node nodeToExpand = priorityQueue.poll();
+            Node nodeToExpand = frontier.poll();
 
             //Utils.print("EXPANDING STATE: " + nodeToExpand.state.toString() +"\n"
             //       + nodeToExpand.state.ascii());
@@ -59,7 +56,7 @@ public class AStar extends SearchAlgorithm {
                     return solution(child);
                 }
 
-                priorityQueue.add(child);
+                frontier.add(child);
             }
 
            //Utils.print("-----------END ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");

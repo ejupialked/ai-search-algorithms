@@ -38,7 +38,7 @@ public class BlocksWorldTileProblem implements Problem {
                        {{x, x, x , x},
                         {x, x, x, x},
                         {x, x, x, x},
-                        {a, b, c,ag}};
+                        {a, b, c, ag}};
 
         Board board = new Board(N, grid);
         return new State(board);
@@ -48,8 +48,8 @@ public class BlocksWorldTileProblem implements Problem {
         String[][] grid = new String[][]
                        {{x, x, x, x},
                         {x, a, x, x},
-                        {x, b, ag, x},
-                        {x, c,x , x}};
+                        {x, b, x, x},
+                        {x, c,ag , x}};
 
         Board board = new Board(N, grid);
         return new State(board);
