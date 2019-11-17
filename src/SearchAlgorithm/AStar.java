@@ -23,7 +23,7 @@ public class AStar extends SearchAlgorithm {
 
 
 
-       // Utils.print("START STATE: \n" + problem.startState().ascii());
+        //Utils.print("START STATE: \n" + problem.startState().ascii());
        // Utils.print("GOAL STATE: \n" + problem.goalState().ascii());
 
         priorityQueue.add(root);
@@ -34,26 +34,25 @@ public class AStar extends SearchAlgorithm {
 
 
 
-
         while(!priorityQueue.isEmpty()){
 
             Node nodeToExpand = priorityQueue.poll();
 
             //Utils.print("EXPANDING STATE: " + nodeToExpand.state.toString() +"\n"
-                  //  + nodeToExpand.state.ascii());
+            //       + nodeToExpand.state.ascii());
 
 
-           // Utils.print("-----------PERFORMING ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");
+
+            //Utils.print("-----------PERFORMING ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");
 
             for(Action action: problem.actions()){
 
-                // child with heuristic goal state
                 Node child = new Node(nodeToExpand,problem.goalState(), action);
                 nodes++;
 
                 if(!child.state.performAction(action)) continue;
 
-               // Utils.print("["+action+"]" + child.state.hashCode() + "Cost: " + child.f + "\n" + child.state.ascii());
+               //Utils.print("["+action+"]" + child.state.hashCode() + "Cost: " + child.f + "\n" + child.state.ascii());
 
 
                 if (problem.checkGoal(child.state)) {
@@ -63,7 +62,7 @@ public class AStar extends SearchAlgorithm {
                 priorityQueue.add(child);
             }
 
-           // Utils.print("-----------END ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");
+           //Utils.print("-----------END ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");
 
         }
         return null;

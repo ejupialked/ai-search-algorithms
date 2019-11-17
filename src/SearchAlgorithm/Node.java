@@ -72,41 +72,37 @@ public class Node implements Comparable<Node>, Heuristic {
         Board boardGoal = goal.getBoard();
         Board boardCurr = state.getBoard();
 
-
-
         int a = boardCurr.getA().manhattanDistance(boardGoal.getA());
         int b = boardCurr.getB().manhattanDistance(boardGoal.getB());
         int c = boardCurr.getC().manhattanDistance(boardGoal.getC());
 
         int max = Math.max(a, Math.max(b, c));
 
+
         if(!(boardCurr.getA().manhattanDistance(boardGoal.getA()) == 0)){
             sum += boardCurr.getA().manhattanDistance(boardGoal.getA());
-
-            if((boardCurr.getAgent().manhattanDistance(boardCurr.getA()) > 3)){
-                sum += boardCurr.getAgent().manhattanDistance(boardCurr.getA());
+            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getA())) > 5)){
+                sum += (boardCurr.getAgent().manhattanDistance(boardCurr.getA()));
             }
-
         }
 
         if(!(boardCurr.getB().manhattanDistance(boardGoal.getB()) == 0)){
             sum += boardCurr.getB().manhattanDistance(boardGoal.getB());
-            if((boardCurr.getAgent().manhattanDistance(boardCurr.getB()) > 3)){
-                sum += boardCurr.getAgent().manhattanDistance(boardCurr.getB());
+            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getB())) > 5)){
+                sum += (boardCurr.getAgent().manhattanDistance(boardCurr.getB()));
             }
         }
 
         if(!(boardCurr.getC().manhattanDistance(boardGoal.getC()) == 0)){
             sum += boardCurr.getC().manhattanDistance(boardGoal.getC());
-            if((boardCurr.getAgent().manhattanDistance(boardCurr.getC()) > 3)){
-                sum += boardCurr.getAgent().manhattanDistance(boardCurr.getC());
+            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getC())) > 5)){
+                sum += (boardCurr.getAgent().manhattanDistance(boardCurr.getC()));
             }
-
         }
 
 
 
-        return sum + max;
+        return sum+ max*4;
     }
 
     @Override
