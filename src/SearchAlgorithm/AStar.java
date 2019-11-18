@@ -4,6 +4,9 @@ import Problem.Problem;
 import Puzzle.TransitionModel.*;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import Utils.Utils.*;
+
+import static Utils.Utils.print;
 
 public class AStar extends SearchAlgorithm {
 
@@ -35,12 +38,11 @@ public class AStar extends SearchAlgorithm {
 
             Node nodeToExpand = frontier.poll();
 
-            //Utils.print("EXPANDING STATE: " + nodeToExpand.state.toString() +"\n"
-            //       + nodeToExpand.state.ascii());
+            print("EXPANDING STATE: " + nodeToExpand.state.toString() +"\n" + nodeToExpand.state.ascii());
 
 
 
-            //Utils.print("-----------PERFORMING ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");
+            print("-----------PERFORMING ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");
 
             for(Action action: problem.actions()){
 
@@ -49,7 +51,7 @@ public class AStar extends SearchAlgorithm {
 
                 if(!child.state.performAction(action)) continue;
 
-               //Utils.print("["+action+"]" + child.state.hashCode() + "Cost: " + child.f + "\n" + child.state.ascii());
+               print("["+action+"]" + child.state.hashCode() + "Cost: " + child.f + "\n" + child.state.ascii());
 
 
                 if (problem.checkGoal(child.state)) {
@@ -59,7 +61,7 @@ public class AStar extends SearchAlgorithm {
                 frontier.add(child);
             }
 
-           //Utils.print("-----------END ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");
+           print("-----------END ACTIONS on " + nodeToExpand.state.hashCode() +"---------------------");
 
         }
         return null;
