@@ -1,43 +1,35 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Problem.TransitionModel.Action;
-import static Utils.Utils.shuffle;
 import java.util.*;
 
-public class DFS extends TreeSearchAlgorithm {
+public class DFS extends TreeSearch {
 
-    private Stack<Node> frontier;
+    Stack<Node> fringe;
 
     public DFS(){
         super();
-        this.frontier = new Stack<Node>();
+        this.fringe = new Stack<>();
     }
 
 
     @Override
     protected LinkedList<Node> search(Problem problem) {
         Node root = new Node(problem.startState());
-        nodes++;
 
-        frontier.add(root);
+        fringe.add(root);
 
-        while (!frontier.isEmpty()){
+        while (!fringe.isEmpty()){
 
-            Node nodeToExpand = frontier.pop();
+            Node nodeToExpand = fringe.pop();
 
-            if(problem.checkGoal(nodeToExpand)){
+            if(problem.checkGoal(nodeToExpand)) {
                 return solution(nodeToExpand);
             }
 
-            for (Action a: shuffle(problem.actions())) {
-                Node child = new Node(nodeToExpand, a);
-                nodes++;
+            List<Node> successors = generateRandomSuccessors(nodeToExpand, problem);
 
-                if(!child.state.performAction(a)) continue;
-
-                frontier.add(child);
-            }
+            fringe.addAll(successors);
         }
         return null;
     }

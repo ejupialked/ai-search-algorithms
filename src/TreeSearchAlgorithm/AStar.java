@@ -1,14 +1,14 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Problem.TransitionModel.Action;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 
-public class AStar extends TreeSearchAlgorithm {
+public class AStar extends TreeSearch {
 
-    private PriorityQueue<Node> frontier;
+    PriorityQueue<Node> frontier;
 
     public AStar(){
         super();
@@ -26,24 +26,20 @@ public class AStar extends TreeSearchAlgorithm {
             return solution(root);
         }
 
-
         while(!frontier.isEmpty()){
 
             Node nodeToExpand = frontier.poll();
 
-            for(Action action: problem.actions()){
-
-                Node child = new Node(nodeToExpand,problem.goal(), action);
-                nodes++;
-
-                if(!child.state.performAction(action)) continue;
-
-                if (problem.checkGoal(child)) {
-                    return solution(child);
-                }
-                frontier.add(child);
+            if (problem.checkGoal(nodeToExpand)) {
+                return solution(nodeToExpand);
             }
+
+            List<Node> successors = generateSuccessors(nodeToExpand, problem);
+
+            frontier.addAll(successors);
+
         }
+
         return null;
     }
 }

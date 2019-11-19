@@ -1,16 +1,17 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Problem.TransitionModel.Action;
 import java.util.LinkedList;
-import static Utils.Utils.shuffle;
+import java.util.List;
 
-public class IDS extends TreeSearchAlgorithm {
+
+public class IDS extends TreeSearch {
 
     @Override
     protected LinkedList<Node> search(Problem problem) {
 
         Node root = new Node(problem.startState());
+
         Node solution;
 
         for (int depth = 1; depth < Integer.MAX_VALUE ; depth++) {
@@ -21,28 +22,27 @@ public class IDS extends TreeSearchAlgorithm {
                 return solution(solution);
             }
         }
+
         return null;
     }
 
 
-    public Node DLS(Problem problem, Node current, int depth) {
+    private Node DLS(Problem problem, Node current, int depth) {
 
         if (depth == 0 && problem.checkGoal(current)) {
             return current;
         }
 
         if (depth > 0) {
-            for (Action action : shuffle(problem.actions())) {
 
-                Node child = new Node(current, action);
-                nodes++;
+            List<Node> successors = generateSuccessors(current, problem);
 
-                if(!child.state.performAction(action)) continue;
+            for(Node successor : successors){
 
-                Node found = DLS(problem, child,depth - 1);
+                Node result = DLS(problem, successor,depth - 1);
 
-                if (found != null) {
-                    return found;
+                if (result != null) {
+                    return result;
                 }
             }
         }

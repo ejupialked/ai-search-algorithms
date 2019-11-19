@@ -1,4 +1,4 @@
-Step 0: null
+--------START STATE--------
 ╔═══╤═══╤═══╤═══╗
 ║   │   │   │   ║
 ╟───┼───┼───┼───╢
@@ -9,6 +9,18 @@ Step 0: null
 ║ A │ B │ C │ @ ║
 ╚═══╧═══╧═══╧═══╝
 
+--------GOAL STATE--------
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │ A │   │   ║
+╟───┼───┼───┼───╢
+║   │ B │   │   ║
+╟───┼───┼───┼───╢
+║   │ C │   │ @ ║
+╚═══╧═══╧═══╧═══╝
+
+I'm solving the puzzle...
 Step 1: UP
 ╔═══╤═══╤═══╤═══╗
 ║   │   │   │   ║
@@ -164,7 +176,7 @@ Step 14: LEFT
 ╚═══╧═══╧═══╧═══╝
 
 
-Time elapsed: 567690ms
-Number nodes: 177400986
-Depth : 15
-Moves: null UP LEFT LEFT DOWN LEFT UP RIGHT DOWN RIGHT UP UP LEFT DOWN LEFT 
+Time elapsed: 111849ms
+Number nodes generated: 8943147
+Depth solution : 14
+Moves: UP LEFT LEFT DOWN LEFT UP RIGHT DOWN RIGHT UP UP LEFT DOWN LEFT 

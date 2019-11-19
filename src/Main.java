@@ -4,19 +4,17 @@ import TreeSearchAlgorithm.BFS;
 import TreeSearchAlgorithm.DFS;
 import TreeSearchAlgorithm.IDS;
 import TreeSearchAlgorithm.AStar;
-import TreeSearchAlgorithm.TreeSearchAlgorithm;
+import TreeSearchAlgorithm.TreeSearch;
 import Utils.Utils;
 
 
 import static Utils.Utils.print;
 
 /**
- *
  * Run the algorithms here.
  *
  * @author Alked Ejupi Copyright (2019). All rights reserved.
  */
-
 public class Main {
 
 
@@ -32,33 +30,33 @@ public class Main {
             String algorithm = args[0];
             solveProblem(problem, algorithm);
         }
-
-
-
-
-
-
     }
 
 
+    /**
+     * Solve problem.
+     *
+     * @param problem   the problem
+     * @param algorithm the algorithm
+     */
     public static void solveProblem(Problem problem,String algorithm){
 
         String output = null;
             switch (algorithm) {
                 case "BFS":
-                    TreeSearchAlgorithm bfs = new BFS();
+                    TreeSearch bfs = new BFS();
                     output = bfs.solveProblem(problem);
                     break;
                 case "DFS":
-                    TreeSearchAlgorithm dfs = new DFS();
+                    TreeSearch dfs = new DFS();
                     output = dfs.solveProblem(problem);
                     break;
                 case "IDS":
-                    TreeSearchAlgorithm ids = new IDS();
+                    TreeSearch ids = new IDS();
                     output = ids.solveProblem(problem);
                     break;
                 case "AStar":
-                    TreeSearchAlgorithm ashs = new AStar();
+                    TreeSearch ashs = new AStar();
                     output = ashs.solveProblem(problem);
 
             }

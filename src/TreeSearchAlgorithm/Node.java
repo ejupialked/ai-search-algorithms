@@ -23,40 +23,16 @@ public class Node implements Comparable<Node>, Heuristic {
     }
 
 
-    /* child new  */
+    /* child (successor) */
     Node(Problem problem, Node parent, Action action) throws IllegalMoveException {
         this.state = problem.generateState(parent.state, action);
         this.action = action;
         this.parent = parent;
         this.actionCost = parent.actionCost + problem.actionCost();
+        this.f = f(g(),h(problem.goal()));
+
     }
 
-    /* child (successor) */
-    Node(Node parent, Action action){
-        Board board = new Board(parent.state.getBoard().getN(),
-                parent.state.getBoard().getGrid());
-        this.state = new State(board);
-        this.action = action;
-        this.parent = parent;
-    }
-
-
-    /* child (successor) heuristic */
-    Node(Node parent, Board goal, Action action){
-        Board board = new Board(parent.state.getBoard().getN(),
-                parent.state.getBoard().getGrid());
-        this.state = new State(board);
-        this.action = action;
-        this.parent = parent;
-
-        this.f = f(g(),h(goal));
-    }
-
-
-    /* Node for g() */
-    Node(Node parent){
-        this.parent = parent;
-    }
 
     @Override
     public int compareTo(Node o) {
@@ -65,17 +41,7 @@ public class Node implements Comparable<Node>, Heuristic {
 
     @Override
     public int g() {
-        if(this.parent == null){
-            return 0;
-        }
-        Node curr = new Node(this.parent);
-
-        int cost = 0;
-        while (curr != null){
-            curr = curr.parent;
-            cost++;
-        }
-        return cost;
+        return actionCost;
     }
 
     @Override
@@ -111,7 +77,7 @@ public class Node implements Comparable<Node>, Heuristic {
             }
         }
 
-        return sum+ max*4;
+        return sum + max*4;
     }
 
     @Override
@@ -121,12 +87,6 @@ public class Node implements Comparable<Node>, Heuristic {
 
 
 
-    /**
-     * Returns the state of the board
-     * as a String.
-     * @return the state of board
-     */
-    @Override
     public String toString() {
         return Integer.toString(hashCode());
     }

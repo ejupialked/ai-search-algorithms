@@ -19,28 +19,21 @@ import Problem.TransitionModel.Action;
  *
  * @author Alked Ejupi Copyright (2019). All rights reserved.
  */
-public abstract class TreeSearchAlgorithm {
+public abstract class TreeSearch {
 
-    protected int nodes;
-    protected int depth;
+    int nodes;
+    int depth;
 
     protected long start;
     protected long end;
 
-    protected long startMemory;
-    protected long endMemory;
-
-    StringBuilder solutionMoves;
-    StringBuilder solutionASCII;
+    private StringBuilder solutionMoves;
+    private StringBuilder solutionASCII;
 
 
     protected abstract LinkedList<Node> search(Problem problem);
 
-
-
-
-
-    TreeSearchAlgorithm(){
+    TreeSearch(){
         this.nodes = 1;
         this.depth = 0;
         this.solutionASCII = new StringBuilder();
@@ -52,14 +45,15 @@ public abstract class TreeSearchAlgorithm {
         return new Node(problem, parent, action);
     }
 
-    protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem){
+
+    protected List<Node> generateRandomSuccessors(Node nodeToExpand, Problem problem){
         ArrayList<Node> successors = new ArrayList<Node>();
 
-
-        for (Action action: problem.actions()) {
+        for (Action action: Utils.shuffle(problem.actions())) {
             Node child = null;
             try {
                 child = generateChildNode(problem, nodeToExpand, action);
+                nodes++;
             } catch (IllegalMoveException e) {
             }
 
@@ -71,18 +65,50 @@ public abstract class TreeSearchAlgorithm {
         return successors;
     }
 
+    protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem){
+        ArrayList<Node> successors = new ArrayList<Node>();
+
+
+        //Utils.print("Expanding: " + nodeToExpand.hashCode());
+        //Utils.print(nodeToExpand.state.ascii());
+
+        //Utils.print("-----------start expansion------------");
+
+
+        for (Action action: problem.actions()) {
+            Node child = null;
+            try {
+                child = generateChildNode(problem, nodeToExpand, action);
+                nodes++;
+               // Utils.print("Node: "+ child.state.hashCode());
+
+                //Utils.print(child.state.ascii());
+            } catch (IllegalMoveException e) {
+            }
+
+            if(child != null)
+                successors.add(child);
+
+        }
+
+       // Utils.print("-----------end expansion------------");
+
+
+        return successors;
+    }
+
     public String solveProblem(Problem problem){
 
         Utils.print("I'm solving the puzzle...");
 
-        start();
-        startMemory = Runtime.getRuntime().totalMemory();
 
+        start = System.currentTimeMillis();
         LinkedList<Node> solution = search(problem);
-        end();
-        endMemory = Runtime.getRuntime().totalMemory() - startMemory;
+        end = System.currentTimeMillis();
 
-        int i = 0;
+
+
+        int i = 1;
         for (Node node: solution) {
             solutionMoves.append(node.action).append(" ");
             solutionASCII
@@ -98,6 +124,7 @@ public abstract class TreeSearchAlgorithm {
 
         return toString();
     }
+
     protected LinkedList<Node> solution(Node solution) {
         LinkedList<Node> path = new LinkedList<>();
 
@@ -109,18 +136,13 @@ public abstract class TreeSearchAlgorithm {
 
         Collections.reverse(path);
 
+        //remove start node from the solution
+        path.remove(0);
+
         depth = path.size();
         return path;
     }
 
-
-    public void start(){
-        this.start =  System.currentTimeMillis();
-    }
-
-    public void end(){
-        this.end = System.currentTimeMillis();
-    }
 
     public long time(){
         return end - start;

@@ -1,59 +1,35 @@
 package TreeSearchAlgorithm;
 
-import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
-import Problem.TransitionModel.Action;
-import Utils.Utils;
-
 import java.util.*;
 
-public class BFS extends TreeSearchAlgorithm {
+public class BFS extends TreeSearch {
 
-    private Queue<Node> frontier;
+    Queue<Node> fringe;
 
     public BFS(){
         super();
-        this.frontier = new LinkedList<>();
+        this.fringe = new LinkedList<>();
     }
 
-    /**
-     * Solves {@link BlocksWorldTileProblem} with BFS
-     *
-     * @param problem the problem to solve
-     * @return a {@code LinkedList<Node>} containing the solution
-     *          if successful, returns {@code null} if case of failure.
-     */
+
     @Override
     protected LinkedList<Node> search(Problem problem) {
         Node root = new Node(problem.startState());
-        nodes++;
-        if(problem.checkGoal(root)){
-            return solution(root);
-        }
 
-        frontier.add(root);
-        while (!frontier.isEmpty()){
-            Node nodeToExpand = frontier.remove();
+        fringe.add(root);
 
+        while (!fringe.isEmpty()){
 
+            Node nodeToExpand = fringe.remove();
 
-            if (problem.checkGoal(nodeToExpand)) {
+            if(problem.checkGoal(nodeToExpand)) {
                 return solution(nodeToExpand);
             }
 
-            for (Action action: problem.actions()) {
-                Node child = new Node(nodeToExpand, action);
+            List<Node> successors = generateSuccessors(nodeToExpand, problem);
 
-                nodes++;
-
-                if(!child.state.performAction(action)) continue;
-
-
-                if (problem.checkGoal(child)) {
-                    return solution(child);
-                }
-                frontier.add(child);
-            }
+            fringe.addAll(successors);
         }
         return null;
     }

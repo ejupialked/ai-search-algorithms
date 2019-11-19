@@ -11,27 +11,38 @@ import Problem.TransitionModel.Action;
  * It also provides the possible action that can be performed.
  *
  * @author Alked Ejupi Copyright (2019). All rights reserved.
- *
  */
 public class State {
 
-    private Board board;
-    private TransitionModel transitionModel;
-    private Action actionTaken;
+    Board board;
+     TransitionModel transitionModel;
+     Action actionTaken;
 
 
+    /**
+     * Instantiates a new State.
+     *
+     * @param board the board
+     */
     public State(Board board) {
         this.board = board;
         this.transitionModel = new TransitionModel();
     }
 
+    /**
+     * Gets board.
+     *
+     * @return the board
+     */
     public Board getBoard() {
         return board;
     }
 
     /**
      * Perform an action on the {@link Board}
+     *
      * @param a the action to perform
+     * @return the boolean
      */
     public boolean performAction(Action a)  {
         try {
@@ -52,14 +63,29 @@ public class State {
         return super.equals(obj);
     }
 
+    /**
+     * Ascii string.
+     *
+     * @return the string
+     */
     public String ascii(){
         return Utils.drawGrid(Utils.array2dToArray1d(board.getGrid()), board.getN());
     }
 
+    /**
+     * Gets action taken.
+     *
+     * @return the action taken
+     */
     public Action getActionTaken() {
         return actionTaken;
     }
 
+    /**
+     * Sets action taken.
+     *
+     * @param actionTaken the action taken
+     */
     public void setActionTaken(Action actionTaken) {
         this.actionTaken = actionTaken;
     }

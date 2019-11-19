@@ -19,8 +19,8 @@ import static Utils.Utils.buildStringFromArray1D;
  */
 public class Board {
 
-    private int N;
-    private Cell[][] cells;
+    int N;
+    Cell[][] cells;
     private String[][] grid;
 
     private String configuration;
