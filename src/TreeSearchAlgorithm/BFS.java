@@ -27,6 +27,7 @@ public class BFS extends TreeSearchAlgorithm {
         nodes++;
 
         frontier.add(root);
+
         while (!frontier.isEmpty()){
             Node nodeToExpand = frontier.remove();
 

@@ -87,7 +87,7 @@ public class BlocksWorldTileProblem implements Problem {
 
         transitionModel.performTransition(action, newState);
 
-        return new State(board);
+        return newState;
     }
 
     @Override
