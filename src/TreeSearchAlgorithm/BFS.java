@@ -2,6 +2,8 @@ package TreeSearchAlgorithm;
 
 import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
+import Problem.TransitionModel.Action;
+import Utils.Utils;
 
 import java.util.*;
 
@@ -25,20 +27,33 @@ public class BFS extends TreeSearchAlgorithm {
     protected LinkedList<Node> search(Problem problem) {
         Node root = new Node(problem.startState());
         nodes++;
+        if(problem.checkGoal(root)){
+            return solution(root);
+        }
 
         frontier.add(root);
-
         while (!frontier.isEmpty()){
             Node nodeToExpand = frontier.remove();
+
+
 
             if (problem.checkGoal(nodeToExpand)) {
                 return solution(nodeToExpand);
             }
 
-            List<Node> successors = generateSuccessors(nodeToExpand, problem);
+            for (Action action: problem.actions()) {
+                Node child = new Node(nodeToExpand, action);
 
-            frontier.addAll(successors);
+                nodes++;
 
+                if(!child.state.performAction(action)) continue;
+
+
+                if (problem.checkGoal(child)) {
+                    return solution(child);
+                }
+                frontier.add(child);
+            }
         }
         return null;
     }

@@ -19,7 +19,7 @@ import static Utils.Utils.buildStringFromArray1D;
  */
 public class Board {
 
-    private final int N;
+    private int N;
     private Cell[][] cells;
     private String[][] grid;
 

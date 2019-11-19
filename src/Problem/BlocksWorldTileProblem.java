@@ -35,11 +35,32 @@ public class BlocksWorldTileProblem implements Problem {
     }
 
     public State initStartState(){
-        String[][] grid = new String[][]
+       String[][] grid = new String[][]
                        {{x, x, x , x},
                         {x, x, x, x},
                         {x, x, x, x},
                         {a, b, c, ag}};
+/*
+        String[][] grid = new String[N][N];
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N ; j++) {
+
+                if( i == 0 && j == 1)
+                    grid[i][j] = ag;
+                else if( i == 0 && j == 0)
+                    grid[i][j] = a;
+                else if( i == 1 && j == 1)
+                    grid[i][j] = b;
+                else if( i == 2 && j == 2)
+                    grid[i][j] = c;
+                else
+                    grid[i][j] = x;
+
+            }
+        }
+
+ */
 
         Board board = new Board(N, grid);
         return new State(board);
@@ -50,8 +71,29 @@ public class BlocksWorldTileProblem implements Problem {
                        {{x, x, x, x},
                         {x, a, x, x},
                         {x, b, x, x},
-                        {x, c,ag , x}};
+                        {x, c, x, ag}};
+        /*
 
+        String[][] grid = new String[N][N];
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N ; j++) {
+
+                if( i == 0 && j == 4)
+                    grid[i][j] = ag;
+                else if( i == 4 && j == 4)
+                    grid[i][j] = a;
+                else if( i == 5 && j == 5)
+                    grid[i][j] = b;
+                else if( i == 6 && j == 6)
+                    grid[i][j] = c;
+                else
+                    grid[i][j] = x;
+
+            }
+        }
+
+         */
         Board board = new Board(N, grid);
         return board;
     }

@@ -36,6 +36,8 @@ public class TransitionModel {
             case RIGHT: right(board, agent); break;
         }
 
+        state.setActionTaken(move);
+
         board.updateGrid();
         board.updateConfiguration();
 

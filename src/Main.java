@@ -5,6 +5,7 @@ import TreeSearchAlgorithm.DFS;
 import TreeSearchAlgorithm.IDS;
 import TreeSearchAlgorithm.AStar;
 import TreeSearchAlgorithm.TreeSearchAlgorithm;
+import Utils.Utils;
 
 
 import static Utils.Utils.print;
@@ -21,10 +22,20 @@ public class Main {
 
     public static void main(String[] args){
         Problem problem = new BlocksWorldTileProblem();
+
+        Utils.print("--------START STATE--------");
+        Utils.print(problem.startState().ascii());
+
+        Utils.print("--------GOAL STATE--------");
+        Utils.print(Utils.drawGrid(Utils.array2dToArray1d(problem.goal().getGrid()), problem.goal().getN()));
         if(args.length != 0){
             String algorithm = args[0];
             solveProblem(problem, algorithm);
         }
+
+
+
+
 
 
     }

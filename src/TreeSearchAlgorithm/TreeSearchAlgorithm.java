@@ -73,7 +73,7 @@ public abstract class TreeSearchAlgorithm {
 
     public String solveProblem(Problem problem){
 
-        Utils.print("I'm searching your solution..");
+        Utils.print("I'm solving the puzzle...");
 
         start();
         startMemory = Runtime.getRuntime().totalMemory();
