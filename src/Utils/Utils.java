@@ -1,6 +1,9 @@
 package Utils;
 
 import Puzzle.Cell;
+import Problem.TransitionModel.Action;
+
+import java.util.Random;
 
 /**
  * Utility class
@@ -84,6 +87,18 @@ public final class Utils {
         return  array1D;
     }
 
+    public static Action[] shuffle(Action[] actions) {
+        Random rand = new Random();
+
+        for (int i = 0; i < actions.length; i++) {
+            int randomIndexToSwap = rand.nextInt(actions.length);
+            Action temp = actions[randomIndexToSwap];
+            actions[randomIndexToSwap] = actions[i];
+            actions[i] = temp;
+        }
+        return actions;
+    }
+
     /**
      * Build a string from array1D
      * @param array1D
@@ -95,13 +110,6 @@ public final class Utils {
         return s.toString();
     }
 
-    public static String humanReadableByteCount(long bytes, boolean si) {
-        int unit = si ? 1000 : 1024;
-        if (bytes < unit) return bytes + " B";
-        int exp = (int) (Math.log(bytes) / Math.log(unit));
-        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
-        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
-    }
     /**
      * Print a string in the console
      * @param str the string to print

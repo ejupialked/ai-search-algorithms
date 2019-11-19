@@ -1,10 +1,10 @@
 package Problem;
 
-import Puzzle.TransitionModel;
-import Puzzle.TransitionModel.*;
+import Exceptions.IllegalMoveException;
 import Puzzle.Board;
-import Puzzle.State;
-import java.util.Random;
+import Problem.TransitionModel.Action;
+import TreeSearchAlgorithm.Node;
+
 import static Puzzle.Cell.*;
 
 /**
@@ -18,7 +18,8 @@ public class BlocksWorldTileProblem implements Problem {
     private static int N = 4;
 
     public TransitionModel transitionModel;
-    public State goalState;
+
+    public Board goal;
     public State startState;
 
     private static String a = CellType.A.getText();
@@ -28,8 +29,8 @@ public class BlocksWorldTileProblem implements Problem {
     private static String x = CellType.EMPTY.getText();
 
     public BlocksWorldTileProblem(){
-        this.transitionModel = new TransitionModel();
-        this.goalState = intiGoalState();
+        this.transitionModel = transitionModel();
+        this.goal = intiGoalState();
         this.startState = initStartState();
     }
 
@@ -44,7 +45,7 @@ public class BlocksWorldTileProblem implements Problem {
         return new State(board);
     }
 
-    public State intiGoalState() {
+    public Board intiGoalState() {
         String[][] grid = new String[][]
                        {{x, x, x, x},
                         {x, a, x, x},
@@ -52,13 +53,13 @@ public class BlocksWorldTileProblem implements Problem {
                         {x, c,ag , x}};
 
         Board board = new Board(N, grid);
-        return new State(board);
+        return board;
     }
 
 
     @Override
     public TransitionModel transitionModel() {
-        return transitionModel;
+        return new TransitionModel();
     }
 
     @Override
@@ -66,19 +67,6 @@ public class BlocksWorldTileProblem implements Problem {
         return Action.values();
     }
 
-    @Override
-    public Action[] randomiseActions() {
-        Random rand = new Random();
-        Action[] actions = actions();
-
-        for (int i = 0; i < actions.length; i++) {
-            int randomIndexToSwap = rand.nextInt(actions.length);
-            Action temp = actions[randomIndexToSwap];
-            actions[randomIndexToSwap] = actions[i];
-            actions[i] = temp;
-        }
-        return actions;
-    }
 
     @Override
     public State startState() {
@@ -86,14 +74,27 @@ public class BlocksWorldTileProblem implements Problem {
     }
 
     @Override
-    public State goalState() {
-        return goalState;
+    public Board goal() {
+        return goal;
     }
 
     @Override
-    public String goal() {
-        return goalState.toString();
+    public State generateState(State parent, Action action) throws IllegalMoveException {
+        Board board = new Board(parent.getBoard().getN(),
+                parent.getBoard().getGrid());
+
+        State newState = new State(board);
+
+        transitionModel.performTransition(action, newState);
+
+        return new State(board);
     }
+
+    @Override
+    public int actionCost() {
+        return 1;
+    }
+
 
     /**
      * Checks by just comparing
@@ -103,11 +104,12 @@ public class BlocksWorldTileProblem implements Problem {
      * the string that represents an empty space
      * since the position of the agent does not matter
      * when checking the goal state
-     * @param state the state to check
+     * @param solution the node to check
      * @return
      */
     @Override
-    public boolean checkGoal(State state) {
-        return goal().replace(ag, x).equals(state.toString().replace(ag, x));
+    public boolean checkGoal(Node solution) {
+        State state = solution.getState();
+        return goal().getConfiguration().replace(ag, x).equals(state.toString().replace(ag, x));
     }
 }

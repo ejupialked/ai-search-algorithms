@@ -1,6 +1,8 @@
-package Puzzle;
+package Problem;
 
 import Exceptions.IllegalMoveException;
+import Puzzle.Board;
+import Puzzle.Cell;
 import java.awt.Point;
 
 /**
@@ -20,21 +22,22 @@ public class TransitionModel {
      * on the {@link Board}.
      *
      * @param move the type of move of the agent
-     * @param b the {@link Board}
+     * @param state the {@link Board}
      * @throws  IllegalMoveException if move cannot be done
      */
-    public void moveAgent(Action move, Board b) throws IllegalMoveException {
-        Cell agent = b.getAgent();
+    public void performTransition(Action move, State state) throws IllegalMoveException {
+        Board board = state.getBoard();
+        Cell agent = board.getAgent();
 
         switch (move){
-            case UP:    up(b, agent);    break;
-            case DOWN:  down(b, agent);  break;
-            case LEFT:  left(b, agent);  break;
-            case RIGHT: right(b, agent); break;
+            case UP:    up(board, agent);    break;
+            case DOWN:  down(board, agent);  break;
+            case LEFT:  left(board, agent);  break;
+            case RIGHT: right(board, agent); break;
         }
 
-        b.updateGrid();
-        b.updateConfiguration();
+        board.updateGrid();
+        board.updateConfiguration();
 
     }
 
@@ -52,7 +55,7 @@ public class TransitionModel {
         if(up.x < 0) {
             throw new IllegalMoveException(Action.UP, up);
         }else{
-            moveAgent(board, up);
+            performTransition(board, up);
         }
     }
 
@@ -71,7 +74,7 @@ public class TransitionModel {
         if(down.x >= board.getN()) {
             throw new IllegalMoveException(Action.DOWN, down);
         }else{
-            moveAgent(board, down);
+            performTransition(board, down);
         }
     }
 
@@ -89,7 +92,7 @@ public class TransitionModel {
         if(left.y < 0) {
             throw new IllegalMoveException(Action.LEFT, left);
         }else{
-            moveAgent(board, left);
+            performTransition(board, left);
         }
     }
 
@@ -108,7 +111,7 @@ public class TransitionModel {
         if(right.y >= board.getN()) {
             throw new IllegalMoveException(Action.RIGHT, right);
         }else{
-            moveAgent(board, right);
+            performTransition(board, right);
         }
     }
 
@@ -117,7 +120,7 @@ public class TransitionModel {
      * @param board the board
      * @param p future cell of the agent
      */
-    private void moveAgent(Board board, Point p){
+    private void performTransition(Board board, Point p){
         Cell cellToSwap = board.getCells()[p.x][p.y];
         Point agent = board.getAgent().getPoint();
 

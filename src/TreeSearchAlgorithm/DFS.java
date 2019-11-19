@@ -1,11 +1,11 @@
-package SearchAlgorithm;
+package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Puzzle.TransitionModel.Action;
-
+import Problem.TransitionModel.Action;
+import static Utils.Utils.shuffle;
 import java.util.*;
 
-public class DFS extends SearchAlgorithm {
+public class DFS extends TreeSearchAlgorithm {
 
     private Stack<Node> frontier;
 
@@ -20,27 +20,21 @@ public class DFS extends SearchAlgorithm {
         Node root = new Node(problem.startState());
         nodes++;
 
-        if(problem.checkGoal(root.state)){
-            return solution(root);
-        }
-
         frontier.add(root);
 
         while (!frontier.isEmpty()){
 
             Node nodeToExpand = frontier.pop();
 
-            for (Action action: problem.randomiseActions()) {
+            if(problem.checkGoal(nodeToExpand)){
+                return solution(nodeToExpand);
+            }
 
-                Node child = new Node(nodeToExpand, action);
+            for (Action a: shuffle(problem.actions())) {
+                Node child = new Node(nodeToExpand, a);
                 nodes++;
 
-                if(!child.state.performAction(action)) continue;
-
-
-                if (problem.checkGoal(child.state)) {
-                    return solution(child);
-                }
+                if(!child.state.performAction(a)) continue;
 
                 frontier.add(child);
             }

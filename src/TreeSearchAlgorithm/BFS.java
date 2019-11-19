@@ -1,12 +1,12 @@
-package SearchAlgorithm;
+package TreeSearchAlgorithm;
 
 import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
-import Puzzle.TransitionModel.Action;
+import Problem.TransitionModel.Action;
 
 import java.util.*;
 
-public class BFS extends SearchAlgorithm {
+public class BFS extends TreeSearchAlgorithm {
 
     private Queue<Node> frontier;
 
@@ -26,7 +26,7 @@ public class BFS extends SearchAlgorithm {
     protected LinkedList<Node> search(Problem problem) {
         Node root = new Node(problem.startState());
         nodes++;
-        if(problem.checkGoal(root.state)){
+        if(problem.checkGoal(root)){
             return solution(root);
         }
 
@@ -40,7 +40,7 @@ public class BFS extends SearchAlgorithm {
 
                 if(!child.state.performAction(action)) continue;
 
-                if (problem.checkGoal(child.state)) {
+                if (problem.checkGoal(child)) {
                     return solution(child);
                 }
 

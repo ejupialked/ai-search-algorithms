@@ -1,21 +1,34 @@
-package SearchAlgorithm;
+package TreeSearchAlgorithm;
 
-import Puzzle.TransitionModel.Action;
+import Exceptions.IllegalMoveException;
+import Problem.Problem;
+import Problem.TransitionModel.Action;
 import Puzzle.Board;
-import Puzzle.State;
+import Problem.State;
 
 public class Node implements Comparable<Node>, Heuristic {
 
     State state;
     Node parent;
     Action action;
+    int actionCost;
+
     int f;
 
-  ;
     /*the root */
     Node(State start){
         this.state = start;
-        this.parent =null;
+        this.parent = null;
+        this.actionCost = 0;
+    }
+
+
+    /* child new  */
+    Node(Problem problem, Node parent, Action action) throws IllegalMoveException {
+        this.state = problem.generateState(parent.state, action);
+        this.action = action;
+        this.parent = parent;
+        this.actionCost = parent.actionCost + problem.actionCost();
     }
 
     /* child (successor) */
@@ -29,7 +42,7 @@ public class Node implements Comparable<Node>, Heuristic {
 
 
     /* child (successor) heuristic */
-    Node(Node parent, State goal, Action action){
+    Node(Node parent, Board goal, Action action){
         Board board = new Board(parent.state.getBoard().getN(),
                 parent.state.getBoard().getGrid());
         this.state = new State(board);
@@ -66,10 +79,8 @@ public class Node implements Comparable<Node>, Heuristic {
     }
 
     @Override
-    public int h(State goal) {
+    public int h(Board boardGoal) {
         int sum = 0;
-
-        Board boardGoal = goal.getBoard();
         Board boardCurr = state.getBoard();
 
         int a = boardCurr.getA().manhattanDistance(boardGoal.getA());
@@ -99,8 +110,6 @@ public class Node implements Comparable<Node>, Heuristic {
                 sum += (boardCurr.getAgent().manhattanDistance(boardCurr.getC()));
             }
         }
-
-
 
         return sum+ max*4;
     }

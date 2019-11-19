@@ -1,8 +1,9 @@
-package Puzzle;
+package Problem;
 
 import Exceptions.IllegalMoveException;
-import Puzzle.TransitionModel.*;
+import Puzzle.Board;
 import Utils.Utils;
+import Problem.TransitionModel.Action;
 
 /**
  * Class that represent a single state of the puzzle,
@@ -34,7 +35,7 @@ public class State {
      */
     public boolean performAction(Action a)  {
         try {
-            transitionModel.moveAgent(a, board);
+            transitionModel.performTransition(a, this);
             setActionTaken(a);
             return true;
         } catch (IllegalMoveException e){

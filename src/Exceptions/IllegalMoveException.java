@@ -1,6 +1,6 @@
 package Exceptions;
 
-import Puzzle.TransitionModel;
+import Problem.TransitionModel.Action;
 import java.awt.*;
 
 /**
@@ -8,10 +8,10 @@ import java.awt.*;
  */
 public class IllegalMoveException extends Exception {
 
-    private TransitionModel.Action a;
+    private Action a;
     private Point p;
 
-    public IllegalMoveException(TransitionModel.Action a, Point p){
+    public IllegalMoveException(Action a, Point p){
         super();
         this.a = a;
         this.p = p;

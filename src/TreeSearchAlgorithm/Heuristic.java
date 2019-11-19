@@ -1,6 +1,6 @@
-package SearchAlgorithm;
+package TreeSearchAlgorithm;
 
-import Puzzle.State;
+import Puzzle.Board;
 
 public interface Heuristic {
 
@@ -13,7 +13,7 @@ public interface Heuristic {
     /**
      * estimated cost of the cheapest path from {@code n} to goal
      */
-    int h(State goal);
+    int h(Board goal);
 
     /**
      *  estimated cost of the cheapest solution through {@code n}

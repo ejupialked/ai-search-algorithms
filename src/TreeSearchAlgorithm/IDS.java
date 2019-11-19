@@ -1,10 +1,11 @@
-package SearchAlgorithm;
+package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Puzzle.TransitionModel.*;
+import Problem.TransitionModel.Action;
 import java.util.LinkedList;
+import static Utils.Utils.shuffle;
 
-public class IDS extends SearchAlgorithm {
+public class IDS extends TreeSearchAlgorithm {
 
     @Override
     protected LinkedList<Node> search(Problem problem) {
@@ -26,12 +27,12 @@ public class IDS extends SearchAlgorithm {
 
     public Node DLS(Problem problem, Node current, int depth) {
 
-        if (depth == 0 && problem.checkGoal(current.state)) {
+        if (depth == 0 && problem.checkGoal(current)) {
             return current;
         }
 
         if (depth > 0) {
-            for (Action action : problem.randomiseActions()) {
+            for (Action action : shuffle(problem.actions())) {
 
                 Node child = new Node(current, action);
                 nodes++;
@@ -45,7 +46,6 @@ public class IDS extends SearchAlgorithm {
                 }
             }
         }
-
         return null;
     }
 }

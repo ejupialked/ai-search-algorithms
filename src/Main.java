@@ -1,10 +1,10 @@
 import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
-import SearchAlgorithm.BFS;
-import SearchAlgorithm.DFS;
-import SearchAlgorithm.IDS;
-import SearchAlgorithm.AStar;
-import SearchAlgorithm.SearchAlgorithm;
+import TreeSearchAlgorithm.BFS;
+import TreeSearchAlgorithm.DFS;
+import TreeSearchAlgorithm.IDS;
+import TreeSearchAlgorithm.AStar;
+import TreeSearchAlgorithm.TreeSearchAlgorithm;
 
 
 import static Utils.Utils.print;
@@ -35,20 +35,20 @@ public class Main {
         String output = null;
             switch (algorithm) {
                 case "BFS":
-                    SearchAlgorithm bfs = new BFS();
-                    output = bfs.searchDebug(problem);
+                    TreeSearchAlgorithm bfs = new BFS();
+                    output = bfs.solveProblem(problem);
                     break;
                 case "DFS":
-                    SearchAlgorithm dfs = new DFS();
-                    output = dfs.searchDebug(problem);
+                    TreeSearchAlgorithm dfs = new DFS();
+                    output = dfs.solveProblem(problem);
                     break;
                 case "IDS":
-                    SearchAlgorithm ids = new IDS();
-                    output = ids.searchDebug(problem);
+                    TreeSearchAlgorithm ids = new IDS();
+                    output = ids.solveProblem(problem);
                     break;
                 case "AStar":
-                    SearchAlgorithm ashs = new AStar();
-                    output = ashs.searchDebug(problem);
+                    TreeSearchAlgorithm ashs = new AStar();
+                    output = ashs.solveProblem(problem);
 
             }
 

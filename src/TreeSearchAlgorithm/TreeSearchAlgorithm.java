@@ -1,9 +1,15 @@
-package SearchAlgorithm;
+package TreeSearchAlgorithm;
 
+import Exceptions.IllegalMoveException;
 import Problem.Problem;
 import Utils.Utils;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+
+import Problem.TransitionModel.Action;
 
 
 /**
@@ -13,7 +19,7 @@ import java.util.LinkedList;
  *
  * @author Alked Ejupi Copyright (2019). All rights reserved.
  */
-public abstract class SearchAlgorithm {
+public abstract class TreeSearchAlgorithm {
 
     protected int nodes;
     protected int depth;
@@ -28,9 +34,44 @@ public abstract class SearchAlgorithm {
     StringBuilder solutionASCII;
 
 
+    protected abstract LinkedList<Node> search(Problem problem);
 
 
-    public String searchDebug(Problem problem){
+
+
+
+    TreeSearchAlgorithm(){
+        this.nodes = 1;
+        this.depth = 0;
+        this.solutionASCII = new StringBuilder();
+        this.solutionMoves = new StringBuilder();
+    }
+
+
+    private Node generateChildNode(Problem problem, Node parent,Action action) throws IllegalMoveException {
+        return new Node(problem, parent, action);
+    }
+
+    protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem){
+        ArrayList<Node> successors = new ArrayList<Node>();
+
+
+        for (Action action: problem.actions()) {
+            Node child = null;
+            try {
+                child = generateChildNode(problem, nodeToExpand, action);
+            } catch (IllegalMoveException e) {
+            }
+
+            if(child != null)
+                successors.add(child);
+
+        }
+
+        return successors;
+    }
+
+    public String solveProblem(Problem problem){
 
         Utils.print("I'm searching your solution..");
 
@@ -41,10 +82,8 @@ public abstract class SearchAlgorithm {
         end();
         endMemory = Runtime.getRuntime().totalMemory() - startMemory;
 
-
         int i = 0;
         for (Node node: solution) {
-
             solutionMoves.append(node.action).append(" ");
             solutionASCII
                     .append("Step ")
@@ -59,18 +98,6 @@ public abstract class SearchAlgorithm {
 
         return toString();
     }
-
-    protected abstract LinkedList<Node> search(Problem problem);
-
-
-    SearchAlgorithm(){
-        this.nodes = 1;
-        this.depth = 0;
-        this.solutionASCII = new StringBuilder();
-        this.solutionMoves = new StringBuilder();
-    }
-
-
     protected LinkedList<Node> solution(Node solution) {
         LinkedList<Node> path = new LinkedList<>();
 
@@ -84,7 +111,6 @@ public abstract class SearchAlgorithm {
 
         depth = path.size();
         return path;
-
     }
 
 
@@ -100,17 +126,13 @@ public abstract class SearchAlgorithm {
         return end - start;
     }
 
-
     @Override
     public String toString() {
         return solutionASCII +
-                "\nMemory used: " + Utils.humanReadableByteCount(endMemory, true) +
                 "\nTime elapsed: " + time() + "ms" +
                 "\nNumber nodes generated: " + nodes +
                 "\nDepth solution : " + depth +
                 "\nMoves: " + solutionMoves
                ;
     }
-
-
 }

@@ -1,11 +1,12 @@
 package Problem;
 
-import Puzzle.State;
-import Puzzle.TransitionModel;
-import Puzzle.TransitionModel.Action;
+import Exceptions.IllegalMoveException;
+import Problem.TransitionModel.Action;
+import Puzzle.Board;
+import TreeSearchAlgorithm.Node;
 
 /**
- * Interface for defining the puzzle problem
+ * Interface for defining the Blocks World Tile puzzle problem
  *
  * @author Alked Ejupi. Copyright (2019). All rights reserved.
  *
@@ -16,20 +17,25 @@ public interface Problem {
     TransitionModel transitionModel();
 
     Action[] actions();
-    Action[] randomiseActions();
-
 
     State startState();
-    State goalState();
+    Board goal();
 
-    String goal();
+    State generateState(State parentState, Action action) throws IllegalMoveException;
+
+    int actionCost();
+
 
     /**
-     * Check if the given state
-     * is the actual goal.
-     * @param state the state to check
-     * @return {@code true} if it is the goal
-     *         {@code false} otherwise.
+     * Checks by just comparing
+     * the String configuration (of the Board)
+     *
+     * Replaces the string of the agent with
+     * the string that represents an empty space
+     * since the position of the agent does not matter
+     * when checking the goal state
+     * @param solution the node to check
+     * @return
      */
-    boolean checkGoal(State state);
+    boolean checkGoal(Node solution);
 }
