@@ -4,7 +4,6 @@ import Puzzle.Board;
 
 public interface Heuristic {
 
-
     /**
      * Path cost from start node to {@code n}
      */
