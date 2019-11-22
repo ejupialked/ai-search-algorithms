@@ -1,4 +1,4 @@
-package Puzzle;
+package BlocksWorld;
 
 import java.awt.*;
 import static Utils.Utils.array2dToArray1d;

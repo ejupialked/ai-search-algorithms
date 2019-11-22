@@ -3,7 +3,7 @@ package TreeSearchAlgorithm;
 import Exceptions.IllegalMoveException;
 import Problem.Problem;
 import Problem.TransitionModel.Action;
-import Puzzle.Board;
+import BlocksWorld.Board;
 import Problem.State;
 
 public class Node implements Comparable<Node>, Heuristic {

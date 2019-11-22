@@ -2,7 +2,7 @@ package Problem;
 
 import Exceptions.IllegalMoveException;
 import Problem.TransitionModel.Action;
-import Puzzle.Board;
+import BlocksWorld.Board;
 import TreeSearchAlgorithm.Node;
 
 /**

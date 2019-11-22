@@ -1,7 +1,7 @@
 package Problem;
 
 import Exceptions.IllegalMoveException;
-import Puzzle.Board;
+import BlocksWorld.Board;
 import Utils.Utils;
 import Problem.TransitionModel.Action;
 

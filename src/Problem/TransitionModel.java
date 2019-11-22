@@ -1,8 +1,8 @@
 package Problem;
 
 import Exceptions.IllegalMoveException;
-import Puzzle.Board;
-import Puzzle.Cell;
+import BlocksWorld.Board;
+import BlocksWorld.Cell;
 import java.awt.Point;
 
 /**

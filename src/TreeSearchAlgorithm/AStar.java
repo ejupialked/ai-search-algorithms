@@ -8,11 +8,11 @@ import java.util.PriorityQueue;
 
 public class AStar extends TreeSearch {
 
-    PriorityQueue<Node> frontier;
+    PriorityQueue<Node> fringe;
 
     public AStar(){
         super();
-        this.frontier = new PriorityQueue<>();
+        this.fringe = new PriorityQueue<>();
     }
 
     @Override
@@ -20,15 +20,15 @@ public class AStar extends TreeSearch {
         Node root = new Node(problem.startState());
         nodes++;
 
-        frontier.add(root);
+        fringe.add(root);
 
         if(problem.checkGoal(root)){
             return solution(root);
         }
 
-        while(!frontier.isEmpty()){
+        while(!fringe.isEmpty()){
 
-            Node nodeToExpand = frontier.poll();
+            Node nodeToExpand = fringe.poll();
 
             if (problem.checkGoal(nodeToExpand)) {
                 return solution(nodeToExpand);
@@ -36,7 +36,7 @@ public class AStar extends TreeSearch {
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
 
-            frontier.addAll(successors);
+            fringe.addAll(successors);
 
         }
 

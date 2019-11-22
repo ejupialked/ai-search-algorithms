@@ -1,6 +1,4 @@
-package Puzzle;
-
-import Puzzle.Cell;
+package BlocksWorld;
 
 public interface ManhattanDistance {
 

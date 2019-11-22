@@ -1,4 +1,4 @@
-package Puzzle;
+package BlocksWorld;
 
 import java.awt.*;
 

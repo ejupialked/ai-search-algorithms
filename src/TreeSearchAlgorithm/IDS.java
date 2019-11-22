@@ -11,6 +11,7 @@ public class IDS extends TreeSearch {
     protected LinkedList<Node> search(Problem problem) {
 
         Node root = new Node(problem.startState());
+        nodes++;
 
         Node solution;
 

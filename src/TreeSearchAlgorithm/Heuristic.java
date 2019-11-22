@@ -1,6 +1,6 @@
 package TreeSearchAlgorithm;
 
-import Puzzle.Board;
+import BlocksWorld.Board;
 
 public interface Heuristic {
 
