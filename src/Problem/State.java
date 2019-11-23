@@ -35,6 +35,11 @@ public class State {
     }
 
 
+    public String asciiCells(){
+        return board.asciiCells();
+    }
+
+
     public String ascii(){
         return Utils.drawGrid(Utils.array2dToArray1d(board.getGrid()), board.getN());
     }

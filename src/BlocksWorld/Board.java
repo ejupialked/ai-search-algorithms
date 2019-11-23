@@ -1,8 +1,10 @@
 package BlocksWorld;
 
+import Utils.Utils;
+
 import java.awt.*;
-import static Utils.Utils.array2dToArray1d;
-import static Utils.Utils.buildStringFromArray1D;
+
+import static Utils.Utils.*;
 
 /**
  * Represents a board containing NxN cells.
@@ -20,6 +22,7 @@ public class Board {
     int N;
     Cell[][] cells;
     private String[][] grid;
+    private Cell[][] gridCells;
 
     private String configuration;
 
@@ -38,6 +41,15 @@ public class Board {
         this.configuration = buildStringFromArray1D(array2dToArray1d(grid));
 
     }
+
+
+    public Board(int N, Cell[][] gridCells) {
+        this.N = N;
+        this.gridCells = gridCells;
+        this.configuration = convert1DCellsToString(convert2DCellsTo1DCells(gridCells));
+    }
+
+
 
     /**
      * Generates 2d array of cells.
@@ -95,6 +107,9 @@ public class Board {
         return configuration;
     }
 
+    public Cell[][] getGridCells() {
+        return gridCells;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -136,6 +151,26 @@ public class Board {
 
     public String[][] getGrid() {
         return grid;
+    }
+
+    public String asciiCells(){
+        return Utils.drawGridCells(Utils.convert2DCellsTo1DCells(getGridCells()), getN());
+    }
+
+    public void setA(Cell a) {
+        this.a = a;
+    }
+
+    public void setB(Cell b) {
+        this.b = b;
+    }
+
+    public void setC(Cell c) {
+        this.c = c;
+    }
+
+    public void setAgent(Cell agent) {
+        this.agent = agent;
     }
 
     public Cell getA() {

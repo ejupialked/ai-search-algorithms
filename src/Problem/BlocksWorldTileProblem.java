@@ -1,11 +1,16 @@
 package Problem;
 
+import BlocksWorld.Cell;
 import Exceptions.IllegalMoveException;
 import BlocksWorld.Board;
 import Problem.TransitionModel.Action;
 import TreeSearchAlgorithm.Node;
+import Utils.Utils;
+
+import java.awt.*;
 
 import static BlocksWorld.Cell.*;
+import static Utils.Utils.generateBoard;
 
 /**
  *  This class defines the problem to solve.
@@ -28,11 +33,43 @@ public class BlocksWorldTileProblem implements Problem {
     private static String ag = CellType.AGENT.getText();
     private static String x = CellType.EMPTY.getText();
 
+
+    private static CellType A = CellType.A;
+    private static CellType B = CellType.B;
+    private static CellType C = CellType.C;
+    private static CellType AGENT = CellType.AGENT;
+    private static CellType EMPTY = CellType.EMPTY;
+
+
+
+
     public BlocksWorldTileProblem(){
         this.transitionModel = transitionModel();
         this.goal = intiGoalState();
         this.startState = initStartState();
     }
+
+
+
+    public State initCellsStart(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
+        Cell a = new Cell(pointTileA, A);
+        Cell b = new Cell(pointTileB, B);
+        Cell c = new Cell(pointTileC, C);
+        Cell ag = new Cell(pointAgent, AGENT);
+        Board board = generateBoard(a, b, c, ag, N);
+        return new State(board);
+
+    }
+
+    public Board initCellsGoal(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
+        Cell a = new Cell(pointTileA, A);
+        Cell b = new Cell(pointTileB, B);
+        Cell c = new Cell(pointTileC, C);
+        Cell ag = new Cell(pointAgent, AGENT);
+        return generateBoard(a, b, c, ag, N);
+    }
+
+
 
     public State initStartState(){
       String[][] grid = new String[][]
