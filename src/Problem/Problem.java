@@ -25,7 +25,6 @@ public interface Problem {
 
     int actionCost();
 
-
     /**
      * Checks by just comparing
      * the String configuration (of the Board)
