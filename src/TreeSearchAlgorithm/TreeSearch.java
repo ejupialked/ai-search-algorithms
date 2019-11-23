@@ -31,7 +31,7 @@ public abstract class TreeSearch {
     private StringBuilder solutionASCII;
 
 
-    protected abstract LinkedList<Node> search(Problem problem);
+    protected abstract List<Node> search(Problem problem);
 
     TreeSearch(){
         this.nodes = 1;
@@ -103,7 +103,7 @@ public abstract class TreeSearch {
 
 
         start = System.currentTimeMillis();
-        LinkedList<Node> solution = search(problem);
+        List<Node> solution = search(problem);
         end = System.currentTimeMillis();
 
 
@@ -125,7 +125,7 @@ public abstract class TreeSearch {
         return toString();
     }
 
-    protected LinkedList<Node> solution(Node solution) {
+    protected List<Node> solution(Node solution) {
         LinkedList<Node> path = new LinkedList<>();
 
         path.add(solution);

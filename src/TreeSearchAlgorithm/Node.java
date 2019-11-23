@@ -11,7 +11,7 @@ public class Node implements Comparable<Node>, Heuristic {
     State state;
     Node parent;
     Action action;
-    int actionCost;
+    int pathCost;
 
     int f;
 
@@ -19,16 +19,15 @@ public class Node implements Comparable<Node>, Heuristic {
     Node(State start){
         this.state = start;
         this.parent = null;
-        this.actionCost = 0;
+        this.pathCost = 0;
     }
-
 
     /* child (successor) */
     Node(Problem problem, Node parent, Action action) throws IllegalMoveException {
         this.state = problem.generateState(parent.state, action);
         this.action = action;
         this.parent = parent;
-        this.actionCost = parent.actionCost + problem.actionCost();
+        this.pathCost = parent.pathCost + problem.actionCost();
         this.f = f(g(),h(problem.goal()));
 
     }
@@ -41,7 +40,7 @@ public class Node implements Comparable<Node>, Heuristic {
 
     @Override
     public int g() {
-        return actionCost;
+        return pathCost;
     }
 
     @Override
@@ -84,7 +83,6 @@ public class Node implements Comparable<Node>, Heuristic {
     public int f(int g, int h) {
         return g + h;
     }
-
 
 
     public String toString() {

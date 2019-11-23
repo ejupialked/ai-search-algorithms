@@ -1,14 +1,13 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import java.util.LinkedList;
-import java.util.List;
 
+import java.util.List;
 
 public class IDS extends TreeSearch {
 
     @Override
-    protected LinkedList<Node> search(Problem problem) {
+    protected List<Node> search(Problem problem) {
 
         Node root = new Node(problem.startState());
         nodes++;

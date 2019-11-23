@@ -11,8 +11,6 @@ import static Utils.Utils.buildStringFromArray1D;
  * the {@code configuration} attribute represents the
  * arrangements of tiles and agent as a single {@code String}
  *
- *
- *
  * @author Alked Ejupi Copyright (2019). All rights reserved.
  *
  *
@@ -86,7 +84,6 @@ public class Board {
             return cell;
     }
 
-
     /**
      * Updates the String configuration of the board
      */
@@ -129,7 +126,6 @@ public class Board {
         this.b.setLocation(agent);
     }
 
-
     public int getN() {
         return N;
     }
@@ -138,16 +134,13 @@ public class Board {
         return cells;
     }
 
-
     public String[][] getGrid() {
         return grid;
     }
 
-
     public Cell getA() {
         return a;
     }
-
 
     public Cell getB() {
         return b;
@@ -160,7 +153,6 @@ public class Board {
     public Cell getAgent() {
         return agent;
     }
-
 
     public void updateGrid() {
         String[][] grid = new String[N][N];

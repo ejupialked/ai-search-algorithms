@@ -17,7 +17,6 @@ public class IllegalMoveException extends Exception {
         this.p = p;
     }
 
-
     @Override
     public String getMessage() {
         return "["+a+"]"+" is an illegal move. Point ("+ p.x +", "+ p.y + ");";

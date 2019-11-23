@@ -15,7 +15,7 @@ public class DFS extends TreeSearch {
 
 
     @Override
-    protected LinkedList<Node> search(Problem problem) {
+    protected List<Node> search(Problem problem) {
         Node root = new Node(problem.startState());
 
         fringe.add(root);

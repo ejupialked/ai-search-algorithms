@@ -1,7 +1,7 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -16,7 +16,7 @@ public class AStar extends TreeSearch {
     }
 
     @Override
-    protected LinkedList<Node> search(Problem problem) {
+    protected List<Node> search(Problem problem) {
         Node root = new Node(problem.startState());
         nodes++;
 

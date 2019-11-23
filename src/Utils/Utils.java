@@ -2,7 +2,6 @@ package Utils;
 
 import BlocksWorld.Cell;
 import Problem.TransitionModel.Action;
-
 import java.util.Random;
 
 /**
