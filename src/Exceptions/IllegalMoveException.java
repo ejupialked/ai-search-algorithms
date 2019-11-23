@@ -9,16 +9,14 @@ import java.awt.*;
 public class IllegalMoveException extends Exception {
 
     private Action a;
-    private Point p;
 
-    public IllegalMoveException(Action a, Point p){
+    public IllegalMoveException(Action a){
         super();
         this.a = a;
-        this.p = p;
     }
 
     @Override
     public String getMessage() {
-        return "["+a+"]"+" is an illegal move. Point ("+ p.x +", "+ p.y + ");";
+        return "["+a+"]"+" is an illegal move.";
     }
 }

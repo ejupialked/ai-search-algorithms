@@ -1,8 +1,6 @@
 package Problem;
 
-import Exceptions.IllegalMoveException;
 import BlocksWorld.Board;
-import Utils.Utils;
 import Problem.TransitionModel.Action;
 
 /**
@@ -39,10 +37,6 @@ public class State {
         return board.asciiCells();
     }
 
-
-    public String ascii(){
-        return Utils.drawGrid(Utils.array2dToArray1d(board.getGrid()), board.getN());
-    }
 
 
     public Action getActionTaken() {

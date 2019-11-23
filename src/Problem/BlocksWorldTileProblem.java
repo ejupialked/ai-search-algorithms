@@ -5,12 +5,11 @@ import Exceptions.IllegalMoveException;
 import BlocksWorld.Board;
 import Problem.TransitionModel.Action;
 import TreeSearchAlgorithm.Node;
-import Utils.Utils;
 
 import java.awt.*;
 
 import static BlocksWorld.Cell.*;
-import static Utils.Utils.generateBoard;
+import static Utils.Utils.*;
 
 /**
  *  This class defines the problem to solve.
@@ -27,13 +26,6 @@ public class BlocksWorldTileProblem implements Problem {
     public Board goal;
     public State startState;
 
-    private static String a = CellType.A.getText();
-    private static String b = CellType.B.getText();
-    private static String c = CellType.C.getText();
-    private static String ag = CellType.AGENT.getText();
-    private static String x = CellType.EMPTY.getText();
-
-
     private static CellType A = CellType.A;
     private static CellType B = CellType.B;
     private static CellType C = CellType.C;
@@ -41,14 +33,11 @@ public class BlocksWorldTileProblem implements Problem {
     private static CellType EMPTY = CellType.EMPTY;
 
 
-
-
-    public BlocksWorldTileProblem(){
+    public BlocksWorldTileProblem(Point...points){
         this.transitionModel = transitionModel();
-        this.goal = intiGoalState();
-        this.startState = initStartState();
+        this.startState = initCellsStart(points[0], points[1], points[2], points[3]);
+        this.goal = initCellsGoal(points[4], points[5], points[6], points[7]);
     }
-
 
 
     public State initCellsStart(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
@@ -70,72 +59,6 @@ public class BlocksWorldTileProblem implements Problem {
     }
 
 
-
-    public State initStartState(){
-      String[][] grid = new String[][]
-                       {{x, x, x , x},
-                        {x, x, ag, x},
-                        {b, a, x, x},
-                        {x, c, x, x}};
-
-        /*String[][] grid = new String[N][N];
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N ; j++) {
-
-                if( i == 2 && j == 2)
-                    grid[i][j] = ag;
-                else if( i == 3 && j == 0)
-                    grid[i][j] = a;
-                else if( i == 3 && j == 1)
-                    grid[i][j] = b;
-                else if( i == 3 && j == 2)
-                    grid[i][j] = c;
-                else
-                    grid[i][j] = x;
-
-            }
-        }*/
-
-
-
-        Board board = new Board(N, grid);
-        return new State(board);
-    }
-
-    public Board intiGoalState() {
-        String[][] grid = new String[][]
-                       {{x, x, x, x},
-                        {x, a, x, x},
-                        {x, b, x, x},
-                        {x, c, x, ag}};
-
-
-       /* String[][] grid = new String[N][N];
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N ; j++) {
-
-                if( i == 0 && j == 0 )
-                    grid[i][j] = ag;
-                else if( i ==  1 && j == 1)
-                    grid[i][j] = a;
-                else if( i == 2 && j == 1)
-                    grid[i][j] = b;
-                else if( i == 3 && j == 1)
-                    grid[i][j] = c;
-                else
-                    grid[i][j] = x;
-
-            }
-        }*/
-
-
-        Board board = new Board(N, grid);
-        return board;
-    }
-
-
     @Override
     public TransitionModel transitionModel() {
         return new TransitionModel();
@@ -145,7 +68,6 @@ public class BlocksWorldTileProblem implements Problem {
     public Action[] actions() {
         return Action.values();
     }
-
 
     @Override
     public State startState() {
@@ -159,15 +81,26 @@ public class BlocksWorldTileProblem implements Problem {
 
     @Override
     public State generateState(State parent, Action action) throws IllegalMoveException {
-        Board board = new Board(parent.getBoard().getN(),
-                parent.getBoard().getGrid());
 
+        Board parentBoard = parent.getBoard();
+
+        // new cells for A, B, C and agent
+        Cell An = cloneCell(parentBoard.getA());
+        Cell Bn = cloneCell(parentBoard.getB());
+        Cell Cn = cloneCell(parentBoard.getC());
+        Cell AGn = cloneCell(parentBoard.getAgent());
+
+        //new Board
+        Board board = generateBoard(An, Bn, Cn, AGn, parentBoard.getN());
+
+        //new State
         State newState = new State(board);
 
-        transitionModel.performTransition(action, newState);
+        transitionModel.performTransitionCells(action, newState);
 
         return newState;
     }
+
 
     @Override
     public int actionCost() {
@@ -175,20 +108,14 @@ public class BlocksWorldTileProblem implements Problem {
     }
 
 
-    /**
-     * Checks by just comparing
-     * the String configuration (of the Board)
-     *
-     * Replaces the string of the agent with
-     * the string that represents an empty space
-     * since the position of the agent does not matter
-     * when checking the goal state
-     * @param solution the node to check
-     * @return
-     */
+    //1164684252
     @Override
     public boolean checkGoal(Node solution) {
+
+        if(solution.hashCode() == 1164684252) print(solution.getState().getBoard().getConfiguration());
+        if(solution.hashCode() == 1164626592) print(solution.getState().getBoard().getConfiguration());
+
         State state = solution.getState();
-        return goal().getConfiguration().replace(ag, x).equals(state.toString().replace(ag, x));
+        return goal().getConfiguration().replace(AGENT.getText(), EMPTY.getText()).equals(state.toString().replace(AGENT.getText(), EMPTY.getText()));
     }
 }

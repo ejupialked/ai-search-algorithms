@@ -1,5 +1,9 @@
+import BlocksWorld.Board;
+import Exceptions.IllegalMoveException;
 import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
+import Problem.State;
+import Problem.TransitionModel;
 import TreeSearchAlgorithm.BFS;
 import TreeSearchAlgorithm.DFS;
 import TreeSearchAlgorithm.IDS;
@@ -9,7 +13,9 @@ import Utils.Utils;
 
 
 import java.awt.*;
+import java.io.IOException;
 
+import static Utils.Utils.drawGridCells;
 import static Utils.Utils.print;
 
 /**
@@ -21,35 +27,34 @@ public class Main {
 
 
     public static void main(String[] args){
-        Problem problem = new BlocksWorldTileProblem();
+        //Problem problem = new BlocksWorldTileProblem();
 
 
-        BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem();
 
 
-        Point a = new Point(0,0);
-        Point b = new Point(1,1);
-        Point c = new Point(2,2);
+        Point a = new Point(3,0);
+        Point b = new Point(3,1);
+        Point c = new Point(3,2);
         Point agent = new Point(3,3);
 
-        Point aGoal = new Point(3,3);
-        Point bGoal = new Point(2,2);
-        Point cGoal = new Point(1,1);
-        Point agentGoal = new Point(0,0);
-
-        Utils.print(problem1.initCellsStart(a, b, c, agent).asciiCells());
-        Utils.print(problem1.initCellsGoal(aGoal, bGoal, cGoal, agentGoal).asciiCells());
+        Point aGoal = new Point(1,1);
+        Point bGoal = new Point(3,1);
+        Point cGoal = new Point(3,2);
+        Point agentGoal = new Point(2,0);
 
 
+        BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
 
-        Utils.print("--------START STATE--------");
-        Utils.print(problem.startState().ascii());
 
-        Utils.print("--------GOAL STATE--------");
-        Utils.print(Utils.drawGrid(Utils.array2dToArray1d(problem.goal().getGrid()), problem.goal().getN()));
+
+         print("--------START STATE--------");
+        print(problem1.startState().asciiCells());
+
+       print("--------GOAL STATE--------");
+      print(drawGridCells(Utils.convert2DCellsTo1DCells(problem1.goal().getGridCells()), problem1.goal().getN()));
         if(args.length != 0){
             String algorithm = args[0];
-            solveProblem(problem, algorithm);
+            solveProblem(problem1, algorithm);
         }
     }
 

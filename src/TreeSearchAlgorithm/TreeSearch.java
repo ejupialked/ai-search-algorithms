@@ -50,11 +50,14 @@ public abstract class TreeSearch {
         ArrayList<Node> successors = new ArrayList<Node>();
 
         for (Action action: Utils.shuffle(problem.actions())) {
-            Node child = null;
+            Node child;
             try {
                 child = generateChildNode(problem, nodeToExpand, action);
+                Utils.print("config child: "  +child.state.getBoard().getConfiguration());
+                Utils.print(child.state.asciiCells());
                 nodes++;
             } catch (IllegalMoveException e) {
+                child = null;
             }
 
             if(child != null)
@@ -72,18 +75,20 @@ public abstract class TreeSearch {
         //Utils.print("Expanding: " + nodeToExpand.hashCode());
         //Utils.print(nodeToExpand.state.ascii());
 
-        //Utils.print("-----------start expansion------------");
+      //  Utils.print("-----------start expansion------------");
 
 
+        int i = 0;
         for (Action action: problem.actions()) {
-            Node child = null;
+            Node child;
             try {
                 child = generateChildNode(problem, nodeToExpand, action);
                 nodes++;
-               // Utils.print("Node: "+ child.state.hashCode());
-
-                //Utils.print(child.state.ascii());
+                //Utils.print(i++ + " node expanded: " + child.state.hashCode());
+               // Utils.print("parent of " + child.state.hashCode() + " is " + child.parent.state.hashCode());
+              //  Utils.print(child.state.asciiCells());
             } catch (IllegalMoveException e) {
+                child = null;
             }
 
             if(child != null)
@@ -91,7 +96,7 @@ public abstract class TreeSearch {
 
         }
 
-       // Utils.print("-----------end expansion------------");
+        //Utils.print("-----------end expansion------------");
 
 
         return successors;
@@ -117,7 +122,9 @@ public abstract class TreeSearch {
                     .append(": ")
                     .append(node.state.getActionTaken())
                     .append("\n")
-                    .append(node.state.ascii())
+                    .append(node.state.hashCode())
+                    .append("\n")
+                    .append(node.state.asciiCells())
                     .append("\n");
         }
 

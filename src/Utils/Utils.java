@@ -2,6 +2,7 @@ package Utils;
 
 import BlocksWorld.Board;
 import BlocksWorld.Cell;
+import Problem.State;
 import Problem.TransitionModel.Action;
 
 import java.awt.*;
@@ -14,38 +15,6 @@ import java.util.Random;
  */
 
 public final class Utils {
-
-    /**
-     * Draws the blocks of the puzzle in a nice way in the Console.
-     *
-     * @param array1D the puzzle in 2d array form
-     * @param n  the size of grid (nxn)
-     * @return the String containing the puzzle with blocks
-     */
-    public static String drawGrid(String[] array1D, int n) {
-        for (int i = 0; i < array1D.length; i++) {
-            if(array1D[i].equals("x"))
-                array1D[i] = " ";
-
-        }
-        String pattern = buildPattern(n);
-        String[] R ={"╔═╤╦╗","║ │║║o","╟─┼╫╢","╠═╪╬╣","╚═╧╩╝"};
-        StringBuilder r = new StringBuilder();
-
-        for (int X: pattern.getBytes()) {
-            for (int x: pattern.replace("1",R[X-=48].length()>5?"151":"111").getBytes()){
-                r.append(R[X].charAt(x - 48));
-            }
-            r.append("\n");
-        }
-
-        for(String i: array1D) {
-            r = new StringBuilder(r.toString().replaceFirst("o", i.equals("") ? "b" + i : i));
-        }
-
-        return r.toString();
-    }
-
 
     /**
      * Draws the blocks of the puzzle in a nice way in the Console.
@@ -92,21 +61,6 @@ public final class Utils {
     }
 
 
-    /**
-     * Convert an array 2D to an array 1D
-     * @param array2D the array 2D to convert
-     * @return the 1D array
-     */
-    public static String[] array2dToArray1d(String[][] array2D){
-        String[] array1D = new String[array2D.length*array2D[0].length];
-
-        for(int i = 0; i < array2D.length; i++) {
-            String[] row = array2D[i];
-            System.arraycopy(array2D[i], 0, array1D, i * row.length, row.length);
-        }
-
-        return  array1D;
-    }
 
 
     public static String convert1DCellsToString(Cell[] array1D){
@@ -129,14 +83,10 @@ public final class Utils {
 
     public static Board generateBoard(Cell a, Cell b, Cell c, Cell agent, int n){
         Cell[][] gridCells = generateGridCells(a, b, c, agent, n);
-
         Board newBoard =  new Board(n, gridCells);
-
         for (int x = 0; x < n; x++) {
             for (int y = 0; y < n ; y++) {
-
                 Cell cell = gridCells[x][y];
-
                 switch (cell.getCellType()) {
                     case A: newBoard.setA(cell); break;
                     case B: newBoard.setB(cell); break;
@@ -144,8 +94,15 @@ public final class Utils {
                     case AGENT: newBoard.setAgent(cell); break;
                 }
             }
+
         }
+        newBoard.computeConfiguration();
+
         return newBoard;
+    }
+
+    public static Cell cloneCell(Cell c){
+        return new Cell(((int) c.getX()), ((int) c.getY()), c.getCellType());
     }
 
     private static Cell[][] generateGridCells(Cell a, Cell b, Cell c, Cell agent, int n){
@@ -168,8 +125,6 @@ public final class Utils {
         return cells;
     }
 
-
-
     public static Action[] shuffle(Action[] actions) {
         Random rand = new Random();
 
@@ -183,18 +138,6 @@ public final class Utils {
     }
 
 
-
-
-    /**
-     * Build a string from array1D
-     * @param array1D
-     * @return the string
-     */
-    public static String buildStringFromArray1D(String[] array1D) {
-        StringBuilder s = new StringBuilder();
-        for (String s1: array1D) s.append(s1);
-        return s.toString();
-    }
 
     /**
      * Print a string in the console

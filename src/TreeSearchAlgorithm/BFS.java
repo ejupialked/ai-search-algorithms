@@ -1,6 +1,8 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
+import Utils.Utils;
+
 import java.util.*;
 
 public class BFS extends TreeSearch {
@@ -23,10 +25,12 @@ public class BFS extends TreeSearch {
 
             Node nodeToExpand = fringe.remove();
 
+            Utils.print("Removing node " + nodeToExpand.hashCode() + " from the fringe.");
             if(problem.checkGoal(nodeToExpand)) {
                 return solution(nodeToExpand);
             }
 
+            Utils.print("Start to expand " + nodeToExpand.hashCode() + ".");
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
 
             fringe.addAll(successors);
