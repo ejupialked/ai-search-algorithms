@@ -33,16 +33,13 @@ public class State {
     }
 
 
-    public String asciiCells(){
-        return board.asciiCells();
+    public String printASCII(){
+        return board.getASCIIString();
     }
-
-
 
     public Action getActionTaken() {
         return actionTaken;
     }
-
 
     public void setActionTaken(Action actionTaken) {
         this.actionTaken = actionTaken;

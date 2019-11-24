@@ -79,6 +79,10 @@ public class BlocksWorldTileProblem implements Problem {
         return goal;
     }
 
+    public void setGoal(Board goal) {
+        this.goal = goal;
+    }
+
     @Override
     public State generateState(State parent, Action action) throws IllegalMoveException {
 
@@ -96,7 +100,7 @@ public class BlocksWorldTileProblem implements Problem {
         //new State
         State newState = new State(board);
 
-        transitionModel.performTransitionCells(action, newState);
+        transitionModel.performTransition(action, newState);
 
         return newState;
     }
@@ -111,11 +115,8 @@ public class BlocksWorldTileProblem implements Problem {
     //1164684252
     @Override
     public boolean checkGoal(Node solution) {
-
-        if(solution.hashCode() == 1164684252) print(solution.getState().getBoard().getConfiguration());
-        if(solution.hashCode() == 1164626592) print(solution.getState().getBoard().getConfiguration());
-
         State state = solution.getState();
         return goal().getConfiguration().replace(AGENT.getText(), EMPTY.getText()).equals(state.toString().replace(AGENT.getText(), EMPTY.getText()));
     }
+
 }

@@ -2,7 +2,8 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import java.util.*;
+import java.util.Stack;
+import java.util.List;
 
 public class DFS extends TreeSearch {
 
@@ -13,15 +14,14 @@ public class DFS extends TreeSearch {
         this.fringe = new Stack<>();
     }
 
-
     @Override
     protected List<Node> search(Problem problem) {
         Node root = new Node(problem.startState());
+        nodes++;
 
         fringe.add(root);
 
         while (!fringe.isEmpty()){
-
             Node nodeToExpand = fringe.pop();
 
             if(problem.checkGoal(nodeToExpand)) {
@@ -29,7 +29,6 @@ public class DFS extends TreeSearch {
             }
 
             List<Node> successors = generateRandomSuccessors(nodeToExpand, problem);
-
             fringe.addAll(successors);
         }
         return null;

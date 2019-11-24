@@ -18,7 +18,7 @@ public class TransitionModel {
     public enum Action {UP, DOWN, LEFT, RIGHT}
 
 
-    public void performTransitionCells(Action move, State state) throws IllegalMoveException {
+    public void performTransition(Action move, State state) throws IllegalMoveException {
         Board board = state.getBoard();
         Cell destination = null;
 
@@ -36,13 +36,13 @@ public class TransitionModel {
             state.setActionTaken(move);
 
             //update configuration
-            board.computeConfiguration();
+            board.updateConfiguration();
         }
     }
 
     private void moveAgent(Board board, Cell destination){
 
-        Cell[][] cells = board.getGridCells();
+        Cell[][] cells = board.getCells();
         Point agent = board.getAgent().getPoint();
 
         Point tempAgent = new Point(((int) agent.getX()), ((int) agent.getY()));
@@ -65,7 +65,7 @@ public class TransitionModel {
         Cell destination;
 
         try {
-            destination = board.getGridCells()[left.x][left.y];
+            destination = board.getCells()[left.x][left.y];
         }catch (ArrayIndexOutOfBoundsException e){
             return null;
         }
@@ -80,7 +80,7 @@ public class TransitionModel {
         Point right = new Point(agent.x, newY);
         Cell destination;
         try {
-            destination = board.getGridCells()[right.x][right.y];
+            destination = board.getCells()[right.x][right.y];
         }catch (ArrayIndexOutOfBoundsException e){
             return null;
         }
@@ -93,7 +93,7 @@ public class TransitionModel {
         Point down = new Point(newX, agent.y);
         Cell destination;
         try {
-            destination = board.getGridCells()[down.x][down.y];
+            destination = board.getCells()[down.x][down.y];
         }catch (ArrayIndexOutOfBoundsException e){
             return null;
         }
@@ -107,7 +107,7 @@ public class TransitionModel {
         Cell destination;
 
         try {
-            destination = board.getGridCells()[up.x][up.y];
+            destination = board.getCells()[up.x][up.y];
         }catch (ArrayIndexOutOfBoundsException e){
             return null;
         }

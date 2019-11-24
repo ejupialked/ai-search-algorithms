@@ -38,6 +38,7 @@ public abstract class TreeSearch {
         this.depth = 0;
         this.solutionASCII = new StringBuilder();
         this.solutionMoves = new StringBuilder();
+
     }
 
 
@@ -45,48 +46,20 @@ public abstract class TreeSearch {
         return new Node(problem, parent, action);
     }
 
-
     protected List<Node> generateRandomSuccessors(Node nodeToExpand, Problem problem){
-        ArrayList<Node> successors = new ArrayList<Node>();
-
-        for (Action action: Utils.shuffle(problem.actions())) {
-            Node child;
-            try {
-                child = generateChildNode(problem, nodeToExpand, action);
-                Utils.print("config child: "  +child.state.getBoard().getConfiguration());
-                Utils.print(child.state.asciiCells());
-                nodes++;
-            } catch (IllegalMoveException e) {
-                child = null;
-            }
-
-            if(child != null)
-                successors.add(child);
-
-        }
-
-        return successors;
+        List<Node> random = generateSuccessors(nodeToExpand, problem);
+        Collections.shuffle(random);
+        return random;
     }
 
     protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem){
         ArrayList<Node> successors = new ArrayList<Node>();
 
-
-        //Utils.print("Expanding: " + nodeToExpand.hashCode());
-        //Utils.print(nodeToExpand.state.ascii());
-
-      //  Utils.print("-----------start expansion------------");
-
-
-        int i = 0;
         for (Action action: problem.actions()) {
             Node child;
             try {
                 child = generateChildNode(problem, nodeToExpand, action);
                 nodes++;
-                //Utils.print(i++ + " node expanded: " + child.state.hashCode());
-               // Utils.print("parent of " + child.state.hashCode() + " is " + child.parent.state.hashCode());
-              //  Utils.print(child.state.asciiCells());
             } catch (IllegalMoveException e) {
                 child = null;
             }
@@ -95,10 +68,6 @@ public abstract class TreeSearch {
                 successors.add(child);
 
         }
-
-        //Utils.print("-----------end expansion------------");
-
-
         return successors;
     }
 
@@ -122,9 +91,12 @@ public abstract class TreeSearch {
                     .append(": ")
                     .append(node.state.getActionTaken())
                     .append("\n")
+                    .append("Config: ")
+                    .append(node.state.getBoard().getConfiguration())
+                    .append("\n")
                     .append(node.state.hashCode())
                     .append("\n")
-                    .append(node.state.asciiCells())
+                    .append(node.state.printASCII())
                     .append("\n");
         }
 
@@ -143,7 +115,8 @@ public abstract class TreeSearch {
 
         Collections.reverse(path);
 
-        //remove start node from the solution
+
+
         path.remove(0);
 
         depth = path.size();

@@ -13,8 +13,6 @@ public class Cell extends Point implements ManhattanDistance {
 
     private CellType cellType;
 
-
-
     /**
      * Enum class for representing
      * the cell type.
@@ -24,7 +22,7 @@ public class Cell extends Point implements ManhattanDistance {
         B("B"),
         C("C"),
         AGENT("@"),
-        EMPTY("x");
+        EMPTY("-");
 
         private  String text;
 

@@ -2,17 +2,18 @@ package TreeSearchAlgorithm;
 
 import Problem.Problem;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-
 public class AStar extends TreeSearch {
 
+    //Uses a priority queue to store the fringe
     PriorityQueue<Node> fringe;
 
     public AStar(){
-        super();
-        this.fringe = new PriorityQueue<>();
+        super();            //Comparator that compares nodes using their estimated cost
+        this.fringe = new PriorityQueue<>(Comparator.comparingInt(n -> n.estimatedCost));
     }
 
     @Override
@@ -22,24 +23,16 @@ public class AStar extends TreeSearch {
 
         fringe.add(root);
 
-        if(problem.checkGoal(root)){
-            return solution(root);
-        }
-
         while(!fringe.isEmpty()){
-
             Node nodeToExpand = fringe.poll();
 
-            if (problem.checkGoal(nodeToExpand)) {
+            if(problem.checkGoal(nodeToExpand)) {
                 return solution(nodeToExpand);
             }
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
-
             fringe.addAll(successors);
-
         }
-
         return null;
     }
 }

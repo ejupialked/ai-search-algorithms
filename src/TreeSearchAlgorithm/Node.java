@@ -6,14 +6,14 @@ import Problem.TransitionModel.Action;
 import BlocksWorld.Board;
 import Problem.State;
 
-public class Node implements Comparable<Node>, Heuristic {
+public class Node implements Heuristic {
 
     State state;
     Node parent;
     Action action;
-    int pathCost;
 
-    int f;
+    int pathCost;
+    int estimatedCost;
 
     /*the root */
     Node(State start){
@@ -28,14 +28,7 @@ public class Node implements Comparable<Node>, Heuristic {
         this.action = action;
         this.parent = parent;
         this.pathCost = parent.pathCost + problem.actionCost();
-        this.f = f(g(),h(problem.goal()));
-
-    }
-
-
-    @Override
-    public int compareTo(Node o) {
-        return Integer.compare(this.f, o.f);
+        this.estimatedCost = calculateEstimatedCost(g(), h(problem.goal()));
     }
 
     @Override
@@ -52,7 +45,7 @@ public class Node implements Comparable<Node>, Heuristic {
         int b = boardCurr.getB().manhattanDistance(boardGoal.getB());
         int c = boardCurr.getC().manhattanDistance(boardGoal.getC());
 
-        int max = Math.max(a, Math.max(b, c));
+        int max = Math.max(a, Math.max(b, c))/3;
 
 
         if(!(boardCurr.getA().manhattanDistance(boardGoal.getA()) == 0)){
@@ -80,14 +73,11 @@ public class Node implements Comparable<Node>, Heuristic {
     }
 
     @Override
-    public int f(int g, int h) {
+    public int calculateEstimatedCost(int g, int h) {
         return g + h;
     }
 
 
-    public String toString() {
-        return Integer.toString(hashCode());
-    }
 
     public State getState() {
         return state;
@@ -103,7 +93,11 @@ public class Node implements Comparable<Node>, Heuristic {
 
     @Override
     public int hashCode() {
-        return this.state.getBoard().getConfiguration().hashCode();
+        return this.state.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return state.getBoard().toString();
+    }
 }

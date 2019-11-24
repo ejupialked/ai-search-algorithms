@@ -14,7 +14,7 @@ public class IDS extends TreeSearch {
 
         Node solution;
 
-        for (int depth = 1; depth < Integer.MAX_VALUE ; depth++) {
+        for (int depth = 0; depth < Integer.MAX_VALUE ; depth++) {
 
             solution = DLS(problem, root, depth);
 
@@ -22,7 +22,6 @@ public class IDS extends TreeSearch {
                 return solution(solution);
             }
         }
-
         return null;
     }
 

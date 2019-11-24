@@ -2,11 +2,7 @@ package Utils;
 
 import BlocksWorld.Board;
 import BlocksWorld.Cell;
-import Problem.State;
-import Problem.TransitionModel.Action;
-
 import java.awt.*;
-import java.util.Random;
 
 /**
  * Utility class
@@ -27,7 +23,7 @@ public final class Utils {
 
         String[] cellValues = new String[array1D.length];
         for (int i = 0; i < array1D.length; i++) {
-            if(array1D[i].getCellType().getText().equals("x"))
+            if(array1D[i].getCellType().getText().equals(Cell.CellType.EMPTY.getText()))
                cellValues[i] = " ";
             else
                 cellValues[i] = array1D[i].getCellType().getText();
@@ -59,9 +55,6 @@ public final class Utils {
     private static String buildPattern(int n){
         return "0" + "12".repeat(Math.max(0, n-1)) + "14";
     }
-
-
-
 
     public static String convert1DCellsToString(Cell[] array1D){
         StringBuilder s = new StringBuilder();
@@ -96,8 +89,8 @@ public final class Utils {
             }
 
         }
-        newBoard.computeConfiguration();
 
+        newBoard.updateConfiguration();
         return newBoard;
     }
 
@@ -125,18 +118,6 @@ public final class Utils {
         return cells;
     }
 
-    public static Action[] shuffle(Action[] actions) {
-        Random rand = new Random();
-
-        for (int i = 0; i < actions.length; i++) {
-            int randomIndexToSwap = rand.nextInt(actions.length);
-            Action temp = actions[randomIndexToSwap];
-            actions[randomIndexToSwap] = actions[i];
-            actions[i] = temp;
-        }
-        return actions;
-    }
-
 
 
     /**
@@ -144,7 +125,6 @@ public final class Utils {
      * @param str the string to print
      */
     public static void print(String str){
-
         System.out.println(str);
     }
 }

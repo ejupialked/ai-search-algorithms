@@ -1,9 +1,6 @@
 package BlocksWorld;
 
 import Utils.Utils;
-
-import java.awt.*;
-
 import static Utils.Utils.*;
 
 /**
@@ -18,23 +15,21 @@ import static Utils.Utils.*;
  *
  */
 public class Board {
-
     int N;
 
-    private Cell[][] gridCells;
+    private Cell[][] cells;
     private String configuration;
-
     Cell a, b, c, agent;
 
-    public Board(int N, Cell[][] gridCells) {
+    public Board(int N, Cell[][] cells) {
         this.N = N;
-        this.gridCells = gridCells;
-        this.configuration = convert1DCellsToString(convert2DCellsTo1DCells(gridCells));
+        this.cells = cells;
+        this.configuration = convert1DCellsToString(convert2DCellsTo1DCells(cells));
     }
 
 
-    public void computeConfiguration(){
-        this.configuration = convert1DCellsToString(convert2DCellsTo1DCells(getGridCells()));
+    public void updateConfiguration(){
+        this.configuration = convert1DCellsToString(convert2DCellsTo1DCells(getCells()));
     }
 
 
@@ -42,35 +37,16 @@ public class Board {
         return configuration;
     }
 
-    public Cell[][] getGridCells() {
-        return gridCells;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj instanceof Board){
-            return toString().equals(obj);
-        }
-        return super.equals(obj);
-    }
-
-    @Override
-    public String toString() {
-        return configuration;
-    }
-
-    @Override
-    public int hashCode() {
-        return configuration.hashCode();
+    public Cell[][] getCells() {
+        return cells;
     }
 
     public int getN() {
         return N;
     }
 
-
-    public String asciiCells(){
-        return Utils.drawGridCells(Utils.convert2DCellsTo1DCells(getGridCells()), getN());
+    public String getASCIIString(){
+        return Utils.drawGridCells(Utils.convert2DCellsTo1DCells(getCells()), getN());
     }
 
     public void setA(Cell a) {
@@ -105,4 +81,21 @@ public class Board {
         return agent;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Board){
+            return this.equals(obj);
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return configuration;
+    }
+
+    @Override
+    public int hashCode() {
+        return configuration.hashCode();
+    }
 }

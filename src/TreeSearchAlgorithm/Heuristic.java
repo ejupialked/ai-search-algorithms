@@ -17,5 +17,5 @@ public interface Heuristic {
     /**
      *  estimated cost of the cheapest solution through {@code n}
      */
-    int f(int g, int h);
+    int calculateEstimatedCost(int g, int h);
 }
