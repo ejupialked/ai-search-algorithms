@@ -1,10 +1,9 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
+import Utils.Utils;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BFS extends TreeSearch {
 
@@ -32,6 +31,12 @@ public class BFS extends TreeSearch {
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
             fringe.addAll(successors);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
         return null;
     }

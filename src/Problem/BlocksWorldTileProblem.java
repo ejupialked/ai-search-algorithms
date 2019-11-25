@@ -20,10 +20,13 @@ import static Utils.Utils.*;
 public class BlocksWorldTileProblem implements Problem {
 
     private static int N = 4;
+    private static int STEP_COST = 1;
 
     public TransitionModel transitionModel;
 
-    public Board goal;
+    public String goalConfiguration;
+
+    public Board goalBoard;
     public State startState;
 
     private static CellType A = CellType.A;
@@ -35,12 +38,12 @@ public class BlocksWorldTileProblem implements Problem {
 
     public BlocksWorldTileProblem(Point...points){
         this.transitionModel = transitionModel();
-        this.startState = initCellsStart(points[0], points[1], points[2], points[3]);
-        this.goal = initCellsGoal(points[4], points[5], points[6], points[7]);
+        this.startState = initStart(points[0], points[1], points[2], points[3]);
+        this.goalConfiguration = initGoal(points[4], points[5], points[6], points[7]);
     }
 
 
-    public State initCellsStart(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
+    public State initStart(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
         Cell a = new Cell(pointTileA, A);
         Cell b = new Cell(pointTileB, B);
         Cell c = new Cell(pointTileC, C);
@@ -50,12 +53,13 @@ public class BlocksWorldTileProblem implements Problem {
 
     }
 
-    public Board initCellsGoal(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
+    public String initGoal(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
         Cell a = new Cell(pointTileA, A);
         Cell b = new Cell(pointTileB, B);
         Cell c = new Cell(pointTileC, C);
         Cell ag = new Cell(pointAgent, AGENT);
-        return generateBoard(a, b, c, ag, N);
+        this.goalBoard = generateBoard(a, b, c, ag, N);
+        return goalBoard.getConfiguration();
     }
 
 
@@ -76,11 +80,11 @@ public class BlocksWorldTileProblem implements Problem {
 
     @Override
     public Board goal() {
-        return goal;
+        return goalBoard;
     }
 
-    public void setGoal(Board goal) {
-        this.goal = goal;
+    public void setGoal(String  goal) {
+        this.goalConfiguration = goal;
     }
 
     @Override
@@ -105,18 +109,24 @@ public class BlocksWorldTileProblem implements Problem {
         return newState;
     }
 
+    public String getGoalConfiguration() {
+        return goalConfiguration;
+    }
 
     @Override
     public int actionCost() {
-        return 1;
+        return STEP_COST;
     }
 
+    public Board getGoalBoard() {
+        return goalBoard;
+    }
 
-    //1164684252
     @Override
     public boolean checkGoal(Node solution) {
         State state = solution.getState();
-        return goal().getConfiguration().replace(AGENT.getText(), EMPTY.getText()).equals(state.toString().replace(AGENT.getText(), EMPTY.getText()));
+        return getGoalConfiguration().replace(AGENT.getText(), EMPTY.getText())
+                .equals(state.toString().replace(AGENT.getText(), EMPTY.getText()));
     }
 
 }

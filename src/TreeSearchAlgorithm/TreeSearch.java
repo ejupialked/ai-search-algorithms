@@ -4,12 +4,10 @@ import Exceptions.IllegalMoveException;
 import Problem.Problem;
 import Utils.Utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import Problem.TransitionModel.Action;
+import jdk.jshell.execution.Util;
 
 
 /**
@@ -27,6 +25,7 @@ public abstract class TreeSearch {
     protected long start;
     protected long end;
 
+
     private StringBuilder solutionMoves;
     private StringBuilder solutionASCII;
 
@@ -42,7 +41,11 @@ public abstract class TreeSearch {
     }
 
 
-    private Node generateChildNode(Problem problem, Node parent,Action action) throws IllegalMoveException {
+    public int getNodes() {
+        return nodes;
+    }
+
+    private Node generateChildNode(Problem problem, Node parent, Action action) throws IllegalMoveException {
         return new Node(problem, parent, action);
     }
 
@@ -59,13 +62,21 @@ public abstract class TreeSearch {
             Node child;
             try {
                 child = generateChildNode(problem, nodeToExpand, action);
-                nodes++;
+
+
+
+
             } catch (IllegalMoveException e) {
                 child = null;
             }
 
-            if(child != null)
+            if(child != null) {
                 successors.add(child);
+                Utils.print("Depth: " + child.pathCost);
+                Utils.print(child.state.getBoard().getConfiguration());
+
+                nodes++;
+            }
 
         }
         return successors;
@@ -82,7 +93,10 @@ public abstract class TreeSearch {
 
 
 
+
+
         int i = 1;
+
         for (Node node: solution) {
             solutionMoves.append(node.action).append(" ");
             solutionASCII
@@ -92,7 +106,9 @@ public abstract class TreeSearch {
                     .append(node.state.getActionTaken())
                     .append("\n")
                     .append("Config: ")
+                    .append("problems.add(\"")
                     .append(node.state.getBoard().getConfiguration())
+                    .append("\");")
                     .append("\n")
                     .append(node.state.hashCode())
                     .append("\n")
@@ -100,8 +116,7 @@ public abstract class TreeSearch {
                     .append("\n");
         }
 
-
-        return toString();
+       return toString();
     }
 
     protected List<Node> solution(Node solution) {

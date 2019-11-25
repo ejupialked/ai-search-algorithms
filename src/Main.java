@@ -1,16 +1,12 @@
 import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
-import TreeSearchAlgorithm.BFS;
-import TreeSearchAlgorithm.DFS;
-import TreeSearchAlgorithm.IDS;
-import TreeSearchAlgorithm.AStar;
-import TreeSearchAlgorithm.TreeSearch;
-import Utils.Utils;
+import TreeSearchAlgorithm.*;
+
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static Utils.Utils.drawGridCells;
 import static Utils.Utils.print;
 
 /**
@@ -26,20 +22,21 @@ public class Main {
 
         List<String> problems = new ArrayList<>();
 
-        problems.add("xxxxxxxxxxx@ABCx");
-        problems.add("xxxxxxxxxx@xABCx");
-        problems.add("xxxxxxxxx@xxABCx");
-        problems.add("xxxxxxxxxBxxA@Cx");
-        problems.add("xxxxxxxxxBxx@ACx");
-        problems.add("xxxxxxxx@BxxxACx");
-        problems.add("xxxxxxxxB@xxxACx");
-        problems.add("xxxxxxxxBAxxx@Cx");
-        problems.add("xxxxxxxxBAxxxC@x");
-        problems.add("xxxxxxxxBA@xxCxx");
-        problems.add("xxxxx@xxBAxxxCxx");
-        problems.add("xxxxxAxxB@xxxCxx");
-        problems.add("xxxxxAxx@BxxxCxx");
 
+        problems.add("-----------@ABC-");
+        problems.add("----------@-ABC-");
+        problems.add("---------@--ABC-");
+        problems.add("---------B--A@C-");
+        problems.add("---------B--@AC-");
+        problems.add("--------@B---AC-");
+        problems.add("--------B@---AC-");
+        problems.add("--------BA---@C-");
+        problems.add("--------BA---C@-");
+        problems.add("--------BA@--C--");
+        problems.add("------@-BA---C--");
+        problems.add("-----@--BA---C--");
+        problems.add("-----A--B@---C--");
+        problems.add("-----A--@B---C--");
 
 
         Point a = new Point(3,0);
@@ -57,14 +54,34 @@ public class Main {
 
 
 
-         print("--------START STATE--------");
+         print("INITIAL STATE");
         print(problem1.startState().printASCII());
 
-       print("--------GOAL STATE--------");
-      print(drawGridCells(Utils.convert2DCellsTo1DCells(problem1.goal().getCells()), problem1.goal().getN()));
+      // print("--------GOAL STATE--------");
+        // print(drawGridCells(Utils.convert2DCellsTo1DCells(problem1.getGoalBoard().getCells()),
+        // problem1.getGoalBoard().getN()));
+
+
+
         if(args.length != 0){
             String algorithm = args[0];
-            solveProblem(problem1, algorithm);
+            int i = 1;
+            solvePuzzle(problem1, algorithm);
+
+
+            /*for(String problem: problems) {
+
+                print( " ");
+                print( " ");
+
+                print( " ");
+
+                print("Solving problem " + i++ + ": " + problem);
+                problem1.setGoal(problem);
+                solvePuzzle(problem1, algorithm);
+            }*/
+
+
         }
     }
 
@@ -75,7 +92,7 @@ public class Main {
      * @param problem   the problem
      * @param algorithm the algorithm
      */
-    public static void solveProblem(Problem problem,String algorithm){
+    public static void solvePuzzle(Problem problem, String algorithm){
 
         String output = null;
             switch (algorithm) {
@@ -84,12 +101,32 @@ public class Main {
                     output = bfs.solveProblem(problem);
                     break;
                 case "DFS":
+                    List<Integer> average = new ArrayList<>();
+                    for (int i = 0; i < 25 ; i++) {
+                        TreeSearch dfs = new DFS();
+                        output = dfs.solveProblem(problem);
+                        average.add(dfs.getNodes());
+                    }
+
+
+                    Collections.sort(average);
+                    double median;
+                    if (average.size() % 2 == 0)
+                        median = ((double)average.get(average.size()/2)+ (double) average.get(average.size()/2 - 1)) / 2;
+                    else
+                        median = (double) average.get(average.size()/2);
+
+                    print(String.valueOf(median));
+                    /*
                     TreeSearch dfs = new DFS();
                     output = dfs.solveProblem(problem);
+                    print(String.valueOf(dfs.getNodes()));*/
                     break;
                 case "IDS":
                     TreeSearch ids = new IDS();
                     output = ids.solveProblem(problem);
+
+
                     break;
                 case "AStar":
                     TreeSearch ashs = new AStar();
@@ -99,4 +136,5 @@ public class Main {
 
             print(output);
     }
+
 }

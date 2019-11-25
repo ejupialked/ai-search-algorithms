@@ -45,7 +45,7 @@ public class Node implements Heuristic {
         int b = boardCurr.getB().manhattanDistance(boardGoal.getB());
         int c = boardCurr.getC().manhattanDistance(boardGoal.getC());
 
-        int max = Math.max(a, Math.max(b, c))/3;
+        int max = Math.max(a, Math.max(b, c));
 
 
         if(!(boardCurr.getA().manhattanDistance(boardGoal.getA()) == 0)){

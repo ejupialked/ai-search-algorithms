@@ -19,6 +19,7 @@ public interface Problem {
     Action[] actions();
 
     State startState();
+
     Board goal();
 
     State generateState(State parentState, Action action) throws IllegalMoveException;
