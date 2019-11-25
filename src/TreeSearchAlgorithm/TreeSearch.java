@@ -63,7 +63,8 @@ public abstract class TreeSearch {
 
     protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem){
 
-        Utils.print("Start expansion node with...");
+        Utils.print(" ");
+        Utils.print("Start expansion node...");
 
         ArrayList<Node> successors = new ArrayList<Node>();
 
@@ -93,7 +94,6 @@ public abstract class TreeSearch {
 
     public String solveProblem(Problem problem){
 
-        Utils.print("I'm solving the puzzle...");
 
 
         start = System.currentTimeMillis();

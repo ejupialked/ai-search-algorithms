@@ -1,9 +1,12 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Utils.Utils;
+
 
 import java.util.*;
+
+import static Utils.Utils.print;
+import static Utils.Utils.showFringe;
 
 public class BFS extends TreeSearch {
 
@@ -20,12 +23,12 @@ public class BFS extends TreeSearch {
         Node root = makeNode(problem.startState());
 
 
-        Utils.print("Adding root " + root.state.getBoard().getConfiguration() + "to the fringe.");
+        print("Adding root " + root.state.getBoard().getConfiguration() + "to the fringe.");
         fringe.add(root);
 
-        Utils.print(" ");
-        Utils.showFringe(fringe);
-        Utils.print(" ");
+        print(" ");
+        showFringe(fringe);
+        print(" ");
 
 
 
@@ -34,31 +37,33 @@ public class BFS extends TreeSearch {
         while(!fringe.isEmpty()){
 
             Node nodeToExpand = fringe.remove();
-            Utils.print("Removing node " + nodeToExpand.state.getBoard().getConfiguration() + " from the fringe");
+            print("Removing node " + nodeToExpand.state.getBoard().getConfiguration() + " from the fringe");
 
 
-                    Utils.print(" ");
-            Utils.showFringe(fringe);
-                    Utils.print(" ");
+                    print(" ");
+            showFringe(fringe);
+                    print(" ");
 
 
 
-            Utils.print("Check if " + nodeToExpand.state.getBoard().getConfiguration() + " is the goal...");
+            print("Check if " + nodeToExpand.state.getBoard().getConfiguration() + " is the goal...");
+
             if(problem.checkGoal(nodeToExpand)) {
-                Utils.print("Node " + nodeToExpand.state.getBoard().getConfiguration() + " is the goal!");
-                Utils.print("Solution:");
-                return solution(nodeToExpand);
+                print("Node " + nodeToExpand.state.getBoard().getConfiguration() + " is the goal!");
+                                    print(" ");
+                print("Solution:");
+                 return solution(nodeToExpand);
             }
 
-            Utils.print("It is not the goal, " + " then expand node "+ nodeToExpand.state.getBoard().getConfiguration());
+            print("It is not the goal, " + " then expand node "+ nodeToExpand.state.getBoard().getConfiguration());
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
-            Utils.print("Adding all successors to the fringe.");
+            print("Adding all successors to the fringe.");
             fringe.addAll(successors);
 
-                    Utils.print(" ");
-            Utils.showFringe(fringe);
-                    Utils.print(" ");
+                    print(" ");
+            showFringe(fringe);
+                    print(" ");
 
         }
         return null;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static Utils.Utils.print;
+import static Utils.Utils.*;
 
 /**
  * Run the algorithms here.
@@ -57,15 +57,19 @@ public class Main {
          print("INITIAL STATE");
         print(problem1.startState().printASCII());
 
-      // print("--------GOAL STATE--------");
-        // print(drawGridCells(Utils.convert2DCellsTo1DCells(problem1.getGoalBoard().getCells()),
-        // problem1.getGoalBoard().getN()));
+       print("GOAL STATE");
+         print(drawGridCells(convert2DCellsTo1DCells(problem1.getGoalBoard().getCells()),
+                 problem1.getGoalBoard().getN()));
 
 
 
         if(args.length != 0){
             String algorithm = args[0];
             int i = 1;
+
+            print("I'm solving the puzzle with "+ algorithm + "...");
+            print(" ");
+
             problem1.setGoal("------------A@BC");
            solvePuzzle(problem1, algorithm);
 
