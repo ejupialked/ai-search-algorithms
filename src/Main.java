@@ -66,10 +66,11 @@ public class Main {
         if(args.length != 0){
             String algorithm = args[0];
             int i = 1;
-            solvePuzzle(problem1, algorithm);
+            problem1.setGoal("------------A@BC");
+           solvePuzzle(problem1, algorithm);
 
 
-            /*for(String problem: problems) {
+           /* for(String problem: problems) {
 
                 print( " ");
                 print( " ");
@@ -79,9 +80,9 @@ public class Main {
                 print("Solving problem " + i++ + ": " + problem);
                 problem1.setGoal(problem);
                 solvePuzzle(problem1, algorithm);
-            }*/
+            }
 
-
+*/
         }
     }
 

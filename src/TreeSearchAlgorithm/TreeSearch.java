@@ -3,11 +3,11 @@ package TreeSearchAlgorithm;
 import Exceptions.IllegalMoveException;
 import Problem.Problem;
 import Utils.Utils;
-
+import Problem.State;
+import Utils.*;
 import java.util.*;
 
 import Problem.TransitionModel.Action;
-import jdk.jshell.execution.Util;
 
 
 /**
@@ -45,6 +45,12 @@ public abstract class TreeSearch {
         return nodes;
     }
 
+
+    protected Node makeNode(State initialState){
+        nodes++;
+        return new Node(initialState);
+    }
+
     private Node generateChildNode(Problem problem, Node parent, Action action) throws IllegalMoveException {
         return new Node(problem, parent, action);
     }
@@ -56,29 +62,32 @@ public abstract class TreeSearch {
     }
 
     protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem){
+
+        Utils.print("Start expansion node with...");
+
         ArrayList<Node> successors = new ArrayList<Node>();
 
         for (Action action: problem.actions()) {
             Node child;
             try {
                 child = generateChildNode(problem, nodeToExpand, action);
-
-
-
-
             } catch (IllegalMoveException e) {
                 child = null;
             }
 
             if(child != null) {
                 successors.add(child);
-                Utils.print("Depth: " + child.pathCost);
-                Utils.print(child.state.getBoard().getConfiguration());
-
+                Utils.print("Child: " + child.state.getBoard().getConfiguration());
+                Utils.print("Action taken: " + child.action.name());
+                Utils.print(child.state.printASCII());
+                Utils.print("    ");
                 nodes++;
             }
 
         }
+        Utils.print("End expansion of " + nodeToExpand.getState().getBoard().getConfiguration());
+        Utils.print("No. successors generated: " + successors.size());
+
         return successors;
     }
 
@@ -91,12 +100,7 @@ public abstract class TreeSearch {
         List<Node> solution = search(problem);
         end = System.currentTimeMillis();
 
-
-
-
-
         int i = 1;
-
         for (Node node: solution) {
             solutionMoves.append(node.action).append(" ");
             solutionASCII
@@ -105,12 +109,8 @@ public abstract class TreeSearch {
                     .append(": ")
                     .append(node.state.getActionTaken())
                     .append("\n")
-                    .append("Config: ")
-                    .append("problems.add(\"")
+                    .append("Configuration: ")
                     .append(node.state.getBoard().getConfiguration())
-                    .append("\");")
-                    .append("\n")
-                    .append(node.state.hashCode())
                     .append("\n")
                     .append(node.state.printASCII())
                     .append("\n");

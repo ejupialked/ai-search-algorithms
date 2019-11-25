@@ -2,7 +2,10 @@ package Utils;
 
 import BlocksWorld.Board;
 import BlocksWorld.Cell;
+import TreeSearchAlgorithm.Node;
+
 import java.awt.*;
+import java.util.Queue;
 
 /**
  * Utility class
@@ -47,6 +50,25 @@ public final class Utils {
         return r.toString();
     }
 
+
+
+    public static void showFringe(Queue<Node> q){
+        Utils.print("     FRINGE     ");
+        Utils.print("╔════════════════╗");
+        int j = 1;
+
+        if(q.isEmpty()){
+            Utils.print("║     empty      ║");
+        }else{
+            for (Node n: q){
+
+                Utils.print("║"+n.getState().getBoard().getConfiguration() + "║"+" (" + j++ + ")");
+            }
+        }
+        Utils.print("╚════════════════╝");
+
+
+    }
     /**
      * Build a pattern depending on the size of the grid
      * @param n the size

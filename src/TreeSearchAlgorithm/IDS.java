@@ -1,23 +1,20 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Utils.Utils;
-
 import java.util.List;
 
 public class IDS extends TreeSearch {
 
+    private int LIMIT = 30;
+
     @Override
     protected List<Node> search(Problem problem) {
 
-        Node root = new Node(problem.startState());
-        nodes++;
-
         Node solution;
 
-        for (int depth = 0; depth < Integer.MAX_VALUE ; depth++) {
+        for (int d = 0; d < LIMIT; d++) {
 
-            solution = DLS(problem, root, depth);
+            solution = DLS(problem, d);
 
             if (solution != null) {
                 return solution(solution);
@@ -27,19 +24,23 @@ public class IDS extends TreeSearch {
     }
 
 
-    private Node DLS(Problem problem, Node current, int depth) {
+    private Node DLS(Problem problem, int depthLimit){
+        Node root = makeNode(problem.startState());
+        return recursiveDLS(problem,root, depthLimit);
+    }
 
-        if (depth == 0 && problem.checkGoal(current)) {
+
+    private Node recursiveDLS(Problem problem, Node current, int limit) {
+
+        if (limit == 0 && problem.checkGoal(current)) {
             return current;
-        }
-
-        if (depth > 0) {
+        }else {
 
             List<Node> successors = generateSuccessors(current, problem);
 
             for(Node successor : successors){
 
-                Node result = DLS(problem, successor,depth - 1);
+                Node result = recursiveDLS(problem, successor,limit - 1);
 
                 if (result != null) {
                     return result;
