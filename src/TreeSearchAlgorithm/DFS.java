@@ -20,19 +20,19 @@ public class DFS extends TreeSearch {
         Node root = new Node(problem.startState());
 
         fringe.add(root);
-        DEBUG.showAddingRoot(root.state.getBoard().getConfiguration());
+        DEBUG.showAddingRoot(root);
         DEBUG.showFringe(fringe);
 
         while (!fringe.isEmpty()){
             Node nodeToExpand = fringe.pop();
-            DEBUG.showRemoveNodeFromFringe(fringe, nodeToExpand.toString());
+            DEBUG.showRemoveNodeFromFringe(nodeToExpand);
 
-            DEBUG.showCheckGoal(nodeToExpand.toString());
+            DEBUG.showCheckGoal(nodeToExpand);
             if(problem.checkGoal(nodeToExpand)) {
-                DEBUG.showGoal(nodeToExpand.state.toString());
+                DEBUG.showGoal(nodeToExpand);
                 return solution(nodeToExpand);
             }
-            DEBUG.showIsNotGoal(nodeToExpand.toString());
+            DEBUG.showIsNotGoal(nodeToExpand);
             List<Node> successors = generateRandomSuccessors(nodeToExpand, problem);
             DEBUG.showAddAllSuccessors(successors.size());
             fringe.addAll(successors);

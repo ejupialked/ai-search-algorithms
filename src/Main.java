@@ -1,6 +1,7 @@
 import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
 import TreeSearchAlgorithm.*;
+import Utils.DEBUG;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -21,23 +22,7 @@ public class Main {
 
     public static void main(String[] args){
 
-        List<String> problems = new ArrayList<>();
-
-
-        problems.add("-----------@ABC-");
-        problems.add("----------@-ABC-");
-        problems.add("---------@--ABC-");
-        problems.add("---------B--A@C-");
-        problems.add("---------B--@AC-");
-        problems.add("--------@B---AC-");
-        problems.add("--------B@---AC-");
-        problems.add("--------BA---@C-");
-        problems.add("--------BA---C@-");
-        problems.add("--------BA@--C--");
-        problems.add("------@-BA---C--");
-        problems.add("-----@--BA---C--");
-        problems.add("-----A--B@---C--");
-        problems.add("-----A--@B---C--");
+        List<String> problems = problems();
 
 
         Point a = new Point(3,0);
@@ -48,48 +33,60 @@ public class Main {
         Point aGoal = new Point(1,1);
         Point bGoal = new Point(2,1);
         Point cGoal = new Point(3,1);
-        Point agentGoal = new Point(2,0);
+        Point agentGoal = new Point(3,3);
 
 
         BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
+        String algorithm = args[0];
 
 
+        DEBUG.setDEBUGGER(OFF);
+       // problem1.setGoal("----BA---@----C-");
+        // solveUserProblem(problem1,algorithm);
 
-         print("INITIAL STATE");
-        print(problem1.startState().ascii());
+        solveDifferentPuzzle(problems, algorithm);
+    }
 
-       print("GOAL STATE");
-         print(drawGridCells(convert2DCellsTo1DCells(problem1.getGoalBoard().getCells()),
-                 problem1.getGoalBoard().getN()));
+    private static void solveDifferentPuzzle(List<String> problems, String algorithm) {
+        int i = 1;
+        Point a = new Point(3,0);
+        Point b = new Point(3,1);
+        Point c = new Point(3,2);
+        Point agent = new Point(3,3);
 
+        Point aGoal = new Point(1,1);
+        Point bGoal = new Point(2,1);
+        Point cGoal = new Point(3,1);
+        Point agentGoal = new Point(3,3);
 
+        BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
 
-        if(args.length != 0){
-            String algorithm = args[0];
-            int i = 1;
-
-            print("I'm solving the puzzle with "+ algorithm + "...");
-            print(" ");
-
-            problem1.setGoal("------------A@BC");
-            Utils.DEBUG.setDEBUGGER(ON);
-            solvePuzzle(problem1, algorithm);
-
-
-           /* for(String problem: problems) {
-
-                print( " ");
-                print( " ");
-
-                print( " ");
-
-                print("Solving problem " + i++ + ": " + problem);
+        for (String problem: problems) {
+            if(i > 0) {
+                print(" ");
+                print("I'm solving the puzzle with " + algorithm + "...");
+                print("Problem: " + i++);
                 problem1.setGoal(problem);
                 solvePuzzle(problem1, algorithm);
-            }
-
-*/
+            }else
+                i++;
         }
+
+
+    }
+
+    private static void solveUserProblem(BlocksWorldTileProblem problem, String algorithm) {
+
+        print("INITIAL STATE");
+        print(problem.startState().ascii());
+
+         print("--------GOAL STATE--------");
+        print(drawGridCells(convert2DCellsTo1DCells(problem.getGoalBoard().getCells()),
+         problem.getGoalBoard().getN()));
+
+
+        print("I'm solving the puzzle with "+ algorithm + "...");
+            solvePuzzle(problem, algorithm);
     }
 
 
@@ -108,7 +105,7 @@ public class Main {
                     output = bfs.solveProblem(problem);
                     break;
                 case "DFS":
-                    /*
+
                     List<Integer> average = new ArrayList<>();
                     for (int i = 0; i < 25 ; i++) {
                         TreeSearch dfs = new DFS();
@@ -124,11 +121,11 @@ public class Main {
                     else
                         median = (double) average.get(average.size()/2);
 
-                    print(String.valueOf(median));*/
-
+                    print(String.valueOf(median));
+                    /*
                     TreeSearch dfs = new DFS();
                     output = dfs.solveProblem(problem);
-                    print(String.valueOf(dfs.getNodes()));
+                    print(String.valueOf(dfs.getNodes()));*/
                     break;
                 case "IDS":
                     TreeSearch ids = new IDS();
@@ -143,6 +140,32 @@ public class Main {
             }
 
             print(output);
+    }
+
+
+
+
+    private static List<String> problems(){
+        List<String> problems = new ArrayList<>();
+
+        problems.add("------------AB@C"); //1
+        problems.add("------------A@BC"); //2
+        problems.add("----------C-AB@-"); //3
+        problems.add("----------C-A@B-"); //4
+        problems.add("----------B-A-@C"); //5
+        problems.add("---------C@-A-B-"); //6
+        problems.add("--------A---BC@-"); //7
+        problems.add("--------BA---@C-"); //8
+        problems.add("--------BA---C@-"); //9
+        problems.add("--------AB---@-C"); //10
+        problems.add("----------C@-A-B"); //11
+        problems.add("--------BC--A@--");  //12
+        problems.add("--------B@--CA--"); //13
+        problems.add("--------AC@B----"); //14
+        problems.add("----A---@C---B--"); //15
+
+        return problems;
+
     }
 
 }

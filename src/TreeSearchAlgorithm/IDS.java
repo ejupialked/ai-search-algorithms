@@ -12,7 +12,7 @@ public class IDS extends TreeSearch {
     protected List<Node> treeSearch(Problem problem) {
 
         Node root = new Node(problem.startState());
-        DEBUG.creatingRoot(root.state.toString());
+        DEBUG.creatingRoot(root.state.getBoard().getConfiguration());
 
         Node solution;
 
@@ -37,13 +37,13 @@ public class IDS extends TreeSearch {
     private Node DLS(Problem problem, Node current, int depth) {
 
 
-        DEBUG.showCheckGoal(current.state.toString());
+        DEBUG.showCheckGoal(current);
         if (depth == 0 && problem.checkGoal(current)) {
             DEBUG.showGoalDFS(current);
             return current;
         }
 
-        DEBUG.showIsNotGoal(current.state.toString());
+        DEBUG.showIsNotGoal(current);
 
         if (depth > 0) {
 

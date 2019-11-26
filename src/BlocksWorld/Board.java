@@ -84,18 +84,18 @@ public class Board {
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Board){
-            return this.equals(obj);
+            return toString().equals(obj.toString());
         }
         return super.equals(obj);
     }
 
     @Override
     public String toString() {
-        return configuration;
+        return configuration.replace(Cell.CellType.AGENT.getText(), Cell.CellType.EMPTY.getText());
     }
 
     @Override
     public int hashCode() {
-        return configuration.hashCode();
+        return toString().hashCode();
     }
 }

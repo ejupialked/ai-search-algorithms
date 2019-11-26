@@ -22,10 +22,10 @@ public class DEBUG {
         DEBUG.DEBUGGER = DEBUGGER;
     }
 
-    public static void showRemoveNodeFromFringe(Collection<Node> fringe, String nodeToRemove){
+    public static void showRemoveNodeFromFringe(Node nodeToRemove){
 
         if(DEBUGGER){
-            print("Removing node " + nodeToRemove + " from the fringe");
+            print("Removing node " + nodeToRemove.getState().getBoard().getConfiguration() + " from the fringe");
             print(" ");
         }
     }
@@ -78,35 +78,35 @@ public class DEBUG {
 
     }
 
-    public static void showCheckGoal(String nodeToExpand) {
+    public static void showCheckGoal(Node nodeToExpand) {
         if(DEBUGGER)
             print("Check if " + nodeToExpand + " is the goal...");
     }
 
-    public static void showAddingRoot(String configuration) {
+    public static void showAddingRoot(Node node) {
         if(DEBUGGER) {
-            print("Adding root " + configuration + "to the fringe.");
+            print("Adding root " + node.getState().getBoard().getConfiguration() + "to the fringe.");
 
         }
     }
 
-    public static void showGoal(String toString) {
+    public static void showGoal(Node nodeGoal) {
         if(DEBUGGER){
-            print("Node " + toString + " is the goal!");
+            print("Node " + nodeGoal.getState().getBoard().getConfiguration() + " is the goal!");
             print(" ");
             print("Solution:");
         }
     }
 
-    public static void showIsNotGoal(String toString) {
+    public static void showIsNotGoal(Node node) {
         if(DEBUGGER)
-            print("It is not the goal, " + " then expand node "+ toString);
+            print("It is not the goal, " + " then expand node "+ node.getState().getBoard().getConfiguration());
     }
 
     public static void showStartExpansion(State state) {
         if(DEBUGGER){
             Utils.newLine();
-            print("Start expanding node "  + state.toString());
+            print("Start expanding node "  + state.getBoard().getConfiguration());
             Utils.newLine();
         }
 
@@ -120,7 +120,7 @@ public class DEBUG {
 
     public static void showChildGenerated(State state) {
         if(DEBUGGER){
-            print("Child: " + state.toString());
+            print("Child: " + state.getBoard().getConfiguration());
             print("Action taken: " + state.getActionTaken().name());
             print(state.ascii());
             Utils.newLine();
@@ -129,7 +129,7 @@ public class DEBUG {
 
     public static void showEndExpansion(State state, List<Node> successors) {
         if(DEBUGGER){
-            print("End expansion of " + state.toString());
+            print("End expansion of " + state.getBoard().getConfiguration());
             print("No. successors generated: " + successors.size());
             Utils.newLine();
         }
@@ -150,9 +150,9 @@ public class DEBUG {
         }
     }
 
-    public static void showStartDLSCall(Node toString, int depth) {
+    public static void showStartDLSCall(Node node, int depth) {
         if(DEBUGGER){
-            print("Performing recursive DLS calls (d=" + depth +") on root node "+ toString);
+            print("Performing recursive DLS calls (d=" + depth +") on root node "+ node.getState().getBoard().getConfiguration());
         }
     }
 
@@ -181,20 +181,20 @@ public class DEBUG {
     public static void showCallDLSOnChild(Node state) {
         if(DEBUGGER){
             newLine();
-            print("Performing recursive DLS on " + state.toString());
+            print("Performing recursive DLS on " + state.getState().getBoard().getConfiguration());
         }
     }
 
     public static void showGoalDFS(Node current) {
         if(DEBUGGER){
-            print("Ending recursive DLS at " + current.getState().toString());
+            print("Ending recursive DLS at " + current.getState().getBoard().getConfiguration());
             print("Solution found, return value to IDS.");
         }
     }
 
-    public static void creatingRoot(String toString) {
+    public static void creatingRoot(String config) {
         if(DEBUGGER){
-            print("Creating root with initial state: " + toString);
+            print("Creating root with initial state: " + config);
             newLine();
         }
     }

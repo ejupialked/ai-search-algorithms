@@ -22,20 +22,22 @@ public class AStar extends TreeSearch {
         Node root = makeNode(problem.startState());
 
         fringe.add(root);
-        showAddingRoot(root.state.getBoard().getConfiguration());
+        showAddingRoot(root);
         showFringe(fringe);
 
         while(!fringe.isEmpty()){
 
             Node nodeToExpand = fringe.remove();
-            showRemoveNodeFromFringe(fringe, nodeToExpand.toString());
+            showRemoveNodeFromFringe(nodeToExpand);
+            showFringe(fringe);
 
-            showCheckGoal(nodeToExpand.toString());
+
+            showCheckGoal(nodeToExpand);
             if(problem.checkGoal(nodeToExpand)) {
-                showGoal(nodeToExpand.state.toString());
+                showGoal(nodeToExpand);
                 return solution(nodeToExpand);
             }
-            showIsNotGoal(nodeToExpand.toString());
+            showIsNotGoal(nodeToExpand);
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
 

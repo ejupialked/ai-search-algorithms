@@ -131,7 +131,7 @@ public class BlocksWorldTileProblem implements Problem {
     public boolean checkGoal(Node solution) {
         State state = solution.getState();
         return getGoalConfiguration().replace(AGENT.getText(), EMPTY.getText())
-                .equals(state.toString().replace(AGENT.getText(), EMPTY.getText()));
+                .equals(state.getBoard().getConfiguration().replace(AGENT.getText(), EMPTY.getText()));
     }
 
 }

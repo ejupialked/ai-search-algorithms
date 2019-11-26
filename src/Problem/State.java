@@ -1,6 +1,7 @@
 package Problem;
 
 import BlocksWorld.Board;
+import BlocksWorld.Cell;
 import Problem.TransitionModel.Action;
 
 /**
@@ -47,7 +48,7 @@ public class State {
 
     @Override
     public String toString() {
-        return board.getConfiguration();
+        return board.toString();
     }
 
     @Override

@@ -1,0 +1,60 @@
+"C:\Program Files\Amazon Corretto\jdk11.0.4_10\bin\java.exe" -Xms15000m -Xmx20000m "-javaagent:C:\Apps\JetBrains\IntelliJ IDEA 2018.2.5\lib\idea_rt.jar=58554:C:\Apps\JetBrains\IntelliJ IDEA 2018.2.5\bin" -Dfile.encoding=UTF-8 -classpath C:\Users\ae7g18\aicw\out\production\aicw Main AStar
+
+I'm solving the puzzle with AStar...
+Problem: 1
+Nodes generated: 7
+
+I'm solving the puzzle with AStar...
+Problem: 2
+Nodes generated: 23
+
+I'm solving the puzzle with AStar...
+Problem: 3
+Nodes generated: 78
+
+I'm solving the puzzle with AStar...
+Problem: 4
+Nodes generated: 243
+
+I'm solving the puzzle with AStar...
+Problem: 5
+Nodes generated: 328
+
+I'm solving the puzzle with AStar...
+Problem: 6
+Nodes generated: 1961
+
+I'm solving the puzzle with AStar...
+Problem: 7
+Nodes generated: 986
+
+I'm solving the puzzle with AStar...
+Problem: 8
+Nodes generated: 2369
+
+I'm solving the puzzle with AStar...
+Problem: 9
+Nodes generated: 7186
+
+I'm solving the puzzle with AStar...
+Problem: 10
+Nodes generated: 76133
+
+I'm solving the puzzle with AStar...
+Problem: 11
+Nodes generated: 704939
+
+I'm solving the puzzle with AStar...
+Problem: 12
+Nodes generated: 1888827
+
+I'm solving the puzzle with AStar...
+Problem: 13
+Nodes generated: 2999156
+
+I'm solving the puzzle with AStar...
+Problem: 14
+Nodes generated: 9889030
+
+I'm solving the puzzle with AStar...
+Problem: 15

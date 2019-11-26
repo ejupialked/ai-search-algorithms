@@ -87,11 +87,14 @@ public abstract class TreeSearch {
         return successors;
     }
 
+    // TODO: 26/11/2019
     public String solveProblem(Problem problem){
         start = System.currentTimeMillis();
         this.solution = treeSearch(problem);
         end = System.currentTimeMillis();
-       return Utils.solutionToString(this);
+
+        return "Nodes generated: " +nodes;
+        // return Utils.solutionToString(this);
     }
 
     protected List<Node> solution(Node solution) {
