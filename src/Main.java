@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static Utils.DEBUG.*;
 import static Utils.Utils.*;
 
 /**
@@ -55,7 +56,7 @@ public class Main {
 
 
          print("INITIAL STATE");
-        print(problem1.startState().printASCII());
+        print(problem1.startState().ascii());
 
        print("GOAL STATE");
          print(drawGridCells(convert2DCellsTo1DCells(problem1.getGoalBoard().getCells()),
@@ -71,7 +72,8 @@ public class Main {
             print(" ");
 
             problem1.setGoal("------------A@BC");
-           solvePuzzle(problem1, algorithm);
+            Utils.DEBUG.setDEBUGGER(ON);
+            solvePuzzle(problem1, algorithm);
 
 
            /* for(String problem: problems) {
@@ -106,6 +108,7 @@ public class Main {
                     output = bfs.solveProblem(problem);
                     break;
                 case "DFS":
+                    /*
                     List<Integer> average = new ArrayList<>();
                     for (int i = 0; i < 25 ; i++) {
                         TreeSearch dfs = new DFS();
@@ -121,11 +124,11 @@ public class Main {
                     else
                         median = (double) average.get(average.size()/2);
 
-                    print(String.valueOf(median));
-                    /*
+                    print(String.valueOf(median));*/
+
                     TreeSearch dfs = new DFS();
                     output = dfs.solveProblem(problem);
-                    print(String.valueOf(dfs.getNodes()));*/
+                    print(String.valueOf(dfs.getNodes()));
                     break;
                 case "IDS":
                     TreeSearch ids = new IDS();

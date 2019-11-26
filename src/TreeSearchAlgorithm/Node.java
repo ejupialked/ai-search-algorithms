@@ -78,6 +78,14 @@ public class Node implements Heuristic {
     }
 
 
+    public Action getAction() {
+        return action;
+    }
+
+
+    public int getEstimatedCost() {
+        return estimatedCost;
+    }
 
     public State getState() {
         return state;
@@ -98,6 +106,6 @@ public class Node implements Heuristic {
 
     @Override
     public String toString() {
-        return state.getBoard().toString();
+        return state.getBoard().getConfiguration();
     }
 }

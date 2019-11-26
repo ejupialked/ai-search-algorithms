@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import static Utils.DEBUG.*;
+
 public class AStar extends TreeSearch {
 
     //Uses a priority queue to store the fringe
@@ -16,22 +18,33 @@ public class AStar extends TreeSearch {
     }
 
     @Override
-    protected List<Node> search(Problem problem) {
-        Node root = new Node(problem.startState());
-        nodes++;
+    protected List<Node> treeSearch(Problem problem) {
+        Node root = makeNode(problem.startState());
 
         fringe.add(root);
+        showAddingRoot(root.state.getBoard().getConfiguration());
+        showFringe(fringe);
 
         while(!fringe.isEmpty()){
-            Node nodeToExpand = fringe.poll();
 
+            Node nodeToExpand = fringe.remove();
+            showRemoveNodeFromFringe(fringe, nodeToExpand.toString());
+
+            showCheckGoal(nodeToExpand.toString());
             if(problem.checkGoal(nodeToExpand)) {
+                showGoal(nodeToExpand.state.toString());
                 return solution(nodeToExpand);
             }
+            showIsNotGoal(nodeToExpand.toString());
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
+
             fringe.addAll(successors);
+            showAddAllSuccessors(successors.size());
+            showFringe(fringe);
+
         }
         return null;
     }
+
 }

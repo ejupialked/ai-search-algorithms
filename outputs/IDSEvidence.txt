@@ -1,0 +1,230 @@
+  INITIAL STATE         GOAL STATE
+╔═══╤═══╤═══╤═══╗   ╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║   ║   │   │   │   ║
+╟───┼───┼───┼───╢   ╟───┼───┼───┼───╢
+║   │   │   │   ║   ║   │ A │   │   ║
+╟───┼───┼───┼───╢   ╟───┼───┼───┼───╢
+║   │   │   │   ║   ║ @ │ B │   │   ║
+╟───┼───┼───┼───╢   ╟───┼───┼───┼───╢
+║ A │ B │ C │ @ ║   ║   │ C │   │   ║
+╚═══╧═══╧═══╧═══╝   ╚═══╧═══╧═══╧═══╝
+
+
+I'm solving the puzzle with IDS...
+
+Creating root with initial state: ------------ABC@
+
+
+Performing IDS at depth limit 0
+
+Performing recursive DLS calls (d=0) on root node ------------ABC@
+Check if ------------ABC@ is the goal...
+It is not the goal,  then expand node ------------ABC@
+
+End of recursive DLS calls with (d=0)
+
+Solution not found at depth limit 0
+End performing IDS at depth limit 0
+
+Performing IDS at depth limit 1
+
+Performing recursive DLS calls (d=1) on root node ------------ABC@
+Check if ------------ABC@ is the goal...
+It is not the goal,  then expand node ------------ABC@
+
+Start expanding node ------------ABC@
+
+
+Child: -----------@ABC-    Child: ------------AB@C
+Action taken: UP           Action taken: LEFT
+╔═══╤═══╤═══╤═══╗          ╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║   │   │   │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║   │   │   │ @ ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║ A │ B │ C │   ║          ║ A │ B │ @ │ C ║
+╚═══╧═══╧═══╧═══╝          ╚═══╧═══╧═══╧═══╝
+
+End expansion of ------------ABC@
+No. successors generated: 2
+
+Calling DFS on 2 successors
+
+Performing recursive DLS on -----------@ABC-
+Check if -----------@ABC- is the goal...
+It is not the goal,  then expand node -----------@ABC-
+
+Performing recursive DLS on ------------AB@C
+Check if ------------AB@C is the goal...
+It is not the goal,  then expand node ------------AB@C
+
+End of recursive DLS calls with (d=1)
+
+Solution not found at depth limit 1
+End performing IDS at depth limit 1
+
+Performing IDS at depth limit 2
+
+Performing recursive DLS calls (d=2) on root node ------------ABC@
+Check if ------------ABC@ is the goal...
+It is not the goal,  then expand node ------------ABC@
+
+Start expanding node ------------ABC@
+
+
+Child: -----------@ABC-    Child: ------------AB@C
+Action taken: UP           Action taken: LEFT
+╔═══╤═══╤═══╤═══╗          ╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║   │   │   │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║   │   │   │ @ ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║ A │ B │ C │   ║          ║ A │ B │ @ │ C ║
+╚═══╧═══╧═══╧═══╝          ╚═══╧═══╧═══╧═══╝
+
+
+End expansion of ------------ABC@
+No. successors generated: 2
+
+Calling DFS on 2 successors
+
+Performing recursive DLS on -----------@ABC-
+Check if -----------@ABC- is the goal...
+It is not the goal,  then expand node -----------@ABC-
+
+Start expanding node -----------@ABC-
+
+
+Child: -------@----ABC-    Child: ------------ABC@
+Action taken: UP           Action taken: DOWN
+╔═══╤═══╤═══╤═══╗          ╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║   │   │   │ @ ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║   │   │   │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║ A │ B │ C │   ║          ║ A │ B │ C │ @ ║
+╚═══╧═══╧═══╧═══╝          ╚═══╧═══╧═══╧═══╝
+
+Child: ----------@-ABC-
+Action taken: LEFT
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │ @ │   ║
+╟───┼───┼───┼───╢
+║ A │ B │ C │   ║
+╚═══╧═══╧═══╧═══╝
+
+End expansion of -----------@ABC-
+No. successors generated: 3
+
+Calling DFS on 3 successors
+
+Performing recursive DLS on -------@----ABC-
+Check if -------@----ABC- is the goal...
+It is not the goal,  then expand node -------@----ABC-
+
+Performing recursive DLS on ------------ABC@
+Check if ------------ABC@ is the goal...
+It is not the goal,  then expand node ------------ABC@
+
+Performing recursive DLS on ----------@-ABC-
+Check if ----------@-ABC- is the goal...
+It is not the goal,  then expand node ----------@-ABC-
+
+Performing recursive DLS on ------------AB@C
+Check if ------------AB@C is the goal...
+It is not the goal,  then expand node ------------AB@C
+
+Start expanding node ------------AB@C
+
+
+
+
+
+
+
+
+
+
+Child: ----------@-AB-C    Child: ------------A@BC
+Action taken: UP           Action taken: LEFT
+╔═══╤═══╤═══╤═══╗          ╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║   │   │   │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║   │   │ @ │   ║          ║   │   │   │   ║
+╟───┼───┼───┼───╢          ╟───┼───┼───┼───╢
+║ A │ B │   │ C ║          ║ A │ @ │ B │ C ║
+╚═══╧═══╧═══╧═══╝          ╚═══╧═══╧═══╧═══╝
+
+Child: ------------ABC@
+Action taken: RIGHT
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║ A │ B │ C │ @ ║
+╚═══╧═══╧═══╧═══╝
+
+
+End expansion of ------------AB@C
+No. successors generated: 3
+
+Calling DFS on 3 successors
+
+Performing recursive DLS on ----------@-AB-C
+Check if ----------@-AB-C is the goal...
+It is not the goal,  then expand node ----------@-AB-C
+
+Performing recursive DLS on ------------A@BC
+Check if ------------A@BC is the goal...
+Ending recursive DLS at ------------A@BC
+Solution found, return value to IDS.
+
+End of recursive DLS calls with (d=2)
+
+Solution found at (d=2):
+
+Step 1: LEFT
+Configuration: ------------AB@C
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║ A │ B │ @ │ C ║
+╚═══╧═══╧═══╧═══╝
+
+Step 2: LEFT
+Configuration: ------------A@BC
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║ A │ @ │ B │ C ║
+╚═══╧═══╧═══╧═══╝
+
+
+Time elapsed: 45ms
+Number nodes generated: 11
+Depth solution : 2
+Moves: LEFT LEFT
+

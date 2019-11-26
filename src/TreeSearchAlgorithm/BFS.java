@@ -1,12 +1,8 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-
-
 import java.util.*;
-
-import static Utils.Utils.print;
-import static Utils.Utils.showFringe;
+import static Utils.DEBUG.*;
 
 public class BFS extends TreeSearch {
 
@@ -19,51 +15,29 @@ public class BFS extends TreeSearch {
     }
 
     @Override
-    protected List<Node> search(Problem problem) {
+    protected List<Node> treeSearch(Problem problem) {
         Node root = makeNode(problem.startState());
 
-
-        print("Adding root " + root.state.getBoard().getConfiguration() + "to the fringe.");
         fringe.add(root);
-
-        print(" ");
-        showFringe(fringe);
-        print(" ");
-
-
-
-
+        showAddingRoot(root.state.getBoard().getConfiguration());
 
         while(!fringe.isEmpty()){
 
             Node nodeToExpand = fringe.remove();
-            print("Removing node " + nodeToExpand.state.getBoard().getConfiguration() + " from the fringe");
+            showRemoveNodeFromFringe(fringe, nodeToExpand.toString());
 
-
-                    print(" ");
-            showFringe(fringe);
-                    print(" ");
-
-
-
-            print("Check if " + nodeToExpand.state.getBoard().getConfiguration() + " is the goal...");
-
+            showCheckGoal(nodeToExpand.toString());
             if(problem.checkGoal(nodeToExpand)) {
-                print("Node " + nodeToExpand.state.getBoard().getConfiguration() + " is the goal!");
-                                    print(" ");
-                print("Solution:");
+                showGoal(nodeToExpand.state.toString());
                  return solution(nodeToExpand);
             }
-
-            print("It is not the goal, " + " then expand node "+ nodeToExpand.state.getBoard().getConfiguration());
+            showIsNotGoal(nodeToExpand.toString());
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
-            print("Adding all successors to the fringe.");
-            fringe.addAll(successors);
 
-                    print(" ");
+            fringe.addAll(successors);
+            showAddAllSuccessors(successors.size());
             showFringe(fringe);
-                    print(" ");
 
         }
         return null;

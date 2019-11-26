@@ -1,0 +1,156 @@
+  INITIAL STATE         GOAL STATE
+╔═══╤═══╤═══╤═══╗   ╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║   ║   │   │   │   ║
+╟───┼───┼───┼───╢   ╟───┼───┼───┼───╢
+║   │   │   │   ║   ║   │ A │   │   ║
+╟───┼───┼───┼───╢   ╟───┼───┼───┼───╢
+║   │   │   │   ║   ║ @ │ B │   │   ║
+╟───┼───┼───┼───╢   ╟───┼───┼───┼───╢
+║ A │ B │ C │ @ ║   ║   │ C │   │   ║
+╚═══╧═══╧═══╧═══╝   ╚═══╧═══╧═══╧═══╝
+
+
+I'm solving the puzzle with AStar...
+
+Adding root ------------ABC@to the fringe.
+
+     FRINGE
+╔════════════════╗
+║------------ABC@║ (cost=0)
+╚════════════════╝
+
+Removing node ------------ABC@ from the fringe
+
+Check if ------------ABC@ is the goal...
+It is not the goal,  then expand node ------------ABC@
+
+Start expanding node ------------ABC@
+
+Child: -----------@ABC-
+
+Action taken: UP
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │ @ ║
+╟───┼───┼───┼───╢
+║ A │ B │ C │   ║
+╚═══╧═══╧═══╧═══╝
+
+
+Child: ------------AB@C
+Action taken: LEFT
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║ A │ B │ @ │ C ║
+╚═══╧═══╧═══╧═══╝
+
+
+End expansion of ------------ABC@
+No. successors generated: 2
+
+Adding 2 successors to the fringe.
+     FRINGE
+╔════════════════╗
+║------------AB@C║ (cost=23)
+║-----------@ABC-║ (cost=27)
+╚════════════════╝
+Removing node ------------AB@C from the fringe
+
+Check if ------------AB@C is the goal...
+It is not the goal,  then expand node ------------AB@C
+
+Start expanding node ------------AB@C
+
+Child: ----------@-AB-C
+Action taken: UP
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │ @ │   ║
+╟───┼───┼───┼───╢
+║ A │ B │   │ C ║
+╚═══╧═══╧═══╧═══╝
+
+
+Child: ------------A@BC
+Action taken: LEFT
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║ A │ @ │ B │ C ║
+╚═══╧═══╧═══╧═══╝
+
+
+Child: ------------ABC@
+Action taken: RIGHT
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║ A │ B │ C │ @ ║
+╚═══╧═══╧═══╧═══╝
+
+
+End expansion of ------------AB@C
+No. successors generated: 3
+
+Adding 3 successors to the fringe.
+     FRINGE
+╔════════════════╗
+║------------A@BC║ (cost=25)
+║------------ABC@║ (cost=25)
+║-----------@ABC-║ (cost=27)
+║----------@-AB-C║ (cost=27)
+╚════════════════╝
+Removing node ------------A@BC from the fringe
+
+Check if ------------A@BC is the goal...
+Node ------------A@BC is the goal!
+
+Solution:
+Step 1: LEFT
+Configuration: ------------AB@C
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║ A │ B │ @ │ C ║
+╚═══╧═══╧═══╧═══╝
+
+Step 2: LEFT
+Configuration: ------------A@BC
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║ A │ @ │ B │ C ║
+╚═══╧═══╧═══╧═══╝
+
+
+Time elapsed: 31ms
+Number nodes generated: 7
+Depth solution : 2
+Moves: LEFT LEFT

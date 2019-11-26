@@ -2,12 +2,13 @@ package TreeSearchAlgorithm;
 
 import Exceptions.IllegalMoveException;
 import Problem.Problem;
-import Utils.Utils;
 import Problem.State;
-import Utils.*;
+import Utils.DEBUG;
+
 import java.util.*;
 
 import Problem.TransitionModel.Action;
+import Utils.Utils;
 
 
 /**
@@ -25,12 +26,12 @@ public abstract class TreeSearch {
     protected long start;
     protected long end;
 
-
+    private List<Node> solution;
     private StringBuilder solutionMoves;
     private StringBuilder solutionASCII;
 
 
-    protected abstract List<Node> search(Problem problem);
+    protected abstract List<Node> treeSearch(Problem problem);
 
     TreeSearch(){
         this.nodes = 1;
@@ -40,11 +41,9 @@ public abstract class TreeSearch {
 
     }
 
-
     public int getNodes() {
         return nodes;
     }
-
 
     protected Node makeNode(State initialState){
         nodes++;
@@ -57,16 +56,16 @@ public abstract class TreeSearch {
 
     protected List<Node> generateRandomSuccessors(Node nodeToExpand, Problem problem){
         List<Node> random = generateSuccessors(nodeToExpand, problem);
+        DEBUG.showShuffling();
         Collections.shuffle(random);
         return random;
     }
 
     protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem){
 
-        Utils.print(" ");
-        Utils.print("Start expansion node...");
-
         ArrayList<Node> successors = new ArrayList<Node>();
+
+        DEBUG.showStartExpansion(nodeToExpand.state);
 
         for (Action action: problem.actions()) {
             Node child;
@@ -78,45 +77,21 @@ public abstract class TreeSearch {
 
             if(child != null) {
                 successors.add(child);
-                Utils.print("Child: " + child.state.getBoard().getConfiguration());
-                Utils.print("Action taken: " + child.action.name());
-                Utils.print(child.state.printASCII());
-                Utils.print("    ");
+                DEBUG.showChildGenerated(child.state);
                 nodes++;
             }
-
         }
-        Utils.print("End expansion of " + nodeToExpand.getState().getBoard().getConfiguration());
-        Utils.print("No. successors generated: " + successors.size());
+
+        DEBUG.showEndExpansion(nodeToExpand.state, successors);
 
         return successors;
     }
 
     public String solveProblem(Problem problem){
-
-
-
         start = System.currentTimeMillis();
-        List<Node> solution = search(problem);
+        this.solution = treeSearch(problem);
         end = System.currentTimeMillis();
-
-        int i = 1;
-        for (Node node: solution) {
-            solutionMoves.append(node.action).append(" ");
-            solutionASCII
-                    .append("Step ")
-                    .append(i++)
-                    .append(": ")
-                    .append(node.state.getActionTaken())
-                    .append("\n")
-                    .append("Configuration: ")
-                    .append(node.state.getBoard().getConfiguration())
-                    .append("\n")
-                    .append(node.state.printASCII())
-                    .append("\n");
-        }
-
-       return toString();
+       return Utils.solutionToString(this);
     }
 
     protected List<Node> solution(Node solution) {
@@ -129,27 +104,29 @@ public abstract class TreeSearch {
         }
 
         Collections.reverse(path);
-
-
-
         path.remove(0);
 
         depth = path.size();
         return path;
     }
 
+    public List<Node> getSolution() {
+        return solution;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public StringBuilder getSolutionMoves() {
+        return solutionMoves;
+    }
+
+    public StringBuilder getSolutionASCII() {
+        return solutionASCII;
+    }
 
     public long time(){
         return end - start;
-    }
-
-    @Override
-    public String toString() {
-        return solutionASCII +
-                "\nTime elapsed: " + time() + "ms" +
-                "\nNumber nodes generated: " + nodes +
-                "\nDepth solution : " + depth +
-                "\nMoves: " + solutionMoves
-               ;
     }
 }

@@ -83,7 +83,9 @@ public class BlocksWorldTileProblem implements Problem {
         return goalBoard;
     }
 
-    public void setGoal(String  goal) {
+
+
+    public void setGoal(String goal) {
         this.goalConfiguration = goal;
     }
 
@@ -112,6 +114,9 @@ public class BlocksWorldTileProblem implements Problem {
     public String getGoalConfiguration() {
         return goalConfiguration;
     }
+
+
+
 
     @Override
     public int actionCost() {

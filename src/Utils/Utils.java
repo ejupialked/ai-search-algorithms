@@ -3,8 +3,10 @@ package Utils;
 import BlocksWorld.Board;
 import BlocksWorld.Cell;
 import TreeSearchAlgorithm.Node;
+import TreeSearchAlgorithm.TreeSearch;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -14,6 +16,9 @@ import java.util.Queue;
  */
 
 public final class Utils {
+
+
+    private static boolean DEBUG = true;
 
     /**
      * Draws the blocks of the puzzle in a nice way in the Console.
@@ -52,23 +57,10 @@ public final class Utils {
 
 
 
-    public static void showFringe(Queue<Node> q){
-        Utils.print("     FRINGE     ");
-        Utils.print("╔════════════════╗");
-        int j = 1;
-
-        if(q.isEmpty()){
-            Utils.print("║     empty      ║");
-        }else{
-            for (Node n: q){
-
-                Utils.print("║"+n.getState().getBoard().getConfiguration() + "║"+" (" + j++ + ")");
-            }
-        }
-        Utils.print("╚════════════════╝");
 
 
-    }
+
+
     /**
      * Build a pattern depending on the size of the grid
      * @param n the size
@@ -95,6 +87,10 @@ public final class Utils {
         return  array1D;
     }
 
+
+    public static boolean isDEBUG() {
+        return DEBUG;
+    }
 
     public static Board generateBoard(Cell a, Cell b, Cell c, Cell agent, int n){
         Cell[][] gridCells = generateGridCells(a, b, c, agent, n);
@@ -142,11 +138,36 @@ public final class Utils {
 
 
 
-    /**
-     * Print a string in the console
-     * @param str the string to print
-     */
+    public static void newLine(){
+        System.out.println();
+    }
+
+
     public static void print(String str){
         System.out.println(str);
+    }
+
+    public static String solutionToString(TreeSearch search) {
+
+        int i = 1;
+        for (Node node: search.getSolution()) {
+            search.getSolutionMoves().append(node.getAction()).append(" ");
+            search.getSolutionASCII().append("Step ")
+                    .append(i++)
+                    .append(": ")
+                    .append(node.getState().getActionTaken())
+                    .append("\n")
+                    .append("Configuration: ")
+                    .append(node.getState().getBoard().getConfiguration())
+                    .append("\n")
+                    .append(node.getState().ascii())
+                    .append("\n");
+        }
+
+        return search.getSolutionASCII() +
+                        "\nTime elapsed: " + search.time() + "ms" +
+                        "\nNumber nodes generated: " + search.getNodes() +
+                        "\nDepth solution : " + search.getDepth() +
+                        "\nMoves: " + search.getSolutionMoves();
     }
 }

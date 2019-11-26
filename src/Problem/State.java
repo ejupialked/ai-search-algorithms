@@ -33,7 +33,7 @@ public class State {
     }
 
 
-    public String printASCII(){
+    public String ascii(){
         return board.getASCIIString();
     }
 

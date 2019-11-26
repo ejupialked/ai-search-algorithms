@@ -1,50 +1,64 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
+import Utils.DEBUG;
+
+import javax.swing.plaf.ColorUIResource;
 import java.util.List;
 
 public class IDS extends TreeSearch {
 
-    private int LIMIT = 30;
-
     @Override
-    protected List<Node> search(Problem problem) {
+    protected List<Node> treeSearch(Problem problem) {
+
+        Node root = new Node(problem.startState());
+        DEBUG.creatingRoot(root.state.toString());
 
         Node solution;
 
-        for (int d = 0; d < LIMIT; d++) {
+        for (int depth = 0; depth < Integer.MAX_VALUE ; depth++) {
 
-            solution = DLS(problem, d);
+            DEBUG.showLimitIteration(depth);
+            DEBUG.showStartDLSCall(root, depth);
+            solution = DLS(problem, root, depth);
+            DEBUG.showEndDLSCalls(depth);
 
             if (solution != null) {
+                DEBUG.showSolutionFoundDLS(depth);
                 return solution(solution);
             }
+            DEBUG.showNoSolutionFoundDLS(depth);
+
         }
         return null;
     }
 
 
-    private Node DLS(Problem problem, int depthLimit){
-        Node root = makeNode(problem.startState());
-        return recursiveDLS(problem,root, depthLimit);
-    }
+    private Node DLS(Problem problem, Node current, int depth) {
 
 
-    private Node recursiveDLS(Problem problem, Node current, int limit) {
-
-        if (limit == 0 && problem.checkGoal(current)) {
+        DEBUG.showCheckGoal(current.state.toString());
+        if (depth == 0 && problem.checkGoal(current)) {
+            DEBUG.showGoalDFS(current);
             return current;
-        }else {
+        }
+
+        DEBUG.showIsNotGoal(current.state.toString());
+
+        if (depth > 0) {
 
             List<Node> successors = generateSuccessors(current, problem);
 
+            DEBUG.showDFSCallOnSuccessors(successors);
             for(Node successor : successors){
 
-                Node result = recursiveDLS(problem, successor,limit - 1);
+                DEBUG.showCallDLSOnChild(successor);
+                Node result = DLS(problem, successor,depth - 1);
 
                 if (result != null) {
                     return result;
                 }
+
             }
         }
         return null;
