@@ -56,18 +56,19 @@ public final class Utils {
     }
 
 
-
-
-
-
-
     /**
      * Build a pattern depending on the size of the grid
      * @param n the size
      * @return the pattern built
      */
     private static String buildPattern(int n){
-        return "0" + "12".repeat(Math.max(0, n-1)) + "14";
+        String pattern = "0";
+
+        for (int i = 0; i < n; i++) {
+            pattern += "12";
+        }
+        pattern += "14";
+        return pattern;
     }
 
     public static String convert1DCellsToString(Cell[] array1D){
