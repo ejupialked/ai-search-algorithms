@@ -80,7 +80,7 @@ public class DEBUG {
 
     public static void showCheckGoal(Node nodeToExpand) {
         if(DEBUGGER)
-            print("Check if " + nodeToExpand + " is the goal...");
+            print("Check if " + nodeToExpand.getState().getBoard().getConfiguration() + " is the goal...");
     }
 
     public static void showAddingRoot(Node node) {

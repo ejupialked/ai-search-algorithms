@@ -30,9 +30,10 @@ public class BFS extends TreeSearch {
 
 
             Node nodeToExpand = fringe.remove();
-            showRemoveNodeFromFringe(nodeToExpand);
 
+            showRemoveNodeFromFringe(nodeToExpand);
             showCheckGoal(nodeToExpand);
+
             if(problem.checkGoal(nodeToExpand)) {
                 showGoal(nodeToExpand);
                  return solution(nodeToExpand);

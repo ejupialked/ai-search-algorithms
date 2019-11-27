@@ -43,21 +43,21 @@ public class BlocksWorldTileProblem implements Problem {
     }
 
 
-    public State initStart(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
-        Cell a = new Cell(pointTileA, A);
-        Cell b = new Cell(pointTileB, B);
-        Cell c = new Cell(pointTileC, C);
-        Cell ag = new Cell(pointAgent, AGENT);
+    public State initStart(Point...points){
+        Cell a = new Cell(points[0], A);
+        Cell b = new Cell(points[1], B);
+        Cell c = new Cell(points[2], C);
+        Cell ag = new Cell(points[3], AGENT);
         Board board = generateBoard(a, b, c, ag, N);
         return new State(board);
 
     }
 
-    public String initGoal(Point pointTileA, Point pointTileB, Point pointTileC, Point pointAgent){
-        Cell a = new Cell(pointTileA, A);
-        Cell b = new Cell(pointTileB, B);
-        Cell c = new Cell(pointTileC, C);
-        Cell ag = new Cell(pointAgent, AGENT);
+    public String initGoal(Point...points){
+        Cell a = new Cell(points[0], A);
+        Cell b = new Cell(points[1], B);
+        Cell c = new Cell(points[2], C);
+        Cell ag = new Cell(points[3], AGENT);
         this.goalBoard = generateBoard(a, b, c, ag, N);
         return goalBoard.getConfiguration();
     }
@@ -83,31 +83,23 @@ public class BlocksWorldTileProblem implements Problem {
         return goalBoard;
     }
 
-
-
     public void setGoal(String goal) {
         this.goalConfiguration = goal;
     }
 
     @Override
     public State generateState(State parent, Action action) throws IllegalMoveException {
-
         Board parentBoard = parent.getBoard();
-
         // new cells for A, B, C and agent
         Cell An = cloneCell(parentBoard.getA());
         Cell Bn = cloneCell(parentBoard.getB());
         Cell Cn = cloneCell(parentBoard.getC());
         Cell AGn = cloneCell(parentBoard.getAgent());
-
         //new Board
         Board board = generateBoard(An, Bn, Cn, AGn, parentBoard.getN());
-
         //new State
         State newState = new State(board);
-
         transitionModel.performTransition(action, newState);
-
         return newState;
     }
 
@@ -115,13 +107,12 @@ public class BlocksWorldTileProblem implements Problem {
         return goalConfiguration;
     }
 
-
-
-
     @Override
     public int actionCost() {
         return STEP_COST;
     }
+
+
 
     public Board getGoalBoard() {
         return goalBoard;

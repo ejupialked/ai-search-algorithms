@@ -1,0 +1,68 @@
+Problem: 1
+Median: 3.0
+Nodes generated: 49421
+
+I'm solving the puzzle with DFS...
+Problem: 2
+Median: 13.0
+Nodes generated: 16
+
+I'm solving the puzzle with DFS...
+Problem: 3
+Median: 70647.0
+Nodes generated: 154
+
+I'm solving the puzzle with DFS...
+Problem: 4
+Median: 64702.0
+Nodes generated: 324325
+
+I'm solving the puzzle with DFS...
+Problem: 5
+Median: 116659.0
+Nodes generated: 472545
+
+I'm solving the puzzle with DFS...
+Problem: 6
+Median: 347318.0
+Nodes generated: 160905
+
+I'm solving the puzzle with DFS...
+Problem: 7
+Median: 98948.0
+Nodes generated: 188698
+
+I'm solving the puzzle with DFS...
+Problem: 8
+Median: 178479.0
+Nodes generated: 525204
+
+I'm solving the puzzle with DFS...
+Problem: 9
+Median: 445561.0
+Nodes generated: 411976
+
+I'm solving the puzzle with DFS...
+Problem: 10
+Median: 224146.0
+Nodes generated: 49286
+
+I'm solving the puzzle with DFS...
+Problem: 11
+Median: 307643.0
+Nodes generated: 614713
+
+I'm solving the puzzle with DFS...
+Problem: 12
+Median: 160885.0
+Nodes generated: 39174
+
+I'm solving the puzzle with DFS...
+Problem: 13
+Median: 150358.0
+Nodes generated: 447479
+
+I'm solving the puzzle with DFS...
+Problem: 14
+Median: 201535.0
+Nodes generated: 75145

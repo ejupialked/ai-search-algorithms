@@ -2,6 +2,7 @@ package Utils;
 
 import BlocksWorld.Board;
 import BlocksWorld.Cell;
+import Problem.BlocksWorldTileProblem;
 import TreeSearchAlgorithm.Node;
 import TreeSearchAlgorithm.TreeSearch;
 
@@ -18,7 +19,7 @@ import java.util.Queue;
 public final class Utils {
 
 
-    private static boolean DEBUG = true;
+
 
     /**
      * Draws the blocks of the puzzle in a nice way in the Console.
@@ -77,6 +78,22 @@ public final class Utils {
         return s.toString();
     }
 
+
+    public static Cell[] convertStringTo1DCells(String cells){
+        Cell[] cells1 = new Cell[cells.length()];
+        for (int i = 0; i < cells1.length; i++) {
+            switch (String.valueOf(cells.charAt(i))){
+                case "A": cells1[i] = new Cell(0, 1, Cell.CellType.A); break;
+                case "B": cells1[i] = new Cell(0, 2, Cell.CellType.B); break;
+                case "C": cells1[i] = new Cell(0, 3, Cell.CellType.C); break;
+                case "@": cells1[i] = new Cell(0, 4, Cell.CellType.AGENT); break;
+                case "-": cells1[i] = new Cell(0, 5, Cell.CellType.EMPTY); break;
+            }
+        }
+        return cells1;
+    }
+
+
     public static Cell[] convert2DCellsTo1DCells(Cell[][] array2D){
         Cell[] array1D = new Cell[array2D.length*array2D.length];
 
@@ -89,8 +106,8 @@ public final class Utils {
     }
 
 
-    public static boolean isDEBUG() {
-        return DEBUG;
+    public static boolean isDebuggerON() {
+        return DEBUG.DEBUGGER;
     }
 
     public static Board generateBoard(Cell a, Cell b, Cell c, Cell agent, int n){
@@ -108,7 +125,6 @@ public final class Utils {
             }
 
         }
-
         newBoard.updateConfiguration();
         return newBoard;
     }
@@ -148,6 +164,20 @@ public final class Utils {
         System.out.println(str);
     }
 
+    public static void printStartAndGoal(BlocksWorldTileProblem problem1) {
+        print(" INITIAL STATE");
+        print(problem1.startState().ascii());
+        print(" GOAL STATE");
+        if (problem1.getGoalConfiguration() == null) {
+          print(drawGridCells(convert2DCellsTo1DCells(problem1.getGoalBoard().getCells()),
+                    problem1.getGoalBoard().getN()));
+        }else{
+            int n = (int) Math.sqrt(problem1.goalConfiguration.length());
+            print(drawGridCells(convertStringTo1DCells(problem1.getGoalConfiguration()), n));
+        }
+
+
+    }
     public static String solutionToString(TreeSearch search) {
 
         int i = 1;

@@ -34,7 +34,7 @@ public abstract class TreeSearch {
     protected abstract List<Node> treeSearch(Problem problem);
 
     TreeSearch(){
-        this.nodes = 1;
+        this.nodes = 0;
         this.depth = 0;
         this.solutionASCII = new StringBuilder();
         this.solutionMoves = new StringBuilder();
@@ -93,7 +93,7 @@ public abstract class TreeSearch {
         this.solution = treeSearch(problem);
         end = System.currentTimeMillis();
 
-         return "Nodes generated: " +nodes;
+        return "Nodes generated: " + nodes;
         // return Utils.solutionToString(this);
     }
 
