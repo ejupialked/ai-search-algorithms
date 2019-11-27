@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import static Utils.DEBUG.*;
+import static Utils.Debug.*;
 
 public class AStar extends TreeSearch {
 
@@ -13,7 +13,7 @@ public class AStar extends TreeSearch {
     PriorityQueue<Node> fringe;
 
     public AStar(){
-        super();            //Comparator that compares nodes using their estimated cost
+        super();            //Comparator that compares nodesGenerated using their estimated cost
         this.fringe = new PriorityQueue<>(Comparator.comparingInt(n -> n.estimatedCost));
     }
 
@@ -39,7 +39,7 @@ public class AStar extends TreeSearch {
             }
             showIsNotGoal(nodeToExpand);
 
-            List<Node> successors = generateSuccessors(nodeToExpand, problem);
+            List<Node> successors = generateSuccessors(nodeToExpand, problem, true);
 
             fringe.addAll(successors);
             showAddAllSuccessors(successors.size());

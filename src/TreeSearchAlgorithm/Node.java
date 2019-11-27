@@ -14,6 +14,7 @@ public class Node implements Heuristic {
 
     int pathCost;
     int estimatedCost;
+    boolean heuristic;
 
     /*the root */
     Node(State start){
@@ -23,13 +24,19 @@ public class Node implements Heuristic {
     }
 
     /* child (successor) */
-    Node(Problem problem, Node parent, Action action) throws IllegalMoveException {
+    Node(Problem problem, Node parent, Action action, boolean heuristic) throws IllegalMoveException {
         this.state = problem.generateState(parent.state, action);
         this.action = action;
         this.parent = parent;
-        this.pathCost = parent.pathCost + problem.actionCost();
-        this.estimatedCost = calculateEstimatedCost(g(), h(problem.goal()));
+        this.heuristic = heuristic;
+
+        if(heuristic){
+            this.pathCost = parent.pathCost + problem.actionCost();
+            this.estimatedCost = calculateEstimatedCost(g(), h(problem.goal()));
+        }
+
     }
+
 
     @Override
     public int g() {
@@ -37,6 +44,9 @@ public class Node implements Heuristic {
     }
 
 
+    public boolean isHeuristic() {
+        return heuristic;
+    }
 
     @Override
     public int h(Board boardGoal) {

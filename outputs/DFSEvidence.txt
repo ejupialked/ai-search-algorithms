@@ -1,4 +1,4 @@
-INITIAL STATE
+ INITIAL STATE
 ╔═══╤═══╤═══╤═══╗
 ║   │   │   │   ║
 ╟───┼───┼───┼───╢
@@ -9,26 +9,25 @@ INITIAL STATE
 ║ A │ B │ C │ @ ║
 ╚═══╧═══╧═══╧═══╝
 
-GOAL STATE
+ GOAL STATE
 ╔═══╤═══╤═══╤═══╗
 ║   │   │   │   ║
 ╟───┼───┼───┼───╢
-║   │ A │   │   ║
+║   │   │   │   ║
 ╟───┼───┼───┼───╢
-║ @ │ B │   │   ║
+║   │   │   │   ║
 ╟───┼───┼───┼───╢
-║   │ C │   │   ║
+║ A │ @ │ B │ C ║
 ╚═══╧═══╧═══╧═══╝
 
 I'm solving the puzzle with DFS...
-
 Adding root ------------ABC@to the fringe.
-     FRINGE
+     FRINGE     
 ╔════════════════╗
 ║------------ABC@║ (1)
 ╚════════════════╝
 Removing node ------------ABC@ from the fringe
-
+ 
 Check if ------------ABC@ is the goal...
 It is not the goal,  then expand node ------------ABC@
 
@@ -65,47 +64,33 @@ No. successors generated: 2
 
 Shuffling the order of the successors...
 Adding 2 successors to the fringe.
-     FRINGE
+     FRINGE     
 ╔════════════════╗
-║-----------@ABC-║ (1)
-║------------AB@C║ (2)
+║------------AB@C║ (1)
+║-----------@ABC-║ (2)
 ╚════════════════╝
+Removing node -----------@ABC- from the fringe
+ 
+Check if -----------@ABC- is the goal...
+It is not the goal,  then expand node -----------@ABC-
 
-Removing node ------------AB@C from the fringe
+Start expanding node -----------@ABC-
 
-Check if ------------AB@C is the goal...
-It is not the goal,  then expand node ------------AB@C
-
-Start expanding node ------------AB@C
-
-Child: ----------@-AB-C
+Child: -------@----ABC-
 Action taken: UP
 ╔═══╤═══╤═══╤═══╗
 ║   │   │   │   ║
 ╟───┼───┼───┼───╢
-║   │   │   │   ║
-╟───┼───┼───┼───╢
-║   │   │ @ │   ║
-╟───┼───┼───┼───╢
-║ A │ B │   │ C ║
-╚═══╧═══╧═══╧═══╝
-
-
-Child: ------------A@BC
-Action taken: LEFT
-╔═══╤═══╤═══╤═══╗
-║   │   │   │   ║
+║   │   │   │ @ ║
 ╟───┼───┼───┼───╢
 ║   │   │   │   ║
 ╟───┼───┼───┼───╢
-║   │   │   │   ║
-╟───┼───┼───┼───╢
-║ A │ @ │ B │ C ║
+║ A │ B │ C │   ║
 ╚═══╧═══╧═══╧═══╝
 
 
 Child: ------------ABC@
-Action taken: RIGHT
+Action taken: DOWN
 ╔═══╤═══╤═══╤═══╗
 ║   │   │   │   ║
 ╟───┼───┼───┼───╢
@@ -117,21 +102,33 @@ Action taken: RIGHT
 ╚═══╧═══╧═══╧═══╝
 
 
-End expansion of ------------AB@C
+Child: ----------@-ABC-
+Action taken: LEFT
+╔═══╤═══╤═══╤═══╗
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │   │   ║
+╟───┼───┼───┼───╢
+║   │   │ @ │   ║
+╟───┼───┼───┼───╢
+║ A │ B │ C │   ║
+╚═══╧═══╧═══╧═══╝
+
+
+End expansion of -----------@ABC-
 No. successors generated: 3
 
 Shuffling the order of the successors...
 Adding 3 successors to the fringe.
-     FRINGE
+     FRINGE     
 ╔════════════════╗
-║-----------@ABC-║ (1)
-║----------@-AB-C║ (2)
-║------------A@BC║ (3)
+║------------AB@C║ (1)
+║----------@-ABC-║ (2)
+║-------@----ABC-║ (3)
 ║------------ABC@║ (4)
 ╚════════════════╝
-
 Removing node ------------ABC@ from the fringe
-
+ 
 Check if ------------ABC@ is the goal...
 It is not the goal,  then expand node ------------ABC@
 
@@ -168,16 +165,16 @@ No. successors generated: 2
 
 Shuffling the order of the successors...
 Adding 2 successors to the fringe.
-     FRINGE
+     FRINGE     
 ╔════════════════╗
-║-----------@ABC-║ (1)
-║----------@-AB-C║ (2)
-║------------A@BC║ (3)
+║------------AB@C║ (1)
+║----------@-ABC-║ (2)
+║-------@----ABC-║ (3)
 ║-----------@ABC-║ (4)
 ║------------AB@C║ (5)
 ╚════════════════╝
 Removing node ------------AB@C from the fringe
-
+ 
 Check if ------------AB@C is the goal...
 It is not the goal,  then expand node ------------AB@C
 
@@ -227,36 +224,36 @@ No. successors generated: 3
 
 Shuffling the order of the successors...
 Adding 3 successors to the fringe.
-     FRINGE
+     FRINGE     
 ╔════════════════╗
-║-----------@ABC-║ (1)
-║----------@-AB-C║ (2)
-║------------A@BC║ (3)
+║------------AB@C║ (1)
+║----------@-ABC-║ (2)
+║-------@----ABC-║ (3)
 ║-----------@ABC-║ (4)
 ║------------ABC@║ (5)
 ║----------@-AB-C║ (6)
 ║------------A@BC║ (7)
 ╚════════════════╝
 Removing node ------------A@BC from the fringe
-
+ 
 Check if ------------A@BC is the goal...
 Node ------------A@BC is the goal!
-
+ 
 Solution:
 11
-Step 1: LEFT
-Configuration: ------------AB@C
+Step 1: UP
+Configuration: -----------@ABC-
 ╔═══╤═══╤═══╤═══╗
 ║   │   │   │   ║
 ╟───┼───┼───┼───╢
 ║   │   │   │   ║
 ╟───┼───┼───┼───╢
-║   │   │   │   ║
+║   │   │   │ @ ║
 ╟───┼───┼───┼───╢
-║ A │ B │ @ │ C ║
+║ A │ B │ C │   ║
 ╚═══╧═══╧═══╧═══╝
 
-Step 2: RIGHT
+Step 2: DOWN
 Configuration: ------------ABC@
 ╔═══╤═══╤═══╤═══╗
 ║   │   │   │   ║
@@ -293,9 +290,7 @@ Configuration: ------------A@BC
 ╚═══╧═══╧═══╧═══╝
 
 
-Time elapsed: 39ms
+Time elapsed: 78ms
 Number nodes generated: 11
 Depth solution : 4
-Moves: LEFT RIGHT LEFT LEFT
-
-Process finished with exit code 0
+Moves: UP DOWN LEFT LEFT 

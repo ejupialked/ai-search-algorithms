@@ -1,7 +1,7 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Utils.DEBUG;
+import Utils.Debug;
 import java.util.List;
 
 public class IDS extends TreeSearch {
@@ -10,22 +10,23 @@ public class IDS extends TreeSearch {
     protected List<Node> treeSearch(Problem problem) {
 
         Node root = makeNode(problem.startState());
-        DEBUG.creatingRoot(root.state.getBoard().getConfiguration());
+        Debug.creatingRoot(root.state.getBoard().getConfiguration());
 
         Node solution;
 
         for (int depth = 0; depth < Integer.MAX_VALUE ; depth++) {
-            nodes = 1;
-            DEBUG.showLimitIteration(depth);
-            DEBUG.showStartDLSCall(root, depth);
+            nodesGenerated = 1;
+            Debug.showLimitIteration(depth);
+            Debug.showStartDLSCall(root, depth);
             solution = DLS(problem, root, depth);
-            DEBUG.showEndDLSCalls(depth);
+
+            Debug.showEndDLSCalls(depth);
 
             if (solution != null) {
-                DEBUG.showSolutionFoundDLS(depth);
+                Debug.showSolutionFoundDLS(depth);
                 return solution(solution);
             }
-            DEBUG.showNoSolutionFoundDLS(depth);
+            Debug.showNoSolutionFoundDLS(depth);
 
         }
         return null;
@@ -34,22 +35,22 @@ public class IDS extends TreeSearch {
 
     private Node DLS(Problem problem, Node current, int depth) {
 
-        DEBUG.showCheckGoal(current);
+        Debug.showCheckGoal(current);
         if (depth == 0 && problem.checkGoal(current)) {
-            DEBUG.showGoalDFS(current);
+            Debug.showGoalDFS(current);
             return current;
         }
 
-        DEBUG.showIsNotGoal(current);
+        Debug.showIsNotGoal(current);
 
         if (depth > 0) {
 
-            List<Node> successors = generateSuccessors(current, problem);
+            List<Node> successors = generateSuccessors(current, problem, false);
 
-            DEBUG.showDFSCallOnSuccessors(successors);
+            Debug.showDFSCallOnSuccessors(successors);
             for(Node successor : successors){
 
-                DEBUG.showCallDLSOnChild(successor);
+                Debug.showCallDLSOnChild(successor);
                 Node result = DLS(problem, successor,depth - 1);
 
 

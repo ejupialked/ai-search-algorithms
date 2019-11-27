@@ -1,10 +1,9 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Utils.Utils;
 
 import java.util.*;
-import static Utils.DEBUG.*;
+import static Utils.Debug.*;
 
 public class BFS extends TreeSearch {
 
@@ -40,17 +39,12 @@ public class BFS extends TreeSearch {
             }
             showIsNotGoal(nodeToExpand);
 
-            List<Node> successors = generateSuccessors(nodeToExpand, problem);
-
+            List<Node> successors = generateSuccessors(nodeToExpand, problem, false);
             fringe.addAll(successors);
             showAddAllSuccessors(successors.size());
             showFringe(fringe);
 
         }
-
-
-
-
         return null;
     }
 

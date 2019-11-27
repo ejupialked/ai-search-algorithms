@@ -2,7 +2,7 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Utils.DEBUG;
+import Utils.Debug;
 import java.util.Stack;
 import java.util.List;
 
@@ -20,23 +20,24 @@ public class DFS extends TreeSearch {
         Node root = makeNode(problem.startState());
 
         fringe.add(root);
-        DEBUG.showAddingRoot(root);
-        DEBUG.showFringe(fringe);
+        Debug.showAddingRoot(root);
+        Debug.showFringe(fringe);
 
         while (!fringe.isEmpty()){
             Node nodeToExpand = fringe.pop();
-            DEBUG.showRemoveNodeFromFringe(nodeToExpand);
 
-            DEBUG.showCheckGoal(nodeToExpand);
+            Debug.showRemoveNodeFromFringe(nodeToExpand);
+
+            Debug.showCheckGoal(nodeToExpand);
             if(problem.checkGoal(nodeToExpand)) {
-                DEBUG.showGoal(nodeToExpand);
+                Debug.showGoal(nodeToExpand);
                 return solution(nodeToExpand);
             }
-            DEBUG.showIsNotGoal(nodeToExpand);
+            Debug.showIsNotGoal(nodeToExpand);
             List<Node> successors = generateRandomSuccessors(nodeToExpand, problem);
-            DEBUG.showAddAllSuccessors(successors.size());
+            Debug.showAddAllSuccessors(successors.size());
             fringe.addAll(successors);
-            DEBUG.showFringe(fringe);
+            Debug.showFringe(fringe);
 
         }
         return null;

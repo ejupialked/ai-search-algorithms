@@ -3,12 +3,13 @@ package TreeSearchAlgorithm;
 import Exceptions.IllegalMoveException;
 import Problem.Problem;
 import Problem.State;
-import Utils.DEBUG;
+import Utils.Debug;
 
 import java.util.*;
 
 import Problem.TransitionModel.Action;
 import Utils.Utils;
+
 
 
 /**
@@ -20,7 +21,8 @@ import Utils.Utils;
  */
 public abstract class TreeSearch {
 
-    int nodes;
+    int nodesGenerated;
+
     int depth;
 
     protected long start;
@@ -34,55 +36,63 @@ public abstract class TreeSearch {
     protected abstract List<Node> treeSearch(Problem problem);
 
     TreeSearch(){
-        this.nodes = 0;
+        this.nodesGenerated = 0;
         this.depth = 0;
         this.solutionASCII = new StringBuilder();
         this.solutionMoves = new StringBuilder();
 
     }
 
-    public int getNodes() {
-        return nodes;
+    public int getNodesGenerated() {
+        return nodesGenerated;
     }
 
     protected Node makeNode(State initialState){
-        nodes++;
+        nodesGenerated++;
         return new Node(initialState);
     }
 
     private Node generateChildNode(Problem problem, Node parent, Action action) throws IllegalMoveException {
-        return new Node(problem, parent, action);
+        return new Node(problem, parent, action, false);
+    }
+
+    private Node generateHeuristicChildNode(Problem problem, Node parent, Action action) throws IllegalMoveException {
+        return new Node(problem, parent, action, true);
     }
 
     protected List<Node> generateRandomSuccessors(Node nodeToExpand, Problem problem){
-        List<Node> random = generateSuccessors(nodeToExpand, problem);
-        DEBUG.showShuffling();
+        List<Node> random = generateSuccessors(nodeToExpand, problem, false);
+        Debug.showShuffling();
         Collections.shuffle(random);
         return random;
     }
 
-    protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem){
+    protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem, boolean heuristic){
 
         ArrayList<Node> successors = new ArrayList<Node>();
 
-        DEBUG.showStartExpansion(nodeToExpand.state);
+        Debug.showStartExpansion(nodeToExpand.state);
 
         for (Action action: problem.actions()) {
             Node child;
             try {
-                child = generateChildNode(problem, nodeToExpand, action);
+                if(!heuristic){
+                    child = generateChildNode(problem, nodeToExpand, action);
+                }else{
+                    child = generateHeuristicChildNode(problem, nodeToExpand, action);
+                }
             } catch (IllegalMoveException e) {
                 child = null;
             }
 
             if(child != null) {
                 successors.add(child);
-                DEBUG.showChildGenerated(child.state);
-                nodes++;
+                Debug.showChildGenerated(child);
+                nodesGenerated++;
             }
         }
 
-        DEBUG.showEndExpansion(nodeToExpand.state, successors);
+        Debug.showEndExpansion(nodeToExpand.state, successors);
 
         return successors;
     }
@@ -93,8 +103,8 @@ public abstract class TreeSearch {
         this.solution = treeSearch(problem);
         end = System.currentTimeMillis();
 
-        return "Nodes generated: " + nodes;
-        // return Utils.solutionToString(this);
+        // return "Nodes generated: " + nodesGenerated + "\n Nodes expanded: " + nodesExpanded;
+         return Utils.solutionToString(this);
     }
 
     protected List<Node> solution(Node solution) {

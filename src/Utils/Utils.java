@@ -7,8 +7,6 @@ import TreeSearchAlgorithm.Node;
 import TreeSearchAlgorithm.TreeSearch;
 
 import java.awt.*;
-import java.util.List;
-import java.util.Queue;
 
 /**
  * Utility class
@@ -107,7 +105,7 @@ public final class Utils {
 
 
     public static boolean isDebuggerON() {
-        return DEBUG.DEBUGGER;
+        return Debug.DEBUGGER;
     }
 
     public static Board generateBoard(Cell a, Cell b, Cell c, Cell agent, int n){
@@ -160,20 +158,24 @@ public final class Utils {
     }
 
 
-    public static void print(String str){
+    public static void println(String str){
         System.out.println(str);
     }
+    public static void print(String str){
+        System.out.print(str);
+    }
+
 
     public static void printStartAndGoal(BlocksWorldTileProblem problem1) {
-        print(" INITIAL STATE");
-        print(problem1.startState().ascii());
-        print(" GOAL STATE");
+        println(" INITIAL STATE");
+        println(problem1.startState().ascii());
+        println(" GOAL STATE");
         if (problem1.getGoalConfiguration() == null) {
-          print(drawGridCells(convert2DCellsTo1DCells(problem1.getGoalBoard().getCells()),
+          println(drawGridCells(convert2DCellsTo1DCells(problem1.getGoalBoard().getCells()),
                     problem1.getGoalBoard().getN()));
         }else{
             int n = (int) Math.sqrt(problem1.goalConfiguration.length());
-            print(drawGridCells(convertStringTo1DCells(problem1.getGoalConfiguration()), n));
+            println(drawGridCells(convertStringTo1DCells(problem1.getGoalConfiguration()), n));
         }
 
 
@@ -197,7 +199,7 @@ public final class Utils {
 
         return search.getSolutionASCII() +
                         "\nTime elapsed: " + search.time() + "ms" +
-                        "\nNumber nodes generated: " + search.getNodes() +
+                        "\nNumber nodes generated: " + search.getNodesGenerated() +
                         "\nDepth solution : " + search.getDepth() +
                         "\nMoves: " + search.getSolutionMoves();
     }

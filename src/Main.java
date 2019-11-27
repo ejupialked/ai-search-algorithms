@@ -1,13 +1,13 @@
 import Problem.BlocksWorldTileProblem;
 import Problem.Problem;
 import TreeSearchAlgorithm.*;
-import Utils.DEBUG;
+import Utils.Debug;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Utils.DEBUG.*;
+import static Utils.Debug.*;
 import static Utils.Utils.*;
 
 /**
@@ -36,14 +36,14 @@ public class Main {
 
         String algorithm = args[0];
 
-        DEBUG.setDEBUGGER(OFF);
+        Debug.setDEBUGGER(OFF);
 
-        problem1.setGoal("-----------@ABC-");
+    //problem1.setGoal("------------AB@C");
 
 
 
-        //solveUserProblem(problem1,algorithm);
-        solveDifferentPuzzle(problems(), algorithm);
+         solveUserProblem(problem1,algorithm);
+        // solveDifferentPuzzle(problems(), algorithm);
 
 
 
@@ -67,9 +67,9 @@ public class Main {
 
         for (String problem: problems) {
             if(i > 0) {
-                print(" ");
-                print("I'm solving the puzzle with " + algorithm + "...");
-                print("Problem: " + i++);
+                println(" ");
+                println("I'm solving the puzzle with " + algorithm + "...");
+                println("Problem: " + i++);
                 problem1.setGoal(problem);
                // printStartAndGoal(problem1);
                 solvePuzzle(problem1, algorithm);
@@ -82,7 +82,7 @@ public class Main {
 
     private static void solveUserProblem(BlocksWorldTileProblem problem, String algorithm) {
         printStartAndGoal(problem);
-        print("I'm solving the puzzle with "+ algorithm + "...");
+        println("I'm solving the puzzle with "+ algorithm + "...");
         solvePuzzle(problem, algorithm);
     }
 
@@ -104,7 +104,7 @@ public class Main {
                 case "DFS":
                     TreeSearch dfs = new DFS();
                     output = dfs.solveProblem(problem);
-                    print(String.valueOf(dfs.getNodes()));
+                    println(String.valueOf(dfs.getNodesGenerated()));
 
                     break;
                 case "IDS":
@@ -119,7 +119,7 @@ public class Main {
 
             }
 
-            print(output);
+            println(output);
     }
 
 
