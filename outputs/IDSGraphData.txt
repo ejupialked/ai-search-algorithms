@@ -1,0 +1,57 @@
+"C:\Program Files\Java\jdk-11.0.2\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2018.3.5\lib\idea_rt.jar=19286:C:\Program Files\JetBrains\IntelliJ IDEA 2018.3.5\bin" -Dfile.encoding=UTF-8 -classpath "C:\Users\alked_2\OneDrive - University of Southampton\blocksworld-tile-puzzle\out\production\blocksworld-tile-puzzle" Main IDS
+
+I'm solving the puzzle with IDS...
+Problem: 1
+Nodes generated: 3
+
+I'm solving the puzzle with IDS...
+Problem: 2
+Nodes generated: 6
+
+I'm solving the puzzle with IDS...
+Problem: 3
+Nodes generated: 15
+
+I'm solving the puzzle with IDS...
+Problem: 4
+Nodes generated: 15
+
+I'm solving the puzzle with IDS...
+Problem: 5
+Nodes generated: 41
+
+I'm solving the puzzle with IDS...
+Problem: 6
+Nodes generated: 364
+
+I'm solving the puzzle with IDS...
+Problem: 7
+Nodes generated: 1157
+
+I'm solving the puzzle with IDS...
+Problem: 8
+Nodes generated: 3724
+
+I'm solving the puzzle with IDS...
+Problem: 9
+Nodes generated: 12024
+
+I'm solving the puzzle with IDS...
+Problem: 10
+Nodes generated: 38884
+
+I'm solving the puzzle with IDS...
+Problem: 11
+Nodes generated: 125799
+
+I'm solving the puzzle with IDS...
+Problem: 12
+Nodes generated: 407054
+
+I'm solving the puzzle with IDS...
+Problem: 13
+Nodes generated: 1317212
+
+I'm solving the puzzle with IDS...
+Problem: 14
+Nodes generated: 4262541

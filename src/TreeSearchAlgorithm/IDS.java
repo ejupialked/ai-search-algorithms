@@ -18,6 +18,7 @@ public class IDS extends TreeSearch {
 
         for (int depth = 0; depth < Integer.MAX_VALUE ; depth++) {
 
+            nodes = 1;
             DEBUG.showLimitIteration(depth);
             DEBUG.showStartDLSCall(root, depth);
             solution = DLS(problem, root, depth);

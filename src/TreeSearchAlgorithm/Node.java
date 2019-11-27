@@ -39,7 +39,7 @@ public class Node implements Heuristic {
 
 
     @Override
-    public int hImproved(Board boardGoal) {
+    public int h(Board boardGoal) {
         int sum = 0;
         Board boardCurr = state.getBoard();
 
@@ -50,34 +50,34 @@ public class Node implements Heuristic {
         int max = Math.max(a, Math.max(b, c));
 
 
-        if(!(boardCurr.getA().manhattanDistance(boardGoal.getA()) >= 0 || boardCurr.getA().manhattanDistance(boardGoal.getA()) < 3)){
+        if(!(boardCurr.getA().manhattanDistance(boardGoal.getA()) == 0)){
             sum += boardCurr.getA().manhattanDistance(boardGoal.getA());
-            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getA())) > 3)){
+            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getA())) > 5)){
                 sum += (boardCurr.getAgent().manhattanDistance(boardCurr.getA()));
             }
         }
 
-        if(!(boardCurr.getB().manhattanDistance(boardGoal.getB()) >= 0 ||boardCurr.getB().manhattanDistance(boardGoal.getB()) < 3)){
+        if(!(boardCurr.getB().manhattanDistance(boardGoal.getB()) == 0)){
             sum += boardCurr.getB().manhattanDistance(boardGoal.getB());
-            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getB())) > 3)){
+            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getB())) > 5)){
                 sum += (boardCurr.getAgent().manhattanDistance(boardCurr.getB()));
             }
         }
 
-        if(!(boardCurr.getC().manhattanDistance(boardGoal.getC()) >= 0 || boardCurr.getC().manhattanDistance(boardGoal.getC()) < 3)){
+        if(!(boardCurr.getC().manhattanDistance(boardGoal.getC()) == 0)){
             sum += boardCurr.getC().manhattanDistance(boardGoal.getC());
-            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getC())) > 3)){
+            if(!((boardCurr.getAgent().manhattanDistance(boardCurr.getC())) > 5)){
                 sum += (boardCurr.getAgent().manhattanDistance(boardCurr.getC()));
             }
         }
 
-        return sum + max;
+        return sum + max*4;
     }
 
 
 
     @Override
-    public int h(Board boardGoal) {
+    public int hImproved(Board boardGoal) {
         int sum = 0;
         Board boardCurr = state.getBoard();
 

@@ -130,8 +130,11 @@ public class BlocksWorldTileProblem implements Problem {
     @Override
     public boolean checkGoal(Node solution) {
         State state = solution.getState();
-        return getGoalConfiguration().replace(AGENT.getText(), EMPTY.getText())
-                .equals(state.getBoard().getConfiguration().replace(AGENT.getText(), EMPTY.getText()));
+
+        return getGoalConfiguration().equals(state.board.getConfiguration());
+
+       // return getGoalConfiguration().replace(AGENT.getText(), EMPTY.getText())
+             //   .equals(state.getBoard().getConfiguration().replace(AGENT.getText(), EMPTY.getText()));
     }
 
 }

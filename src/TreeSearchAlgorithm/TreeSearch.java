@@ -93,7 +93,7 @@ public abstract class TreeSearch {
         this.solution = treeSearch(problem);
         end = System.currentTimeMillis();
 
-        return "Nodes generated: " +nodes;
+         return "Nodes generated: " +nodes;
         // return Utils.solutionToString(this);
     }
 

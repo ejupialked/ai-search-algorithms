@@ -25,7 +25,9 @@ public class BFS extends TreeSearch {
         fringe.add(root);
         showAddingRoot(root);
 
+
         while(!fringe.isEmpty()){
+
 
             Node nodeToExpand = fringe.remove();
             showRemoveNodeFromFringe(nodeToExpand);
@@ -38,8 +40,6 @@ public class BFS extends TreeSearch {
             showIsNotGoal(nodeToExpand);
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem);
-
-
 
             fringe.addAll(successors);
             showAddAllSuccessors(successors.size());

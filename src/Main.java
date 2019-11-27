@@ -33,7 +33,7 @@ public class Main {
         Point aGoal = new Point(1,1);
         Point bGoal = new Point(2,1);
         Point cGoal = new Point(3,1);
-        Point agentGoal = new Point(3,3);
+        Point agentGoal = new Point(2,0);
 
 
         BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
@@ -42,9 +42,9 @@ public class Main {
 
         DEBUG.setDEBUGGER(OFF);
        // problem1.setGoal("----BA---@----C-");
-        // solveUserProblem(problem1,algorithm);
+        //solveUserProblem(problem1,algorithm);
 
-        solveDifferentPuzzle(problems, algorithm);
+         solveDifferentPuzzle(problems, algorithm);
     }
 
     private static void solveDifferentPuzzle(List<String> problems, String algorithm) {
@@ -107,7 +107,7 @@ public class Main {
                 case "DFS":
 
                     List<Integer> average = new ArrayList<>();
-                    for (int i = 0; i < 25 ; i++) {
+                    for (int i = 0; i < 12; i++) {
                         TreeSearch dfs = new DFS();
                         output = dfs.solveProblem(problem);
                         average.add(dfs.getNodes());
@@ -117,15 +117,16 @@ public class Main {
                     Collections.sort(average);
                     double median;
                     if (average.size() % 2 == 0)
-                        median = ((double)average.get(average.size()/2)+ (double) average.get(average.size()/2 - 1)) / 2;
+                        median = ((double) average.get(average.size() / 2) + (double) average.get(average.size() / 2 - 1)) / 2;
                     else
-                        median = (double) average.get(average.size()/2);
+                        median = (double) average.get(average.size() / 2);
 
-                    print(String.valueOf(median));
+                    print("Median: " + String.valueOf(median));
                     /*
                     TreeSearch dfs = new DFS();
                     output = dfs.solveProblem(problem);
-                    print(String.valueOf(dfs.getNodes()));*/
+                    print(String.valueOf(dfs.getNodes()));
+                    */
                     break;
                 case "IDS":
                     TreeSearch ids = new IDS();
@@ -148,6 +149,24 @@ public class Main {
     private static List<String> problems(){
         List<String> problems = new ArrayList<>();
 
+
+
+        problems.add("-----------@ABC-"); //1
+        problems.add("----------@-ABC-"); //2
+        problems.add("----------C-AB@-"); //3
+        problems.add("---------@--ABC-"); //4
+        problems.add("---------B--A@C-"); //5
+        problems.add("--------@B---AC-"); //6
+        problems.add("--------B@---AC-"); //7
+        problems.add("--------BA---@C-"); //8
+        problems.add("--------BA---C@-"); //9
+        problems.add("--------BA@--C--"); //10
+        problems.add("------@-BA---C--"); //11
+        problems.add("-----@--BA---C--");  //12
+        problems.add("-----A--B@---C--"); //13
+        problems.add("-----A--@B---C--"); //14
+
+        /*
         problems.add("------------AB@C"); //1
         problems.add("------------A@BC"); //2
         problems.add("----------C-AB@-"); //3
@@ -163,7 +182,7 @@ public class Main {
         problems.add("--------B@--CA--"); //13
         problems.add("--------AC@B----"); //14
         problems.add("----A---@C---B--"); //15
-
+*/
         return problems;
 
     }
