@@ -42,20 +42,13 @@ public class Main {
         BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
 
 
-        int i = 1;
-
-        for (BlocksWorldTileProblem p:problems()) {
-            println("p: "+ i++);
-            println(p.getGoalConfiguration());
-            println(p.startState().getBoard().getASCIIString());
-        }
 
 
         String algorithm = args[0];
 
         Debug.setDEBUGGER(OFF);
 
-        //  solveUserProblem(problem1,algorithm);
+        // solveUserProblem(problem1,algorithm);
          solveDifferentPuzzle(problems(), algorithm);
 
 
@@ -157,7 +150,7 @@ public class Main {
         problems.add(new BlocksWorldTileProblem(start,"--------AB---@-C"));
         problems.add(new BlocksWorldTileProblem(start,"----------C@-A-B"));
         problems.add(new BlocksWorldTileProblem(start,"--------BC--A@--"));
-        problems.add(new BlocksWorldTileProblem(start,"--------B@--CA--"));
+        problems.add(new BlocksWorldTileProblem(start,"-----C---A---B@-"));
         problems.add(new BlocksWorldTileProblem(start,"--------AC@B----"));
         problems.add(new BlocksWorldTileProblem(start,"----A---@C---B--"));
 

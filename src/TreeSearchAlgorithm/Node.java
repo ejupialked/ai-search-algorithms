@@ -1,5 +1,6 @@
 package TreeSearchAlgorithm;
 
+import BlocksWorld.Cell;
 import Exceptions.IllegalMoveException;
 import Problem.Problem;
 import Problem.TransitionModel.Action;
@@ -50,6 +51,8 @@ public class Node implements Heuristic {
     public boolean isHeuristic() {
         return heuristic;
     }
+
+
 
     @Override
     public int h(Board boardGoal) {
