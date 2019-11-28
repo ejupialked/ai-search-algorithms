@@ -9,7 +9,7 @@ public class IDS extends TreeSearch {
     @Override
     protected List<Node> treeSearch(Problem problem) {
 
-        Node root = makeNode(problem.startState());
+        Node root = makeNode(problem, problem.startState(), false);
         Debug.creatingRoot(root.state.getBoard().getConfiguration());
 
         Node solution;

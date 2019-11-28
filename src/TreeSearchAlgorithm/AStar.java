@@ -19,7 +19,7 @@ public class AStar extends TreeSearch {
 
     @Override
     protected List<Node> treeSearch(Problem problem) {
-        Node root = makeNode(problem.startState());
+        Node root = makeNode(problem, problem.startState(), true);
 
         fringe.add(root);
         showAddingRoot(root);

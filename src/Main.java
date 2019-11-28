@@ -5,6 +5,7 @@ import Utils.Debug;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static Utils.Debug.*;
@@ -31,19 +32,31 @@ public class Main {
         Point cGoal = new Point(3,1);
         Point agentGoal = new Point(2,0);
 
+      /*  Point aGoal = new Point(1,0);
+        Point bGoal = new Point(2,1);
+        Point cGoal = new Point(3,2);
+        Point agentGoal = new Point(2,0);*/
+
+
 
         BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
+
+
+        int i = 1;
+
+        for (BlocksWorldTileProblem p:problems()) {
+            println("p: "+ i++);
+            println(p.getGoalConfiguration());
+            println(p.startState().getBoard().getASCIIString());
+        }
+
 
         String algorithm = args[0];
 
         Debug.setDEBUGGER(OFF);
 
-    //problem1.setGoal("------------AB@C");
-
-
-
-         solveUserProblem(problem1,algorithm);
-        // solveDifferentPuzzle(problems(), algorithm);
+        //  solveUserProblem(problem1,algorithm);
+         solveDifferentPuzzle(problems(), algorithm);
 
 
 
@@ -51,33 +64,18 @@ public class Main {
 
 
 
-    private static void solveDifferentPuzzle(List<String> problems, String algorithm) {
+    private static void solveDifferentPuzzle(List<BlocksWorldTileProblem> problems, String algorithm) {
         int i = 1;
-        Point a = new Point(3,0);
-        Point b = new Point(3,1);
-        Point c = new Point(3,2);
-        Point agent = new Point(3,3);
-
-        Point aGoal = new Point(1,1);
-        Point bGoal = new Point(2,1);
-        Point cGoal = new Point(3,1);
-        Point agentGoal = new Point(3,3);
-
-        BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
-
-        for (String problem: problems) {
+        for (BlocksWorldTileProblem problem: problems) {
             if(i > 0) {
                 println(" ");
                 println("I'm solving the puzzle with " + algorithm + "...");
                 println("Problem: " + i++);
-                problem1.setGoal(problem);
-               // printStartAndGoal(problem1);
-                solvePuzzle(problem1, algorithm);
+               // printStartAndGoal(problem);
+                solvePuzzle(problem, algorithm);
             }else
                 i++;
         }
-
-
     }
 
     private static void solveUserProblem(BlocksWorldTileProblem problem, String algorithm) {
@@ -102,6 +100,23 @@ public class Main {
                     output = bfs.solveProblem(problem);
                     break;
                 case "DFS":
+
+                    List<Integer> average = new ArrayList<>();
+                    for (int i = 0; i < 20; i++) {
+                        TreeSearch dfs = new DFS();
+                        output = dfs.solveProblem(problem);
+                        average.add(dfs.getNodesGenerated());
+                    }
+
+
+                    Collections.sort(average);
+                    double median;
+                    if (average.size() % 2 == 0)
+                        median = ((double) average.get(average.size() / 2) + (double) average.get(average.size() / 2 - 1)) / 2;
+                    else
+                        median = (double) average.get(average.size() / 2);
+
+                    print("Median: " + String.valueOf(median));
                     TreeSearch dfs = new DFS();
                     output = dfs.solveProblem(problem);
                     println(String.valueOf(dfs.getNodesGenerated()));
@@ -125,41 +140,29 @@ public class Main {
 
 
 
-    private static List<String> problems(){
-        List<String> problems = new ArrayList<>();
+    private static List<BlocksWorldTileProblem> problems(){
+        List<BlocksWorldTileProblem> problems = new ArrayList<>();
 
-        problems.add("-----------@ABC-"); //1
-        problems.add("----------@-ABC-"); //2
-        problems.add("----------C-AB@-"); //3
-        problems.add("---------@--ABC-"); //4
-        problems.add("---------B--A@C-"); //5
-        problems.add("--------@B---AC-"); //6
-        problems.add("--------B@---AC-"); //7
-        problems.add("--------BA---@C-"); //8
-        problems.add("--------BA---C@-"); //9
-        problems.add("--------BA@--C--"); //10
-        problems.add("------@-BA---C--"); //11
-        problems.add("-----@--BA---C--");  //12
-        problems.add("-----A--B@---C--"); //13
-        problems.add("-----A--@B---C--"); //14
+        String start = "------------ABC@";
 
-        /*
-        problems.add("------------AB@C"); //1
-        problems.add("------------A@BC"); //2
-        problems.add("----------C-AB@-"); //3
-        problems.add("----------C-A@B-"); //4
-        problems.add("----------B-A-@C"); //5
-        problems.add("---------C@-A-B-"); //6
-        problems.add("--------A---BC@-"); //7
-        problems.add("--------BA---@C-"); //8
-        problems.add("--------BA---C@-"); //9
-        problems.add("--------AB---@-C"); //10
-        problems.add("----------C@-A-B"); //11
-        problems.add("--------BC--A@--");  //12
-        problems.add("--------B@--CA--"); //13
-        problems.add("--------AC@B----"); //14
-        problems.add("----A---@C---B--"); //15
-*/
+        problems.add(new BlocksWorldTileProblem(start,"------------AB@C"));
+        problems.add(new BlocksWorldTileProblem(start,"------------A@BC"));
+        problems.add(new BlocksWorldTileProblem(start,"----------C-AB@-"));
+        problems.add(new BlocksWorldTileProblem(start,"----------C-A@B-"));
+        problems.add(new BlocksWorldTileProblem(start,"----------B-A-@C"));
+        problems.add(new BlocksWorldTileProblem(start,"---------C@-A-B-"));
+        problems.add(new BlocksWorldTileProblem(start,"--------A---BC@-"));
+        problems.add(new BlocksWorldTileProblem(start,"--------BA---@C-"));
+        problems.add(new BlocksWorldTileProblem(start,"--------BA---C@-"));
+        problems.add(new BlocksWorldTileProblem(start,"--------AB---@-C"));
+        problems.add(new BlocksWorldTileProblem(start,"----------C@-A-B"));
+        problems.add(new BlocksWorldTileProblem(start,"--------BC--A@--"));
+        problems.add(new BlocksWorldTileProblem(start,"--------B@--CA--"));
+        problems.add(new BlocksWorldTileProblem(start,"--------AC@B----"));
+        problems.add(new BlocksWorldTileProblem(start,"----A---@C---B--"));
+
+
+
         return problems;
 
     }

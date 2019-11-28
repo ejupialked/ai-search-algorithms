@@ -17,10 +17,13 @@ public class Node implements Heuristic {
     boolean heuristic;
 
     /*the root */
-    Node(State start){
+    Node(Problem problem, State start, boolean heuristic){
         this.state = start;
         this.parent = null;
-        this.pathCost = 0;
+        if(heuristic){
+            this.pathCost = 0;
+            this.estimatedCost = calculateEstimatedCost(g(), h(problem.goal()));
+        }
     }
 
     /* child (successor) */

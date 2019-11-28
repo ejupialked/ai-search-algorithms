@@ -47,9 +47,9 @@ public abstract class TreeSearch {
         return nodesGenerated;
     }
 
-    protected Node makeNode(State initialState){
+    protected Node makeNode(Problem problem, State initialState, boolean heuristic){
         nodesGenerated++;
-        return new Node(initialState);
+        return new Node(problem, initialState, heuristic);
     }
 
     private Node generateChildNode(Problem problem, Node parent, Action action) throws IllegalMoveException {
@@ -103,8 +103,8 @@ public abstract class TreeSearch {
         this.solution = treeSearch(problem);
         end = System.currentTimeMillis();
 
-        // return "Nodes generated: " + nodesGenerated + "\n Nodes expanded: " + nodesExpanded;
-         return Utils.solutionToString(this);
+        return "Nodes generated: " + nodesGenerated ;
+        // return Utils.solutionToString(this);
     }
 
     protected List<Node> solution(Node solution) {
@@ -122,6 +122,8 @@ public abstract class TreeSearch {
         depth = path.size();
         return path;
     }
+
+
 
     public List<Node> getSolution() {
         return solution;

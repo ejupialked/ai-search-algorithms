@@ -15,10 +15,6 @@ import java.awt.*;
  */
 
 public final class Utils {
-
-
-
-
     /**
      * Draws the blocks of the puzzle in a nice way in the Console.
      *
@@ -50,11 +46,28 @@ public final class Utils {
         for(String i: cellValues) {
             r = new StringBuilder(r.toString().replaceFirst("o", i.equals("") ? "b" + i : i));
         }
-
         return r.toString();
     }
 
 
+    public static Cell[][] convert1DTo2DCells(Cell[] array) {
+
+        int n = (int) Math.sqrt(array.length);
+
+        if (array.length != (n*n))
+            throw new IllegalArgumentException("Invalid array length");
+
+        Cell[][] cells = new Cell[n][n];
+
+        for(int x=0; x<n; x++) {
+            for (int y = 0; y < n; y++) {
+                Cell c = array[(y * n) + x];
+                c.setLocation(x, y);
+                cells[x][y] = c;
+            }
+        }
+        return cells;
+    }
     /**
      * Build a pattern depending on the size of the grid
      * @param n the size
@@ -108,12 +121,11 @@ public final class Utils {
         return Debug.DEBUGGER;
     }
 
-    public static Board generateBoard(Cell a, Cell b, Cell c, Cell agent, int n){
-        Cell[][] gridCells = generateGridCells(a, b, c, agent, n);
-        Board newBoard =  new Board(n, gridCells);
+    public static Board generateBoard(Cell[][] cells, int n){
+        Board newBoard =  new Board(n, cells);
         for (int x = 0; x < n; x++) {
             for (int y = 0; y < n ; y++) {
-                Cell cell = gridCells[x][y];
+                Cell cell = cells[x][y];
                 switch (cell.getCellType()) {
                     case A: newBoard.setA(cell); break;
                     case B: newBoard.setB(cell); break;
@@ -131,7 +143,7 @@ public final class Utils {
         return new Cell(((int) c.getX()), ((int) c.getY()), c.getCellType());
     }
 
-    private static Cell[][] generateGridCells(Cell a, Cell b, Cell c, Cell agent, int n){
+    public static Cell[][] generateGridCells(Cell a, Cell b, Cell c, Cell agent, int n){
         Cell[][] cells = new Cell[n][n];
         for (int x = 0; x < n ; x++) {
             for (int y = 0; y < n; y++) {
@@ -178,8 +190,8 @@ public final class Utils {
             println(drawGridCells(convertStringTo1DCells(problem1.getGoalConfiguration()), n));
         }
 
-
     }
+
     public static String solutionToString(TreeSearch search) {
 
         int i = 1;
