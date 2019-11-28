@@ -13,7 +13,6 @@ import TreeSearchAlgorithm.Node;
  */
 public interface Problem {
 
-
     TransitionModel transitionModel();
 
     Action[] actions();
@@ -35,7 +34,7 @@ public interface Problem {
      * since the position of the agent does not matter
      * when checking the goal state
      * @param solution the node to check
-     * @return
+     * @return true if it is the goal
      */
     boolean checkGoal(Node solution);
 }

@@ -14,6 +14,9 @@ import static Utils.Utils.*;
 /**
  * Run the algorithms here.
  *
+ * the BlocksWorldTileProblem can be defined through 4 points (A, B, C and Agent)
+ * or via a configuration String.
+ *
  * @author Alked Ejupi Copyright (2019). All rights reserved.
  */
 public class Main {
@@ -32,21 +35,13 @@ public class Main {
         Point cGoal = new Point(3,1);
         Point agentGoal = new Point(2,0);
 
-      /*  Point aGoal = new Point(1,0);
-        Point bGoal = new Point(2,1);
-        Point cGoal = new Point(3,2);
-        Point agentGoal = new Point(2,0);*/
-
-
-
         BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
 
-
-
-
+        // argument
         String algorithm = args[0];
 
         Debug.setDEBUGGER(ON);
+
         BlocksWorldTileProblem evidenceDepth1 =
                 new BlocksWorldTileProblem("------------ABC@","------------AB@C");
 
@@ -56,7 +51,6 @@ public class Main {
 
         solveUserProblem(evidenceDepth2, algorithm);
         // solveDifferentPuzzle(problems(), algorithm);
-
 
 
     }
@@ -118,7 +112,7 @@ public class Main {
 
 
 
-    private static List<BlocksWorldTileProblem> problems(){
+    private static List<BlocksWorldTileProblem> problemsForScalability(){
         List<BlocksWorldTileProblem> problems = new ArrayList<>();
 
         String start = "------------ABC@";
@@ -138,8 +132,6 @@ public class Main {
         problems.add(new BlocksWorldTileProblem(start,"-----C---A---B@-"));
         problems.add(new BlocksWorldTileProblem(start,"--------AC@B----"));
         problems.add(new BlocksWorldTileProblem(start,"----A---@C---B--"));
-
-
 
         return problems;
 

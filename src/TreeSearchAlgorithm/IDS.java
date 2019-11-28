@@ -5,7 +5,7 @@ import Utils.Debug;
 import java.util.List;
 
 public class IDS extends TreeSearch {
-
+    //Finite limit of IDS
     int LIMIT = Integer.MAX_VALUE;
 
     @Override
@@ -46,20 +46,15 @@ public class IDS extends TreeSearch {
         Debug.showIsNotGoal(current);
 
         if (depth > 0) {
-
             List<Node> successors = generateSuccessors(current, problem, false);
 
             Debug.showDFSCallOnSuccessors(successors);
-            for(Node successor : successors){
-
+            for(Node successor : successors) {
                 Debug.showCallDLSOnChild(successor);
-                Node result = DLS(problem, successor,depth - 1);
-
-
+                Node result = DLS(problem, successor, depth - 1);
                 if (result != null) {
                     return result;
                 }
-
             }
         }
         return null;

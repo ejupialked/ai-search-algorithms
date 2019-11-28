@@ -9,8 +9,14 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import static Utils.Utils.newLine;
-import static Utils.Utils.print;
 import static Utils.Utils.println;
+
+/**
+ * Debug class
+ *
+ * @author Alked Ejupi Copyright (2019). All rights reserved.
+ */
+
 
 public class Debug {
 
@@ -51,7 +57,6 @@ public class Debug {
         }
 
     }
-
 
     public static void showFringe(Collection<Node> fringe){
         if(DEBUGGER) {

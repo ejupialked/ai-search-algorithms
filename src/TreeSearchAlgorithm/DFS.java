@@ -8,6 +8,7 @@ import java.util.List;
 
 public class DFS extends TreeSearch {
 
+    //LIFO queue
     Stack<Node> fringe;
 
     public DFS(){

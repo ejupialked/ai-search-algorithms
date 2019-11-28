@@ -1,7 +1,6 @@
 package Problem;
 
 import BlocksWorld.Board;
-import BlocksWorld.Cell;
 import Problem.TransitionModel.Action;
 
 /**
@@ -32,7 +31,6 @@ public class State {
         }
         return super.equals(obj);
     }
-
 
     public String ascii(){
         return board.getASCIIString();

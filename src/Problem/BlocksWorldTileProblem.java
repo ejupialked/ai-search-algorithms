@@ -35,7 +35,6 @@ public class BlocksWorldTileProblem implements Problem {
     private static CellType C = CellType.C;
     private static CellType AGENT = CellType.AGENT;
 
-
     public BlocksWorldTileProblem(Point...points){
         this.transitionModel = transitionModel();
         this.startState = initStart(points[0], points[1], points[2], points[3]);
@@ -47,7 +46,6 @@ public class BlocksWorldTileProblem implements Problem {
         this.startState = initStart(startConfiguration);
         this.goalConfiguration = initGoal(goalConfiguration);
     }
-
 
     public State initStart(Point...points){
         Cell a = new Cell(points[0], A);
@@ -132,8 +130,6 @@ public class BlocksWorldTileProblem implements Problem {
         return STEP_COST;
     }
 
-
-
     public Board getGoalBoard() {
         return goalBoard;
     }
@@ -141,9 +137,6 @@ public class BlocksWorldTileProblem implements Problem {
     @Override
     public boolean checkGoal(Node solution) {
         State state = solution.getState();
-
-        // return getGoalConfiguration().equals(state.board.getConfiguration());
-
         return getGoalConfiguration().replace(AGENT.getText(), EMPTY.getText())
                .equals(state.getBoard().getConfiguration().replace(AGENT.getText(), EMPTY.getText()));
     }

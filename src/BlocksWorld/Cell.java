@@ -55,9 +55,6 @@ public class Cell extends Point implements ManhattanDistance {
         this.cellType = cellType;
     }
 
-
-
-
     public CellType getCellType() {
         return cellType;
     }

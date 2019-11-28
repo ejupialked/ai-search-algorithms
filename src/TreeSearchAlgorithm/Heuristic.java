@@ -15,17 +15,6 @@ public interface Heuristic {
      */
     int h(Board goal);
 
-    /**
-     * estimated cost of the cheapest path from {@code n} to goal
-     */
-    int hImproved(Board goal);
-
-
-
-
-   
-
-
 
     /**
      *  estimated cost of the cheapest solution through {@code n}

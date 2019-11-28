@@ -1,13 +1,12 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-
+import Utils.Debug;
 import java.util.*;
-import static Utils.Debug.*;
 
 public class BFS extends TreeSearch {
 
-    //Uses a queue to store the fringe
+    //Uses a FIFO queue to store the fringe
     Queue<Node> fringe;
 
     public BFS(){
@@ -20,24 +19,24 @@ public class BFS extends TreeSearch {
         Node root = makeNode(problem, problem.startState(), false);
 
         fringe.add(root);
-        showAddingRoot(root);
+        Debug.showAddingRoot(root);
 
         while(!fringe.isEmpty()){
             Node nodeToExpand = fringe.remove();
 
-            showRemoveNodeFromFringe(nodeToExpand);
-            showCheckGoal(nodeToExpand);
+            Debug.showRemoveNodeFromFringe(nodeToExpand);
+            Debug.showCheckGoal(nodeToExpand);
 
             if(problem.checkGoal(nodeToExpand)) {
-                showGoal(nodeToExpand);
+                 Debug.showGoal(nodeToExpand);
                  return solution(nodeToExpand);
             }
-            showIsNotGoal(nodeToExpand);
+            Debug.showIsNotGoal(nodeToExpand);
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem, false);
             fringe.addAll(successors);
-            showAddAllSuccessors(successors.size());
-            showFringe(fringe);
+            Debug.showAddAllSuccessors(successors.size());
+            Debug.showFringe(fringe);
         }
         return null;
     }

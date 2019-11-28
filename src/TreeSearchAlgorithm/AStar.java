@@ -1,11 +1,11 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
+import Utils.Debug;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import static Utils.Debug.*;
 
 public class AStar extends TreeSearch {
 
@@ -22,31 +22,28 @@ public class AStar extends TreeSearch {
         Node root = makeNode(problem, problem.startState(), true);
 
         fringe.add(root);
-        showAddingRoot(root);
-        showFringe(fringe);
+        Debug.showAddingRoot(root);
+        Debug.showFringe(fringe);
 
         while(!fringe.isEmpty()){
-
             Node nodeToExpand = fringe.remove();
-            showRemoveNodeFromFringe(nodeToExpand);
-            showFringe(fringe);
+            Debug.showRemoveNodeFromFringe(nodeToExpand);
+            Debug.showFringe(fringe);
 
-
-            showCheckGoal(nodeToExpand);
+            Debug.showCheckGoal(nodeToExpand);
             if(problem.checkGoal(nodeToExpand)) {
-                showGoal(nodeToExpand);
+                Debug.showGoal(nodeToExpand);
                 return solution(nodeToExpand);
             }
-            showIsNotGoal(nodeToExpand);
+            Debug.showIsNotGoal(nodeToExpand);
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem, true);
 
             fringe.addAll(successors);
-            showAddAllSuccessors(successors.size());
-            showFringe(fringe);
+            Debug.showAddAllSuccessors(successors.size());
+            Debug.showFringe(fringe);
 
         }
         return null;
     }
-
 }

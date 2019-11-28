@@ -4,25 +4,20 @@ import Exceptions.IllegalMoveException;
 import Problem.Problem;
 import Problem.State;
 import Utils.Debug;
-
 import java.util.*;
-
 import Problem.TransitionModel.Action;
 import Utils.Utils;
-
-
 
 /**
  * Abstract class for a search algorithm,
  * Contains all methods and attributes that
- * every search methods should have.
+ * every tree search should have.
  *
  * @author Alked Ejupi Copyright (2019). All rights reserved.
  */
 public abstract class TreeSearch {
 
     int nodesGenerated;
-
     int depth;
 
     protected long start;
@@ -32,7 +27,6 @@ public abstract class TreeSearch {
     private StringBuilder solutionMoves;
     private StringBuilder solutionASCII;
 
-
     protected abstract List<Node> treeSearch(Problem problem);
 
     TreeSearch(){
@@ -40,18 +34,17 @@ public abstract class TreeSearch {
         this.depth = 0;
         this.solutionASCII = new StringBuilder();
         this.solutionMoves = new StringBuilder();
-
     }
 
     public int getNodesGenerated() {
         return nodesGenerated;
     }
 
+    // this is usually used to create the root
     protected Node makeNode(Problem problem, State initialState, boolean heuristic){
         nodesGenerated++;
         return new Node(problem, initialState, heuristic);
     }
-
     private Node generateChildNode(Problem problem, Node parent, Action action) throws IllegalMoveException {
         return new Node(problem, parent, action, false);
     }
@@ -68,7 +61,6 @@ public abstract class TreeSearch {
     }
 
     protected List<Node> generateSuccessors(Node nodeToExpand, Problem problem, boolean heuristic){
-
         ArrayList<Node> successors = new ArrayList<Node>();
 
         Debug.showStartExpansion(nodeToExpand.state);
@@ -97,16 +89,18 @@ public abstract class TreeSearch {
         return successors;
     }
 
-    // TODO: 26/11/2019
     public String solveProblem(Problem problem){
         start = System.currentTimeMillis();
         this.solution = treeSearch(problem);
         end = System.currentTimeMillis();
-
-        //return "Nodes generated: " + nodesGenerated ;
         return Utils.solutionToString(this);
     }
 
+    /**
+     * Return the solution given a node
+     * @param solution
+     * @return the reconstructed path
+     */
     protected List<Node> solution(Node solution) {
         LinkedList<Node> path = new LinkedList<>();
 
@@ -122,8 +116,6 @@ public abstract class TreeSearch {
         depth = path.size();
         return path;
     }
-
-
 
     public List<Node> getSolution() {
         return solution;

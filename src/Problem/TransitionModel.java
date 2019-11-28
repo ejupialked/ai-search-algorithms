@@ -17,7 +17,6 @@ public class TransitionModel {
     /* Enum class for agent moves */
     public enum Action {UP, DOWN, LEFT, RIGHT}
 
-
     public void performTransition(Action move, State state) throws IllegalMoveException {
         Board board = state.getBoard();
         Cell destination = null;
@@ -34,7 +33,6 @@ public class TransitionModel {
         }else{
             moveAgent(board, destination);
             state.setActionTaken(move);
-
             //update configuration
             board.updateConfiguration();
         }
