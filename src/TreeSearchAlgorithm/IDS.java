@@ -6,6 +6,8 @@ import java.util.List;
 
 public class IDS extends TreeSearch {
 
+    int LIMIT = Integer.MAX_VALUE;
+
     @Override
     protected List<Node> treeSearch(Problem problem) {
 
@@ -14,7 +16,7 @@ public class IDS extends TreeSearch {
 
         Node solution;
 
-        for (int depth = 0; depth < Integer.MAX_VALUE ; depth++) {
+        for (int depth = 0; depth < LIMIT; depth++) {
             nodesGenerated = 1;
             Debug.showLimitIteration(depth);
             Debug.showStartDLSCall(root, depth);

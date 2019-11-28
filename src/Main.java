@@ -46,10 +46,16 @@ public class Main {
 
         String algorithm = args[0];
 
-        Debug.setDEBUGGER(OFF);
+        Debug.setDEBUGGER(ON);
+        BlocksWorldTileProblem evidenceDepth1 =
+                new BlocksWorldTileProblem("------------ABC@","------------AB@C");
 
-        // solveUserProblem(problem1,algorithm);
-         solveDifferentPuzzle(problems(), algorithm);
+        BlocksWorldTileProblem evidenceDepth2 =
+                new BlocksWorldTileProblem("------------ABC@","------------A@BC");
+
+
+        solveUserProblem(evidenceDepth2, algorithm);
+        // solveDifferentPuzzle(problems(), algorithm);
 
 
 
@@ -64,7 +70,7 @@ public class Main {
                 println(" ");
                 println("I'm solving the puzzle with " + algorithm + "...");
                 println("Problem: " + i++);
-               // printStartAndGoal(problem);
+                printStartAndGoal(problem);
                 solvePuzzle(problem, algorithm);
             }else
                 i++;
@@ -93,33 +99,12 @@ public class Main {
                     output = bfs.solveProblem(problem);
                     break;
                 case "DFS":
-
-                    List<Integer> average = new ArrayList<>();
-                    for (int i = 0; i < 20; i++) {
-                        TreeSearch dfs = new DFS();
-                        output = dfs.solveProblem(problem);
-                        average.add(dfs.getNodesGenerated());
-                    }
-
-
-                    Collections.sort(average);
-                    double median;
-                    if (average.size() % 2 == 0)
-                        median = ((double) average.get(average.size() / 2) + (double) average.get(average.size() / 2 - 1)) / 2;
-                    else
-                        median = (double) average.get(average.size() / 2);
-
-                    print("Median: " + String.valueOf(median));
                     TreeSearch dfs = new DFS();
                     output = dfs.solveProblem(problem);
-                    println(String.valueOf(dfs.getNodesGenerated()));
-
                     break;
                 case "IDS":
                     TreeSearch ids = new IDS();
                     output = ids.solveProblem(problem);
-
-
                     break;
                 case "AStar":
                     TreeSearch ashs = new AStar();

@@ -14,7 +14,7 @@ public class AStar extends TreeSearch {
 
     public AStar(){
         super();            //Comparator that compares nodesGenerated using their estimated cost
-        this.fringe = new PriorityQueue<>(Comparator.comparingInt(n -> n.estimatedCost));
+        this.fringe = new PriorityQueue<>(Comparator.comparingInt(node -> node.estimatedCost));
     }
 
     @Override

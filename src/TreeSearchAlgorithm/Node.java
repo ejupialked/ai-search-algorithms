@@ -12,6 +12,8 @@ public class Node implements Heuristic {
     State state;
     Node parent;
     Action action;
+    int depth;
+
 
     int pathCost;
     int estimatedCost;
@@ -21,6 +23,9 @@ public class Node implements Heuristic {
     Node(Problem problem, State start, boolean heuristic){
         this.state = start;
         this.parent = null;
+        this.heuristic = heuristic;
+        this.depth = 0;
+
         if(heuristic){
             this.pathCost = 0;
             this.estimatedCost = calculateEstimatedCost(g(), h(problem.goal()));
@@ -33,6 +38,8 @@ public class Node implements Heuristic {
         this.action = action;
         this.parent = parent;
         this.heuristic = heuristic;
+        this.depth = parent.depth + 1;
+
 
         if(heuristic){
             this.pathCost = parent.pathCost + problem.actionCost();
@@ -40,6 +47,7 @@ public class Node implements Heuristic {
         }
 
     }
+
 
 
     @Override

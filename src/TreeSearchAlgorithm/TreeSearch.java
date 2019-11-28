@@ -103,8 +103,8 @@ public abstract class TreeSearch {
         this.solution = treeSearch(problem);
         end = System.currentTimeMillis();
 
-       return "Nodes generated: " + nodesGenerated ;
-        //return Utils.solutionToString(this);
+        //return "Nodes generated: " + nodesGenerated ;
+        return Utils.solutionToString(this);
     }
 
     protected List<Node> solution(Node solution) {

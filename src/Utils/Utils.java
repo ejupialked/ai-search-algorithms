@@ -61,7 +61,7 @@ public final class Utils {
 
         for(int x=0; x<n; x++) {
             for (int y = 0; y < n; y++) {
-                Cell c = array[(y * n) + x];
+                Cell c = array[(x * n) +y];
                 c.setLocation(x, y);
                 cells[x][y] = c;
             }
