@@ -27,7 +27,6 @@ public class Board {
         this.configuration = convert1DCellsToString(convert2DCellsTo1DCells(cells));
     }
 
-
     public void updateConfiguration(){
         this.configuration = convert1DCellsToString(convert2DCellsTo1DCells(getCells()));
     }

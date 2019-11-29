@@ -20,29 +20,17 @@ public class AStar extends TreeSearch {
     @Override
     protected List<Node> treeSearch(Problem problem) {
         Node root = makeNode(problem, problem.startState(), true);
-
         fringe.add(root);
-        Debug.showAddingRoot(root);
-        Debug.showFringe(fringe);
 
         while(!fringe.isEmpty()){
             Node nodeToExpand = fringe.remove();
-            Debug.showRemoveNodeFromFringe(nodeToExpand);
-            Debug.showFringe(fringe);
 
-            Debug.showCheckGoal(nodeToExpand);
             if(problem.checkGoal(nodeToExpand)) {
-                Debug.showGoal(nodeToExpand);
                 return solution(nodeToExpand);
             }
-            Debug.showIsNotGoal(nodeToExpand);
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem, true);
-
             fringe.addAll(successors);
-            Debug.showAddAllSuccessors(successors.size());
-            Debug.showFringe(fringe);
-
         }
         return null;
     }

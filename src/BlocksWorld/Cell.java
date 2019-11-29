@@ -62,11 +62,6 @@ public class Cell extends Point implements ManhattanDistance {
     public Point getPoint() {
         return super.getLocation();
     }
-
-    public void setCellType(CellType cellType) {
-        this.cellType = cellType;
-    }
-
 }
 
 

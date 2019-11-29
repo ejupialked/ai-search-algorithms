@@ -20,9 +20,6 @@ import static Utils.Utils.*;
  * @author Alked Ejupi Copyright (2019). All rights reserved.
  */
 public class Main {
-
-
-
     public static void main(String[] args){
 
         Point a = new Point(3,0);
@@ -40,22 +37,11 @@ public class Main {
         // argument
         String algorithm = args[0];
 
-        Debug.setDEBUGGER(ON);
+        Debug.setDEBUGGER(OFF);
 
-        BlocksWorldTileProblem evidenceDepth1 =
-                new BlocksWorldTileProblem("------------ABC@","------------AB@C");
-
-        BlocksWorldTileProblem evidenceDepth2 =
-                new BlocksWorldTileProblem("------------ABC@","------------A@BC");
-
-
-        solveUserProblem(evidenceDepth2, algorithm);
+        solveUserProblem(problem1, algorithm);
         // solveDifferentPuzzle(problems(), algorithm);
-
-
     }
-
-
 
     private static void solveDifferentPuzzle(List<BlocksWorldTileProblem> problems, String algorithm) {
         int i = 1;

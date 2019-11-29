@@ -24,13 +24,6 @@ public class State {
         return board;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(obj instanceof State){
-            return board.equals(((State) obj).board);
-        }
-        return super.equals(obj);
-    }
 
     public String ascii(){
         return board.getASCIIString();
@@ -49,6 +42,13 @@ public class State {
         return board.toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof State){
+            return board.equals(((State) obj).board);
+        }
+        return super.equals(obj);
+    }
     @Override
     public int hashCode() {
         return board.hashCode();

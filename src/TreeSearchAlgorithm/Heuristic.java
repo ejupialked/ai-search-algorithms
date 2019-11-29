@@ -1,7 +1,6 @@
 package TreeSearchAlgorithm;
 
 import BlocksWorld.Board;
-import BlocksWorld.Cell;
 
 public interface Heuristic {
 

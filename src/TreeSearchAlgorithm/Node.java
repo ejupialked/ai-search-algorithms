@@ -11,19 +11,19 @@ public class Node implements Heuristic {
     State state;
     Node parent;
     Action action;
+
     int depth;
     int pathCost;
     int estimatedCost;
-
-    //used to define whether a node is heuristic or not
     boolean heuristic;
 
-    /*the root*/
+    /*the root */
     Node(Problem problem, State start, boolean heuristic){
         this.state = start;
         this.parent = null;
         this.heuristic = heuristic;
         this.depth = 0;
+
         if(heuristic){
             this.pathCost = 0;
             this.estimatedCost = calculateEstimatedCost(g(), h(problem.goal()));
@@ -44,14 +44,19 @@ public class Node implements Heuristic {
         }
     }
 
+
+
     @Override
     public int g() {
         return pathCost;
     }
 
+
     public boolean isHeuristic() {
         return heuristic;
     }
+
+
 
     @Override
     public int h(Board boardGoal) {
@@ -91,7 +96,7 @@ public class Node implements Heuristic {
 
 
 
-    public int hOld(Board boardGoal) {
+    public int hImproved(Board boardGoal) {
         int sum = 0;
         Board boardCurr = state.getBoard();
 
@@ -109,9 +114,11 @@ public class Node implements Heuristic {
         return g + h;
     }
 
+
     public Action getAction() {
         return action;
     }
+
 
     public int getEstimatedCost() {
         return estimatedCost;
