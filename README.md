@@ -2,14 +2,14 @@
 This puzzle consists of three tiles "A", "B" and "C" and the agent which can only move up, down, left and right.
 The agent's goal is to place the tiles in a specific pattern.
 ### Example Agent moves
-![Example](https://raw.githubusercontent.com/ejupialked/ai-search-algorithms/master/screenshots/moves.png?token=AKPXOF7PC6PKMJMQGUQYPWS56L3ME)
+![Example](https://raw.githubusercontent.com/ejupialked/ai-search-algorithms/master/screenshots/moves.png?token=AKPXOF7PGSMSKLGNXLYPFGK56MHQO)
 
 ## The problem to solve
 This is by the default the problem used to test the four search methods. The final position of the agent does not matter.
-![H](https://raw.githubusercontent.com/ejupialked/ai-search-algorithms/master/screenshots/problem.png?token=AKPXOF6ZNLJ6KWACIDKJO2K56L4FW)
+![H](https://raw.githubusercontent.com/ejupialked/ai-search-algorithms/master/screenshots/problem.png?token=AKPXOFYXZRWYUYL6JWT2HBS56MHSQ)
 ## Project Structure (Java)
 The way I have structured my code is described in the UML diagram down below. 
-![Example](https://raw.githubusercontent.com/ejupialked/ai-search-algorithms/master/screenshots/uml.png?token=AKPXOF2MRZ3J2R4KU7PIAHK56MD5K)
+![Example](https://raw.githubusercontent.com/ejupialked/ai-search-algorithms/master/screenshots/uml.png?token=AKPXOFZO7KZQDSWXAO5BLPC56MHNS)
 ### Dependencies
 * Encoding UTF-8 supported on your terminal, the output is displayed using box-drawings characters.
 * Java installed on your machine.
@@ -24,14 +24,14 @@ The way I have structured my code is described in the UML diagram down below.
 ```
 ### A* on operation 🚀
 
-![Example](https://raw.githubusercontent.com/ejupialked/ai-search-algorithms/master/screenshots/AStarOnOperation.gif?token=AKPXOF22GPLWVEWSGSGXRUK56MEC4)
+![astarGif](https://raw.githubusercontent.com/ejupialked/ai-search-algorithms/master/screenshots/AStarOnOperation.gif?token=AKPXOFZVD6P3NK254XRVIIC56MHJA)
 
 ## Issues
 When running BFS you might get an error like this:
 ```
 java.lang.OutOfMemoryError: Java heap space
 ```   
-To overcome this issue you need to increase the Java heap memory size by passing these parameters:
+To overcome this issue increase the Java heap memory size by passing these parameters:
 
 ```
 > java -Xms10000m -Xmx15000m  Main "IDS"
