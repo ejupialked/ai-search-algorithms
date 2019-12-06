@@ -31,10 +31,10 @@ When running BFS you might get an error like this:
 ```
 java.lang.OutOfMemoryError: Java heap space
 ```   
-To overcome this issue increase the Java heap memory size by passing these parameters:
+To overcome this issue increase the Java heap memory size by at least 10GB passing these parameters:
 
 ```
-> java -Xms10000m -Xmx15000m  Main "IDS"
+> java -Xms10000m -Xmx15000m  Main "BFS"
 ```   
 ## Author
 Alked Ejupi Copyright (2019). All rights reserved.
