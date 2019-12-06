@@ -4,9 +4,7 @@ import TreeSearchAlgorithm.*;
 import Utils.Debug;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static Utils.Debug.*;
 import static Utils.Utils.*;
@@ -22,11 +20,15 @@ import static Utils.Utils.*;
 public class Main {
     public static void main(String[] args){
 
+
+
+        //start state
         Point a = new Point(3,0);
         Point b = new Point(3,1);
         Point c = new Point(3,2);
         Point agent = new Point(3,3);
 
+        //goal state
         Point aGoal = new Point(1,1);
         Point bGoal = new Point(2,1);
         Point cGoal = new Point(3,1);

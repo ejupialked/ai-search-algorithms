@@ -1,7 +1,9 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import java.util.*;
+import java.util.List;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class BFS extends TreeSearch {
 
@@ -16,9 +18,10 @@ public class BFS extends TreeSearch {
     @Override
     protected List<Node> treeSearch(Problem problem) {
         Node root = makeNode(problem, problem.startState(), false);
+
         fringe.add(root);
 
-        while (!fringe.isEmpty()){
+        while(!fringe.isEmpty()){
             Node nodeToExpand = fringe.remove();
 
             if(problem.checkGoal(nodeToExpand)) {
@@ -30,4 +33,5 @@ public class BFS extends TreeSearch {
         }
         return null;
     }
+
 }

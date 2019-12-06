@@ -17,6 +17,7 @@ public class IDS extends TreeSearch {
         for (int depth = 0; depth < LIMIT; depth++) {
             nodesGenerated = 1;
             solution = DLS(problem, root, depth);
+
             if (solution != null) {
                 return solution(solution);
             }
@@ -33,6 +34,7 @@ public class IDS extends TreeSearch {
 
         if (depth > 0) {
             List<Node> successors = generateSuccessors(current, problem, false);
+
             for(Node successor : successors) {
                 Node result = DLS(problem, successor, depth - 1);
                 if (result != null) {

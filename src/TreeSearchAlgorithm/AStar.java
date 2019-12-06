@@ -1,7 +1,6 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Utils.Debug;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -20,6 +19,7 @@ public class AStar extends TreeSearch {
     @Override
     protected List<Node> treeSearch(Problem problem) {
         Node root = makeNode(problem, problem.startState(), true);
+
         fringe.add(root);
 
         while(!fringe.isEmpty()){
@@ -30,6 +30,7 @@ public class AStar extends TreeSearch {
             }
 
             List<Node> successors = generateSuccessors(nodeToExpand, problem, true);
+
             fringe.addAll(successors);
         }
         return null;

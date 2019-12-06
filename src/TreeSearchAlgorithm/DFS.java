@@ -1,7 +1,6 @@
 package TreeSearchAlgorithm;
 
 import Problem.Problem;
-import Utils.Debug;
 import java.util.Stack;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class DFS extends TreeSearch {
     @Override
     protected List<Node> treeSearch(Problem problem) {
         Node root = makeNode(problem, problem.startState(), false);
+
         fringe.add(root);
 
         while (!fringe.isEmpty()){

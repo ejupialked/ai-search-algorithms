@@ -58,6 +58,7 @@ public class Node implements Heuristic {
 
 
 
+    // to improve
     @Override
     public int h(Board boardGoal) {
         int sum = 0;
@@ -95,8 +96,7 @@ public class Node implements Heuristic {
     }
 
 
-
-    public int hImproved(Board boardGoal) {
+    public int hAdmissible(Board boardGoal) {
         int sum = 0;
         Board boardCurr = state.getBoard();
 
