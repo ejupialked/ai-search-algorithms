@@ -32,7 +32,7 @@ public class Main {
         Point aGoal = new Point(1,1);
         Point bGoal = new Point(2,1);
         Point cGoal = new Point(3,1);
-        Point agentGoal = new Point(2,0);
+        Point agentGoal = new Point(3,3);
 
         BlocksWorldTileProblem problem1 = new BlocksWorldTileProblem(a, b, c, agent, aGoal, bGoal, cGoal, agentGoal);
 
